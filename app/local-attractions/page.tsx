@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Clock, Calendar, AlertCircle, ChevronRight } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
+import ExperiencesSection from '@/components/sections/ExperiencesSection';
 import ContactCTA from '@/components/sections/ContactCTA';
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ const attractions = [
     duration: '1 hour visit',
     bestTime: 'Throughout the year',
     description: 'Indore\'s most impressive neo-classical building, Lal Bagh was the residence of the Holkars till 1978, later converted into a museum displaying artifacts and a rare coin collection. The Palace\'s main gates are famous for being replicas of the gates of London\'s Buckingham Palace. The interiors feature Italian marble columns, grand chandeliers, Persian carpets, flying nymph frescoes on the ceiling and Belgium stained glass windows.',
-    images: ['/images/attractions/attraction-7.avif', '/images/attractions/attraction-8.avif'],
+    images: ['/images/attractions/attraction-8.avif', '/images/attractions/attraction-10.avif'],
     closed: 'Mondays',
   },
   {
@@ -98,7 +99,7 @@ export default function LocalAttractionsPage() {
       <HeroSection
         title="Local Attractions"
         subtitle="Discover the Soul of Indore"
-        imageSrc="/images/attractions/attraction-7.avif"
+        imageSrc="/images/attractions/attraction-8.avif"
         imageAlt="Lal Bagh Palace Indore — Heritage attraction near Hotel Winway"
         showScrollHint={false}
       />
@@ -198,6 +199,7 @@ export default function LocalAttractionsPage() {
         </div>
       </section>
 
+      <ExperiencesSection />
       <ContactCTA />
     </>
   );

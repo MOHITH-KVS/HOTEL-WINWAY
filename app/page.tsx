@@ -5,7 +5,6 @@ import RoomsPreview from '@/components/sections/RoomsPreview';
 import AmenitiesSection from '@/components/sections/AmenitiesSection';
 import DiningPreview from '@/components/sections/DiningPreview';
 import AttractionsSection from '@/components/sections/AttractionsSection';
-import ExperiencesSection from '@/components/sections/ExperiencesSection';
 import GalleryPreview from '@/components/sections/GalleryPreview';
 import ContactCTA from '@/components/sections/ContactCTA';
 
@@ -42,7 +41,7 @@ export default function HomePage() {
       <HeroSection
         title="Hotel Winway"
         subtitle="Where the Warmth of Malwa Meets Modern Luxury"
-        locationLabel="Indore, Madhya Pradesh"
+        locationLabel="INDORE, MADHYA PRADESH"
         showScrollHint={true}
         showCornerBadges={true}
       />
@@ -51,7 +50,6 @@ export default function HomePage() {
       <AmenitiesSection />
       <DiningPreview />
       <AttractionsSection />
-      <ExperiencesSection />
       <GalleryPreview />
       <ContactCTA />
     </>

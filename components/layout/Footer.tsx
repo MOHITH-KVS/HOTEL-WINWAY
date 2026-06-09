@@ -44,13 +44,16 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1A1A1A] text-white">
+    <footer className="relative z-30 bg-[#1A1A1A] text-white isolate">
       {/* Main Footer */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 pt-16 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <h2 className="font-serif text-2xl font-light text-white mb-4 tracking-wide">
+          <div className="lg:col-span-4">
+            <h2
+              className="font-serif text-2xl font-normal text-white mb-5 tracking-wide"
+              style={{ fontFamily: 'var(--font-serif)' }}
+            >
               Hotel Winway
             </h2>
             <div className="w-12 h-px bg-[#C9A96E] mb-6" />
@@ -118,7 +121,7 @@ export default function Footer() {
 
           {/* Navigation Columns */}
           {Object.entries(footerLinks).map(([heading, links]) => (
-            <div key={heading}>
+            <div key={heading} className="lg:col-span-2 lg:col-start-auto">
               <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-[#C9A96E] mb-5">
                 {heading}
               </h3>
@@ -139,11 +142,14 @@ export default function Footer() {
         </div>
 
         {/* Enquiry Bar */}
-        <div className="mt-12 py-8 border-t border-[#2a2a2a] border-b">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <p className="text-xs text-[#C9A96E] tracking-[0.2em] uppercase mb-1">Plan Your Stay</p>
-              <p className="font-serif text-2xl text-white font-light">
+        <div className="mt-14 pt-10 pb-10 border-t border-[#2a2a2a]">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div className="relative z-10">
+              <p className="text-xs text-[#C9A96E] tracking-[0.2em] uppercase mb-2">Plan Your Stay</p>
+              <p
+                className="font-serif text-xl md:text-2xl text-white font-light leading-snug"
+                style={{ fontFamily: 'var(--font-serif)' }}
+              >
                 Experience Malwa&apos;s Finest Hospitality
               </p>
             </div>

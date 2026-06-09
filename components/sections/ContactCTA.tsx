@@ -12,7 +12,7 @@ export default function ContactCTA() {
 
   return (
     <section
-      className="relative section-padding overflow-hidden"
+      className="relative z-0 section-padding overflow-hidden"
       ref={ref}
       style={{ background: 'linear-gradient(135deg, #1A1A1A 0%, #2D2014 50%, #1A1A1A 100%)' }}
     >
@@ -29,7 +29,10 @@ export default function ContactCTA() {
             transition={{ duration: 0.9 }}
           >
             <span className="section-label">Get in Touch</span>
-            <h2 className="font-serif text-4xl sm:text-5xl font-light text-white mt-4 mb-6 leading-tight">
+            <h2
+              className="font-serif text-3xl sm:text-4xl font-light text-white mt-4 mb-6 leading-tight"
+              style={{ fontFamily: 'var(--font-serif)' }}
+            >
               Plan Your Stay at<br />
               <em className="not-italic text-[#C9A96E]">Hotel Winway</em>
             </h2>

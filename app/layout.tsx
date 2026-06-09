@@ -178,7 +178,7 @@ export default function RootLayout({
       <body>
         <EnquiryModalProvider>
           <Header />
-          <main>{children}</main>
+          <main className="relative z-0">{children}</main>
           <Footer />
           <WhatsAppButton />
           <ScrollToTop />

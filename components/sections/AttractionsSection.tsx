@@ -9,26 +9,26 @@ import useEmblaCarousel from 'embla-carousel-react';
 
 const attractions = [
   {
-    id: 'patalpani',
-    name: 'Patalpani Waterfall',
+    id: 'lal-bagh-palace',
+    name: 'Lal Bagh Palace',
     description:
-      'A scenic waterfall hidden in the forests near Indore. Patalpani keeps secrets and offers a stunning natural retreat just 35 km from the city.',
-    image: '/images/attractions/attraction-9.avif',
-    distance: '35 km',
+      "Indore's most impressive neo-classical building, Lal Bagh was the residence of the Holkars till 1978, later converted into a museum.",
+    image: '/images/attractions/attraction-8.avif',
+    distance: '4.7 km',
   },
   {
-    id: 'central-museum',
-    name: 'Central Museum',
+    id: 'chappan-dukan',
+    name: 'Chappan Dukan',
     description:
-      'Established in 1923 by the Holkar dynasty, the museum is a treasure trove of Madhya Pradesh\u2019s archaeological heritage and historical artefacts.',
-    image: '/images/attractions/attraction-7.avif',
-    distance: '4.7 km',
+      "Located in the upscale New Palasia area, Chappan Dukan ('56 Shops') is an open-air food hub beloved for authentic Indori snacks and street food.",
+    image: '/images/attractions/attraction-5.avif',
+    distance: '2.8 km',
   },
   {
     id: 'rajwada-palace',
     name: 'Rajwada Palace',
     description:
-      'Located in the heart of the city, this architectural gem is an impressive repository of the Holkar dynasty\u2019s history and Indore\u2019s royal past.',
+      "Located in the heart of the city, this architectural gem is an impressive repository of the Holkar dynasty's history and Indore's royal past.",
     image: '/images/attractions/attraction-1.avif',
     distance: '2.5 km',
   },
@@ -36,25 +36,9 @@ const attractions = [
     id: 'sarafa-bazaar',
     name: 'Sarafa Bazaar',
     description:
-      'An iconic night street-food market, Sarafa Bazaar transforms after dark into a bustling vegetarian food haven between 9\u00a0pm and 2\u00a0am.',
+      'An iconic night street-food market, Sarafa Bazaar transforms after dark into a bustling vegetarian food haven between 9 pm and 2 am.',
     image: '/images/attractions/attraction-3.avif',
     distance: '2.6 km',
-  },
-  {
-    id: 'chappan-dukan',
-    name: 'Chappan Dukan',
-    description:
-      'Located in the upscale New Palasia area, Chappan Dukan (\'56 Shops\') is an open-air food hub beloved for authentic Indori snacks and street food.',
-    image: '/images/attractions/attraction-5.avif',
-    distance: '2.8 km',
-  },
-  {
-    id: 'lal-bagh-palace',
-    name: 'Lal Bagh Palace',
-    description:
-      'Indore\u2019s most impressive neo-classical building, Lal Bagh was the residence of the Holkars till 1978, later converted into a museum.',
-    image: '/images/attractions/attraction-8.avif',
-    distance: '4.7 km',
   },
 ];
 
@@ -79,7 +63,7 @@ export default function AttractionsCarousel() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
           <h2 className="heading-mixed mb-4">
             Attractions &amp; Places <strong>to Visit in Indore</strong>
@@ -91,7 +75,7 @@ export default function AttractionsCarousel() {
             Indore blends historical significance with a thriving contemporary culture. From Rajwada
             Palace and Lal Bagh Palace to bustling food streets like Sarafa Bazaar, the city offers
             diverse experiences. Its vibrant culinary scene and growing urban character make it one
-            of central India\u2019s most engaging destinations.
+            of central India&apos;s most engaging destinations.
           </p>
         </motion.div>
 
@@ -175,7 +159,7 @@ export default function AttractionsCarousel() {
         </motion.div>
 
         {/* View all */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-12">
           <Link
             href="/local-attractions"
             className="inline-block border border-[#57585B] text-[#57585B] hover:bg-[#57585B] hover:text-white text-[12px] font-bold tracking-[0.2em] uppercase px-8 py-3 transition-all duration-300"

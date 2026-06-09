@@ -17,8 +17,8 @@
   --font-serif: 'Libre Baskerville', Georgia, serif;
 
   --nav-height: 80px;
-  --section-padding: 96px;
-  --section-padding-mobile: 64px;
+  --section-padding: 100px;
+  --section-padding-mobile: 72px;
 }
 
 * {
@@ -258,7 +258,7 @@ img {
 
 @media (max-width: 1024px) {
   .masonry-grid { columns: 2; }
-  :root { --section-padding: 72px; }
+  :root { --section-padding: 80px; }
 }
 
 @media (max-width: 640px) {

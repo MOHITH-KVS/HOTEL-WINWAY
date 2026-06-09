@@ -4,16 +4,6 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CheckCircle, ArrowRight } from 'lucide-react';
-
-const highlights = [
-  'Strategically located on RNT Marg',
-  'World-class amenities & services',
-  '20 mins drive from the airport',
-  'Complimentary high-speed WiFi',
-  'In-room dining & 24/7 service',
-  'Flexible check-in & cancellation',
-];
 
 export default function WelcomeSection() {
   const ref = useRef(null);
@@ -68,21 +58,17 @@ export default function WelcomeSection() {
               At Hotel Winway, hospitality is more than a service — it is a tradition rooted in the warmth and culture of Malwa. Located in the heart of Indore, the hotel offers a harmonious blend of comfort, convenience and personalized attention.
             </p>
             <p
-              className="text-[#57585B] mb-8"
+              className="text-[#57585B] mb-4"
               style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
             >
               Strategically situated on R.N.T. Marg, one of the city&apos;s most prominent commercial districts, Hotel Winway provides effortless access to business centres, educational institutions, shopping destinations and key transport hubs.
             </p>
-
-            {/* Highlights — bullet style matching reference */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
-              {highlights.map((item) => (
-                <div key={item} className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] mt-1.5 flex-shrink-0" />
-                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: '#57585B', lineHeight: 1.6 }}>{item}</span>
-                </div>
-              ))}
-            </div>
+            <p
+              className="text-[#57585B] mb-8"
+              style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
+            >
+              Whether you are visiting for business or leisure, our dedicated team ensures every stay is marked by thoughtful service, refined comfort and the genuine warmth that defines Malwa hospitality.
+            </p>
 
             <Link
               href="/about"

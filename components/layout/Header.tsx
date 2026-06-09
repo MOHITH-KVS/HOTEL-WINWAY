@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -64,7 +63,6 @@ export default function Header() {
   };
 
   const textColor = scrolled ? 'text-[#57585B]' : 'text-white';
-  const logoFilter = scrolled ? '' : 'brightness-0 invert';
 
   return (
     <>
@@ -77,23 +75,12 @@ export default function Header() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-full flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 z-10">
-            <div className="relative h-12 w-36">
-              <Image
-                src="/images/facade/facade-1.png"
-                alt="Hotel Winway Logo"
-                fill
-                className={`object-contain transition-all duration-300 ${logoFilter}`}
-                priority
-                onError={() => {}}
-              />
-              {/* Text fallback */}
-              <span
-                className={`absolute inset-0 flex items-center font-serif font-semibold text-lg tracking-wide transition-colors duration-300 ${textColor}`}
-                style={{ fontFamily: 'var(--font-serif)' }}
-              >
-                Hotel Winway
-              </span>
-            </div>
+            <span
+              className={`font-serif text-xl font-normal tracking-wide transition-colors duration-300 ${textColor}`}
+              style={{ fontFamily: 'var(--font-serif)' }}
+            >
+              Hotel Winway
+            </span>
           </Link>
 
           {/* Desktop Navigation */}

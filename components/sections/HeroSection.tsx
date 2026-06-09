@@ -137,34 +137,30 @@ export default function HeroSection({
         </>
       )}
 
-      {/* Hero Content — centered */}
-      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-6">
+      {/* Hero Content — lower-left, proportional to reference */}
+      <div className="absolute inset-0 z-20 flex flex-col items-start justify-end text-left text-white px-6 lg:px-10 pb-28 lg:pb-32 max-w-xl">
         {/* Location label */}
-        <div
-          className="flex items-center gap-4 mb-6"
+        <span
+          className="text-white/75 tracking-[0.3em] uppercase mb-3"
           style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 9,
+            fontWeight: 400,
             animation: 'fadeInUp 0.8s ease 0.2s both',
           }}
         >
-          <div className="w-12 h-px bg-white/50" />
-          <span
-            className="text-white/80 tracking-[0.25em] uppercase"
-            style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 400 }}
-          >
-            {locationLabel}
-          </span>
-          <div className="w-12 h-px bg-white/50" />
-        </div>
+          {locationLabel}
+        </span>
 
         {/* Hotel Name */}
         <h1
-          className="text-white mb-4"
+          className="text-white mb-3"
           style={{
             fontFamily: 'var(--font-serif)',
-            fontSize: 'clamp(2.8rem, 7vw, 6rem)',
+            fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
             fontWeight: 400,
-            lineHeight: 1.1,
-            letterSpacing: '0.05em',
+            lineHeight: 1.2,
+            letterSpacing: '0.04em',
             animation: 'fadeInUp 1s ease 0.4s both',
           }}
         >
@@ -173,12 +169,13 @@ export default function HeroSection({
 
         {/* Subtitle */}
         <p
-          className="text-white/80 mb-10 max-w-lg"
+          className="text-white/75 mb-8 max-w-md"
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
+            fontSize: 'clamp(0.8rem, 1.2vw, 0.95rem)',
             fontWeight: 300,
-            letterSpacing: '0.05em',
+            letterSpacing: '0.04em',
+            lineHeight: 1.6,
             animation: 'fadeInUp 0.8s ease 0.6s both',
           }}
         >
@@ -188,7 +185,7 @@ export default function HeroSection({
         {/* Single CTA — ENQUIRE NOW → /contact */}
         <Link
           href="/contact"
-          className="inline-block text-white text-[12px] font-bold tracking-[0.2em] uppercase px-10 py-4 border border-white hover:bg-white hover:text-[#57585B] transition-all duration-300"
+          className="inline-block text-white text-[11px] font-bold tracking-[0.2em] uppercase px-8 py-3 border border-white/80 hover:bg-white hover:text-[#57585B] transition-all duration-300"
           style={{
             fontFamily: 'var(--font-sans)',
             animation: 'fadeInUp 0.8s ease 0.8s both',

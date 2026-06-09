@@ -57,44 +57,37 @@ export default function AmenitiesSection() {
     <section className="section-padding bg-white">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         {/* Heading */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-14">
           <h2 className="heading-mixed">
             Amenities &amp; <strong>Facilities</strong>
           </h2>
         </div>
 
-        {/* 2×2 category grid with vertical divider — matches reference layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 divide-gray-200">
-          {amenityCategories.map((category, idx) => {
+        {/* 4-column layout — matches reference */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+          {amenityCategories.map((category) => {
             const Icon = category.icon;
             return (
-              <div
-                key={category.id}
-                className={`p-8 lg:p-12 ${
-                  idx % 2 === 0 ? 'lg:border-r border-gray-200' : ''
-                } ${idx >= 2 ? 'border-t border-gray-200' : ''}`}
-              >
-                {/* Category header */}
-                <div className="flex items-center gap-3 mb-5">
-                  <Icon size={20} className="text-[#C9A96E]" />
-                  <h3
-                    className="text-[#1A1A1A]"
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: 16,
-                      fontWeight: 700,
-                    }}
-                  >
-                    {category.label}
-                  </h3>
+              <div key={category.id} className="text-center lg:text-left">
+                <div className="flex justify-center lg:justify-start mb-4">
+                  <Icon size={22} className="text-[#C9A96E]" strokeWidth={1.5} />
                 </div>
+                <h3
+                  className="text-[#1A1A1A] mb-4"
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: 15,
+                    fontWeight: 700,
+                  }}
+                >
+                  {category.label}
+                </h3>
 
-                {/* Bullet list */}
                 <ul className="space-y-2">
                   {category.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-2"
+                      className="flex items-start gap-2 justify-center lg:justify-start"
                       style={{
                         fontFamily: 'var(--font-sans)',
                         fontSize: 13,
@@ -103,15 +96,12 @@ export default function AmenitiesSection() {
                       }}
                     >
                       {item !== '...more' && (
-                        <span className="mt-1 text-[#C9A96E]" style={{ fontSize: 8 }}>●</span>
+                        <span className="mt-1.5 text-[#C9A96E] flex-shrink-0" style={{ fontSize: 6 }}>●</span>
                       )}
                       {item}
                     </li>
                   ))}
                 </ul>
-
-                {/* Divider at bottom of each category */}
-                <div className="mt-6 h-px bg-gray-200" />
               </div>
             );
           })}
