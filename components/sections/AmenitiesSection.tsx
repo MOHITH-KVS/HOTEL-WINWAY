@@ -54,49 +54,41 @@ const amenityCategories = [
 
 export default function AmenitiesSection() {
   return (
-    <section className="section-padding bg-white">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        {/* Heading */}
-        <div className="text-center mb-14">
+    <section id="amenities" className="section-padding bg-white scroll-mt-32">
+      <div className="container-main">
+        <div className="section-header">
           <h2 className="heading-mixed">
             Amenities &amp; <strong>Facilities</strong>
           </h2>
         </div>
 
-        {/* 4-column layout — matches reference */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-          {amenityCategories.map((category) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
+          {amenityCategories.map((category, index) => {
             const Icon = category.icon;
             return (
-              <div key={category.id} className="text-center lg:text-left">
-                <div className="flex justify-center lg:justify-start mb-4">
-                  <Icon size={22} className="text-[#C9A96E]" strokeWidth={1.5} />
+              <div
+                key={category.id}
+                className={`text-center lg:text-left ${
+                  index < amenityCategories.length - 1 ? 'lg:border-r lg:border-[#e6e6e6] lg:pr-8' : ''
+                }`}
+              >
+                <div className="flex justify-center lg:justify-start mb-5">
+                  <Icon size={24} className="text-[#8d6346]" strokeWidth={1.5} />
                 </div>
-                <h3
-                  className="text-[#1A1A1A] mb-4"
-                  style={{
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: 15,
-                    fontWeight: 700,
-                  }}
-                >
-                  {category.label}
-                </h3>
-
-                <ul className="space-y-2">
+                <h3 className="heading-card mb-5">{category.label}</h3>
+                <ul className="space-y-2.5">
                   {category.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-2 justify-center lg:justify-start"
+                      className="flex items-start gap-2 justify-center lg:justify-start body-md"
                       style={{
-                        fontFamily: 'var(--font-sans)',
-                        fontSize: 13,
-                        color: item === '...more' ? '#C9A96E' : '#57585B',
+                        fontSize: 14,
+                        color: item === '...more' ? '#8d6346' : undefined,
                         fontWeight: item === '...more' ? 700 : 400,
                       }}
                     >
                       {item !== '...more' && (
-                        <span className="mt-1.5 text-[#C9A96E] flex-shrink-0" style={{ fontSize: 6 }}>●</span>
+                        <span className="mt-2 text-[#8d6346] flex-shrink-0" style={{ fontSize: 5 }}>●</span>
                       )}
                       {item}
                     </li>

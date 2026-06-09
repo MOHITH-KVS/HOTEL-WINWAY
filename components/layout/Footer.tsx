@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
-// Social icons as inline SVGs (lucide-react v1.17 doesn't export brand icons)
 const FacebookIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -44,94 +43,57 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="relative z-30 bg-[#1A1A1A] text-white isolate">
-      {/* Main Footer */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 pt-16 pb-10">
+    <footer className="relative z-30 bg-[#45443f] text-white isolate">
+      <div className="container-main pt-16 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-          {/* Brand Column */}
           <div className="lg:col-span-4">
-            <h2
-              className="font-serif text-2xl font-normal text-white mb-5 tracking-wide"
-              style={{ fontFamily: 'var(--font-serif)' }}
-            >
+            <h2 className="text-lg font-normal tracking-[0.1em] uppercase text-white mb-5" style={{ fontFamily: 'var(--font-display)' }}>
               Hotel Winway
             </h2>
-            <div className="w-12 h-px bg-[#C9A96E] mb-6" />
-            <p className="text-sm text-[#8B8A84] leading-relaxed mb-6 max-w-xs">
-              An elite & exquisite business hotel reflecting the great hospitality of Malwa.
-              Offering world-class amenities and personalized service in the heart of Indore.
+            <div className="w-10 h-px bg-[#8d6346] mb-6" />
+            <p className="text-sm text-white/65 leading-relaxed mb-6 max-w-xs" style={{ fontFamily: 'var(--font-sans)' }}>
+              An elite business hotel reflecting the great hospitality of Malwa, offering world-class amenities in the heart of Indore.
             </p>
-            {/* Social Icons */}
-            <div className="flex gap-4 mb-8">
-              <a
-                href="https://www.facebook.com/HotelWinway"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 border border-[#333] flex items-center justify-center text-[#8B8A84] hover:text-[#C9A96E] hover:border-[#C9A96E] transition-all duration-200"
-                aria-label="Facebook"
-              >
-                <FacebookIcon />
-              </a>
-              <a
-                href="https://www.instagram.com/hotelwinway"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 border border-[#333] flex items-center justify-center text-[#8B8A84] hover:text-[#C9A96E] hover:border-[#C9A96E] transition-all duration-200"
-                aria-label="Instagram"
-              >
-                <InstagramIcon />
-              </a>
-              <a
-                href="https://x.com/hotelwinway"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 border border-[#333] flex items-center justify-center text-[#8B8A84] hover:text-[#C9A96E] hover:border-[#C9A96E] transition-all duration-200"
-                aria-label="Twitter / X"
-              >
-                <XIcon />
-              </a>
+            <div className="flex gap-3 mb-8">
+              {[
+                { href: 'https://www.facebook.com/HotelWinway', label: 'Facebook', Icon: FacebookIcon },
+                { href: 'https://www.instagram.com/hotelwinway', label: 'Instagram', Icon: InstagramIcon },
+                { href: 'https://x.com/hotelwinway', label: 'Twitter', Icon: XIcon },
+              ].map(({ href, label, Icon }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="w-9 h-9 border border-white/20 flex items-center justify-center text-white/60 hover:text-[#8d6346] hover:border-[#8d6346] transition-all duration-300" aria-label={label}>
+                  <Icon />
+                </a>
+              ))}
             </div>
-            {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex gap-3 items-start">
-                <MapPin size={14} className="text-[#C9A96E] mt-1 flex-shrink-0" />
-                <p className="text-xs text-[#8B8A84] leading-relaxed">
-                  164/1 RNT Marg, Near Madhumilan Square,<br />
-                  South Tukoganj, Indore — 452001
-                </p>
+                <MapPin size={14} className="text-[#8d6346] mt-1 flex-shrink-0" />
+                <p className="text-xs text-white/65 leading-relaxed">164/1 RNT Marg, Near Madhumilan Square,<br />South Tukoganj, Indore — 452001</p>
               </div>
               <div className="flex gap-3 items-center">
-                <Phone size={14} className="text-[#C9A96E] flex-shrink-0" />
-                <a href="tel:+910731-661-1111" className="text-xs text-[#8B8A84] hover:text-[#C9A96E] transition-colors">
-                  0731-661-1111
-                </a>
+                <Phone size={14} className="text-[#8d6346] flex-shrink-0" />
+                <a href="tel:+910731-661-1111" className="text-xs text-white/65 hover:text-[#8d6346] transition-colors">0731-661-1111</a>
               </div>
               <div className="flex gap-3 items-center">
-                <Mail size={14} className="text-[#C9A96E] flex-shrink-0" />
-                <a href="mailto:fom1@hotelwinway.com" className="text-xs text-[#8B8A84] hover:text-[#C9A96E] transition-colors">
-                  fom1@hotelwinway.com
-                </a>
+                <Mail size={14} className="text-[#8d6346] flex-shrink-0" />
+                <a href="mailto:fom1@hotelwinway.com" className="text-xs text-white/65 hover:text-[#8d6346] transition-colors">fom1@hotelwinway.com</a>
               </div>
               <div className="flex gap-3 items-center">
-                <Clock size={14} className="text-[#C9A96E] flex-shrink-0" />
-                <p className="text-xs text-[#8B8A84]">Check-in: 12:00 | Check-out: 11:00</p>
+                <Clock size={14} className="text-[#8d6346] flex-shrink-0" />
+                <p className="text-xs text-white/65">Check-in: 12:00 | Check-out: 11:00</p>
               </div>
             </div>
           </div>
 
-          {/* Navigation Columns */}
           {Object.entries(footerLinks).map(([heading, links]) => (
-            <div key={heading} className="lg:col-span-2 lg:col-start-auto">
-              <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-[#C9A96E] mb-5">
+            <div key={heading} className="lg:col-span-2">
+              <h3 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#8d6346] mb-5" style={{ fontFamily: 'var(--font-display)' }}>
                 {heading}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-[#8B8A84] hover:text-white transition-colors duration-200 hover:translate-x-1 inline-block"
-                    >
+                    <Link href={link.href} className="text-sm text-white/65 hover:text-white transition-colors duration-300">
                       {link.label}
                     </Link>
                   </li>
@@ -141,62 +103,33 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Enquiry Bar */}
-        <div className="mt-14 pt-10 pb-10 border-t border-[#2a2a2a]">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-            <div className="relative z-10">
-              <p className="text-xs text-[#C9A96E] tracking-[0.2em] uppercase mb-2">Plan Your Stay</p>
-              <p
-                className="font-serif text-xl md:text-2xl text-white font-light leading-snug"
-                style={{ fontFamily: 'var(--font-serif)' }}
-              >
+        <div className="mt-14 pt-10 border-t border-white/10">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <p className="text-[10px] text-[#8d6346] tracking-[0.2em] uppercase mb-2" style={{ fontFamily: 'var(--font-display)' }}>Get in Touch</p>
+              <p className="text-lg text-white font-normal tracking-[0.06em] uppercase" style={{ fontFamily: 'var(--font-display)' }}>
                 Experience Malwa&apos;s Finest Hospitality
               </p>
             </div>
             <div className="flex gap-3 flex-wrap">
-              <a
-                href="tel:+910731-661-1111"
-                className="flex items-center gap-2 px-5 py-3 border border-[#C9A96E] text-[#C9A96E] text-sm font-medium hover:bg-[#C9A96E] hover:text-white transition-all duration-200"
-              >
-                <Phone size={14} />
-                Call Us
+              <a href="tel:+910731-661-1111" className="btn btn-outline btn-sm" style={{ borderColor: 'rgba(255,255,255,0.4)', color: 'white' }}>
+                <Phone size={14} /> Call Now
               </a>
-              <a
-                href="https://wa.me/919752411015?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Hotel%20Winway"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-3 bg-[#25D366] text-white text-sm font-medium hover:bg-[#1da851] transition-colors"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.03 18.99a9.955 9.955 0 01-4.766-1.21L2.93 19.07l1.323-4.228A9.987 9.987 0 012 11.97C2 6.477 6.477 2 11.97 2S22 6.477 22 11.97s-4.477 9.97-9.97 9.97z"/>
-                </svg>
+              <a href="https://wa.me/919752411015?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Hotel%20Winway" target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp btn-sm">
                 WhatsApp
               </a>
-              <Link
-                href="/contact"
-                className="flex items-center gap-2 px-5 py-3 bg-[#C9A96E] text-white text-sm font-bold tracking-[0.1em] uppercase hover:bg-[#b8955a] transition-colors"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                <Mail size={14} />
-                Enquire Now
+              <Link href="/contact" className="btn btn-accent btn-sm">
+                <Mail size={14} /> Contact Us
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#555]">
-            &copy; {new Date().getFullYear()} Hotel Winway, Indore. All rights reserved.
-          </p>
+        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-white/40">&copy; {new Date().getFullYear()} Hotel Winway, Indore. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/terms-and-conditions" className="text-xs text-[#555] hover:text-[#C9A96E] transition-colors">
-              Terms & Conditions
-            </Link>
-            <Link href="/privacy-policy" className="text-xs text-[#555] hover:text-[#C9A96E] transition-colors">
-              Privacy Policy
-            </Link>
+            <Link href="/terms-and-conditions" className="text-xs text-white/40 hover:text-[#8d6346] transition-colors">Terms & Conditions</Link>
+            <Link href="/privacy-policy" className="text-xs text-white/40 hover:text-[#8d6346] transition-colors">Privacy Policy</Link>
           </div>
         </div>
       </div>

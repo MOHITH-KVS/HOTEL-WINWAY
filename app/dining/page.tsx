@@ -130,7 +130,7 @@ export default function DiningPage() {
 
                 <div className="p-6">
                   <p
-                    className="text-[#C9A96E] mb-1"
+                    className="text-[#8d6346] mb-1"
                     style={{ fontFamily: 'var(--font-sans)', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                   >
                     {venue.cuisine}
@@ -150,7 +150,7 @@ export default function DiningPage() {
 
                   {/* Timing */}
                   <div className="flex items-center gap-1.5 text-[#8B8A84] mb-5" style={{ fontSize: 12 }}>
-                    <Clock size={12} className="text-[#C9A96E]" />
+                    <Clock size={12} className="text-[#8d6346]" />
                     {venue.timing}
                   </div>
 
@@ -158,17 +158,17 @@ export default function DiningPage() {
                   <div className="flex items-center gap-4">
                     <Link
                       href={venue.href}
-                      className="text-[#C9A96E] hover:text-[#1A1A1A] transition-colors"
+                      className="text-[#8d6346] hover:text-[#1A1A1A] transition-colors"
                       style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
                     >
                       View Details ›
                     </Link>
                     <Link
                       href="/contact"
-                      className="text-[#57585B] hover:text-[#C9A96E] transition-colors"
+                      className="text-[#57585B] hover:text-[#8d6346] transition-colors"
                       style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
                     >
-                      Enquire Now ›
+                      Contact Us ›
                     </Link>
                   </div>
                 </div>
@@ -192,7 +192,7 @@ export default function DiningPage() {
             </div>
             <div className="p-8 lg:p-12 flex flex-col justify-center">
               <p
-                className="text-[#C9A96E] mb-1"
+                className="text-[#8d6346] mb-1"
                 style={{ fontFamily: 'var(--font-sans)', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
               >
                 {venues[3].cuisine}
@@ -210,23 +210,23 @@ export default function DiningPage() {
                 {venues[3].description}
               </p>
               <div className="flex items-center gap-1.5 text-[#8B8A84] mb-6" style={{ fontSize: 13 }}>
-                <Clock size={13} className="text-[#C9A96E]" />
+                <Clock size={13} className="text-[#8d6346]" />
                 {venues[3].timing}
               </div>
               <div className="flex items-center gap-6">
                 <Link
                   href={venues[3].href}
-                  className="text-[#C9A96E] hover:text-[#1A1A1A] transition-colors"
+                  className="text-[#8d6346] hover:text-[#1A1A1A] transition-colors"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
                 >
                   View Details ›
                 </Link>
                 <Link
                   href="/contact"
-                  className="text-[#57585B] hover:text-[#C9A96E] transition-colors"
+                  className="text-[#57585B] hover:text-[#8d6346] transition-colors"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
                 >
-                  Enquire Now ›
+                  Contact Us ›
                 </Link>
               </div>
             </div>

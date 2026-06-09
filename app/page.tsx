@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
+import SecondaryNav from '@/components/layout/SecondaryNav';
 import WelcomeSection from '@/components/sections/WelcomeSection';
 import RoomsPreview from '@/components/sections/RoomsPreview';
 import AmenitiesSection from '@/components/sections/AmenitiesSection';
@@ -42,9 +43,10 @@ export default function HomePage() {
         title="Hotel Winway"
         subtitle="Where the Warmth of Malwa Meets Modern Luxury"
         locationLabel="INDORE, MADHYA PRADESH"
-        showScrollHint={true}
         showCornerBadges={true}
+        showEnquiryStrip={true}
       />
+      <SecondaryNav />
       <WelcomeSection />
       <RoomsPreview />
       <AmenitiesSection />

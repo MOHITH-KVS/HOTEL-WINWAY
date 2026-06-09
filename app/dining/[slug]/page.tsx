@@ -126,7 +126,7 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
             <span className="text-white">{venue.name}</span>
           </nav>
           <p
-            className="text-[#C9A96E] mb-2"
+            className="text-[#8d6346] mb-2"
             style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase' }}
           >
             {venue.tagline}
@@ -152,7 +152,7 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
                 >
                   About {venue.name}
                 </h2>
-                <div className="w-8 h-0.5 bg-[#C9A96E] mb-5" />
+                <div className="w-8 h-0.5 bg-[#8d6346] mb-5" />
                 <p
                   className="text-[#57585B]"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
@@ -169,7 +169,7 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
                 >
                   Gallery
                 </h2>
-                <div className="w-8 h-0.5 bg-[#C9A96E] mb-5" />
+                <div className="w-8 h-0.5 bg-[#8d6346] mb-5" />
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {venue.images.slice(0, 6).map((img, i) => (
                     <div key={i} className="relative overflow-hidden card-image-zoom" style={{ aspectRatio: '4/3' }}>
@@ -192,7 +192,7 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
                 className="bg-[#1A1A1A] text-white p-8 sticky top-24"
               >
                 <p
-                  className="text-[#C9A96E] mb-2"
+                  className="text-[#8d6346] mb-2"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
                 >
                   {venue.tagline}
@@ -206,20 +206,20 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
 
                 <div className="space-y-4 py-4 border-y border-[#333] mb-6">
                   <div className="flex items-center gap-3">
-                    <Clock size={14} className="text-[#C9A96E] flex-shrink-0" />
+                    <Clock size={14} className="text-[#8d6346] flex-shrink-0" />
                     <div>
                       <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10, color: '#8B8A84', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Timings</p>
                       <p style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'white' }}>{venue.timing}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Phone size={14} className="text-[#C9A96E] flex-shrink-0" />
+                    <Phone size={14} className="text-[#8d6346] flex-shrink-0" />
                     <div>
                       <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10, color: '#8B8A84', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Reservations</p>
                       <a
                         href="tel:+919752411003"
                         style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'white' }}
-                        className="hover:text-[#C9A96E] transition-colors"
+                        className="hover:text-[#8d6346] transition-colors"
                       >
                         97524-11003
                       </a>
@@ -229,10 +229,10 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
 
                 <Link
                   href="/contact"
-                  className="w-full block text-center bg-[#C9A96E] hover:bg-[#b8955a] text-white py-4 text-[12px] font-bold tracking-[0.15em] uppercase transition-all mb-3"
+                  className="w-full block text-center bg-[#8d6346] hover:bg-[#7a5539] text-white py-4 text-[12px] font-bold tracking-[0.15em] uppercase transition-all mb-3"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
-                  Enquire Now
+                  Contact Us
                 </Link>
                 <a
                   href="https://wa.me/919752411015"

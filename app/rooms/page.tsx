@@ -144,17 +144,17 @@ export default function RoomsPage() {
                   <div className="flex items-center gap-4">
                     <Link
                       href={room.href}
-                      className="text-[#C9A96E] hover:text-[#1A1A1A] transition-colors"
+                      className="text-[#8d6346] hover:text-[#1A1A1A] transition-colors"
                       style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
                     >
                       Room Details ›
                     </Link>
                     <Link
                       href="/contact"
-                      className="text-[#57585B] hover:text-[#C9A96E] transition-colors"
+                      className="text-[#57585B] hover:text-[#8d6346] transition-colors"
                       style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
                     >
-                      Enquire Now ›
+                      Contact Us ›
                     </Link>
                   </div>
                 </div>
@@ -206,17 +206,17 @@ export default function RoomsPage() {
               <div className="flex items-center gap-6">
                 <Link
                   href={rooms[3].href}
-                  className="text-[#C9A96E] hover:text-[#1A1A1A] transition-colors"
+                  className="text-[#8d6346] hover:text-[#1A1A1A] transition-colors"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
                 >
                   Room Details ›
                 </Link>
                 <Link
                   href="/contact"
-                  className="text-[#57585B] hover:text-[#C9A96E] transition-colors"
+                  className="text-[#57585B] hover:text-[#8d6346] transition-colors"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
                 >
-                  Enquire Now ›
+                  Contact Us ›
                 </Link>
               </div>
             </div>

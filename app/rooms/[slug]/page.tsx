@@ -205,7 +205,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
             <ChevronRight size={12} />
             <span className="text-white">{room.name}</span>
           </nav>
-          <span className="text-[#C9A96E] text-xs tracking-[0.25em] uppercase mb-2">{room.tagline}</span>
+          <span className="text-[#8d6346] text-xs tracking-[0.25em] uppercase mb-2">{room.tagline}</span>
           <h1 className="font-serif text-5xl lg:text-7xl text-white font-light leading-tight">{room.name}</h1>
         </div>
       </div>
@@ -219,9 +219,9 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
               {/* Quick Specs */}
               <div className="grid grid-cols-3 gap-4">
                 {[
-                  { label: 'Room Size', value: room.size, icon: <Maximize2 size={20} className="text-[#C9A96E]" /> },
-                  { label: 'Guests', value: room.guests, icon: <Users size={20} className="text-[#C9A96E]" /> },
-                  { label: 'Bed Type', value: room.bed, icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" strokeWidth="2"><path d="M2 9V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4"/><path d="M2 20v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/><path d="M2 15h20"/></svg> },
+                  { label: 'Room Size', value: room.size, icon: <Maximize2 size={20} className="text-[#8d6346]" /> },
+                  { label: 'Guests', value: room.guests, icon: <Users size={20} className="text-[#8d6346]" /> },
+                  { label: 'Bed Type', value: room.bed, icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8d6346" strokeWidth="2"><path d="M2 9V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4"/><path d="M2 20v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/><path d="M2 15h20"/></svg> },
                 ].map((spec) => (
                   <div key={spec.label} className="bg-white p-5 text-center shadow-sm">
                     <div className="flex justify-center mb-2">{spec.icon}</div>
@@ -234,7 +234,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
               {/* Description */}
               <div className="bg-white p-8 shadow-sm">
                 <h2 className="font-serif text-2xl text-[#1A1A1A] mb-4">About this Room</h2>
-                <div className="w-8 h-px bg-[#C9A96E] mb-5" />
+                <div className="w-8 h-px bg-[#8d6346] mb-5" />
                 {room.description.split('\n\n').map((para, i) => (
                   <p key={i} className="prose-luxury text-[#57585B] text-sm mb-3 last:mb-0">{para}</p>
                 ))}
@@ -243,11 +243,11 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
               {/* Highlights */}
               <div className="bg-white p-8 shadow-sm">
                 <h2 className="font-serif text-2xl text-[#1A1A1A] mb-4">Room Highlights</h2>
-                <div className="w-8 h-px bg-[#C9A96E] mb-5" />
+                <div className="w-8 h-px bg-[#8d6346] mb-5" />
                 <ul className="space-y-3">
                   {room.highlights.map((h) => (
                     <li key={h} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 bg-[#C9A96E] rounded-full mt-2 flex-shrink-0" />
+                      <div className="w-1.5 h-1.5 bg-[#8d6346] rounded-full mt-2 flex-shrink-0" />
                       <span className="text-sm text-[#57585B]">{h}</span>
                     </li>
                   ))}
@@ -257,11 +257,11 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
               {/* Amenities */}
               <div className="bg-white p-8 shadow-sm">
                 <h2 className="font-serif text-2xl text-[#1A1A1A] mb-4">Amenities</h2>
-                <div className="w-8 h-px bg-[#C9A96E] mb-5" />
+                <div className="w-8 h-px bg-[#8d6346] mb-5" />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   {room.amenities.map((a) => (
                     <div key={a.label} className="flex flex-col items-center text-center p-4 bg-[#F9F6F0] gap-2">
-                      <div className="text-[#C9A96E]">{amenityIcons[a.icon] || <Coffee size={18} />}</div>
+                      <div className="text-[#8d6346]">{amenityIcons[a.icon] || <Coffee size={18} />}</div>
                       <span className="text-xs text-[#57585B] leading-tight">{a.label}</span>
                     </div>
                   ))}
@@ -271,7 +271,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
               {/* Gallery */}
               <div className="bg-white p-8 shadow-sm">
                 <h2 className="font-serif text-2xl text-[#1A1A1A] mb-4">Gallery</h2>
-                <div className="w-8 h-px bg-[#C9A96E] mb-5" />
+                <div className="w-8 h-px bg-[#8d6346] mb-5" />
                 <RoomGalleryClient images={room.images} roomName={room.name} />
               </div>
             </div>
@@ -280,7 +280,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
             <div className="space-y-6">
               {/* Enquiry Sidebar — no price */}
               <div className="bg-[#1A1A1A] text-white p-8 sticky top-24">
-                <p className="text-[#C9A96E] text-xs tracking-[0.2em] uppercase mb-2">{room.tagline}</p>
+                <p className="text-[#8d6346] text-xs tracking-[0.2em] uppercase mb-2">{room.tagline}</p>
                 <h3 className="font-serif text-2xl font-light mb-4">{room.name}</h3>
 
                 <div className="space-y-3 py-4 border-y border-[#333] mb-6">
@@ -294,16 +294,16 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-[#8B8A84]">Breakfast</span>
-                    <span className="text-[#C9A96E]">Included</span>
+                    <span className="text-[#8d6346]">Included</span>
                   </div>
                 </div>
 
                 <Link
                   href="/contact"
-                  className="w-full block text-center bg-[#C9A96E] hover:bg-[#b8955a] text-white py-4 text-sm font-bold tracking-[0.15em] uppercase transition-colors duration-300 mb-3"
+                  className="w-full block text-center bg-[#8d6346] hover:bg-[#7a5539] text-white py-4 text-sm font-bold tracking-[0.15em] uppercase transition-colors duration-300 mb-3"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
-                  Enquire Now
+                  Contact Us
                 </Link>
 
                 <a
@@ -318,7 +318,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
 
                 <a
                   href="tel:+910731-661-1111"
-                  className="w-full flex items-center justify-center gap-2 mt-3 border border-[#444] text-[#8B8A84] py-3.5 text-sm hover:border-[#C9A96E] hover:text-[#C9A96E] transition-all"
+                  className="w-full flex items-center justify-center gap-2 mt-3 border border-[#444] text-[#8B8A84] py-3.5 text-sm hover:border-[#8d6346] hover:text-[#8d6346] transition-all"
                 >
                   <Phone size={16} />
                   0731-661-1111
@@ -347,7 +347,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
         <div className="flex items-center gap-0 max-w-full">
           <a
             href={`tel:+910731-661-1111`}
-            className="flex-1 flex flex-col items-center justify-center gap-0.5 py-3 border-r border-gray-100 text-[#57585B] hover:text-[#C9A96E] transition-colors"
+            className="flex-1 flex flex-col items-center justify-center gap-0.5 py-3 border-r border-gray-100 text-[#57585B] hover:text-[#8d6346] transition-colors"
           >
             <Phone size={18} />
             <span className="text-[9px] font-semibold tracking-wide uppercase">Call</span>
@@ -363,9 +363,9 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
           </a>
           <Link
             href="/contact"
-            className="flex-1 py-3 bg-[#C9A96E] text-center text-white text-[11px] font-bold tracking-wide uppercase"
+            className="flex-1 py-3 bg-[#8d6346] text-center text-white text-[11px] font-bold tracking-wide uppercase"
           >
-            Enquire Now
+            Contact Us
           </Link>
         </div>
       </div>
