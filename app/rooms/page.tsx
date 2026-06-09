@@ -1,69 +1,70 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Wifi, Tv, Coffee, Bath, Maximize2, Users, ArrowRight } from 'lucide-react';
+import { Wifi, Users, Maximize2 } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
 import ContactCTA from '@/components/sections/ContactCTA';
 
 export const metadata: Metadata = {
   title: 'Rooms & Suites | Hotel Winway Indore',
   description:
-    'Explore our range of luxurious rooms and suites at Hotel Winway Indore — from comfortable Standard Rooms to the opulent Presidential Suite. All include WiFi, breakfast and premium amenities.',
+    'Standard Room, Deluxe, Junior Suite and Presidential Suite at Hotel Winway Indore. Thoughtfully designed rooms with modern amenities.',
   alternates: { canonical: 'https://www.hotelwinway.com/rooms' },
+  openGraph: {
+    title: 'Rooms & Suites | Hotel Winway Indore',
+    description: 'Standard Room, Deluxe, Junior Suite and Presidential Suite at Hotel Winway Indore.',
+    images: [{ url: '/images/rooms/presidential-suite/ps-1.jpeg' }],
+  },
 };
 
 const rooms = [
   {
     id: 'standard-room',
     name: 'Standard Room',
-    tagline: 'Effortless Comfort',
-    size: '24 sq.m / 260 sq.ft',
-    guests: 'Up to 2 guests',
-    price: '₹4,000',
+    size: '24 Sq. Mt',
+    sizeImperial: '260 sq.ft',
+    guests: 'Up to 2',
+    bed: 'Double Bed',
     description:
-      'Experience effortless comfort in our thoughtfully appointed Standard Room. Designed with contemporary elegance and practical convenience in mind, featuring inviting interiors, comfortable bedding and modern amenities.',
+      'Experience effortless comfort in our thoughtfully appointed Room. Designed with contemporary elegance and practical convenience in mind, the room features inviting interiors, comfortable bedding and modern amenities to ensure a pleasant and relaxing stay.',
     image: '/images/rooms/standard-room/standard-1.jpeg',
     href: '/rooms/standard-room',
-    features: ['Double Bed', 'Free WiFi', 'Flat-screen TV', 'Breakfast Included'],
   },
   {
     id: 'deluxe-room',
     name: 'Deluxe Room',
-    tagline: 'Elevated Comfort',
-    size: '29 sq.m / 316 sq.ft',
-    guests: 'Up to 2 guests',
-    price: '₹4,200',
+    size: '29 Sq. Mt',
+    sizeImperial: '316 sq.ft',
+    guests: 'Up to 2',
+    bed: 'Double Bed',
     description:
-      'Enjoy an elevated stay experience in our Deluxe Room, thoughtfully designed to offer enhanced comfort and contemporary style. Featuring spacious interiors, elegant furnishings and modern amenities.',
+      'Enjoy an elevated stay experience in our Deluxe Room, thoughtfully designed to offer enhanced comfort and contemporary style. Featuring spacious interiors, elegant furnishings and modern amenities, the room provides the perfect setting to relax and recharge.',
     image: '/images/rooms/deluxe-room/deluxe-1.jpeg',
     href: '/rooms/deluxe-room',
-    features: ['King-size Bed', 'Work Desk', 'Free WiFi', 'Breakfast Included'],
   },
   {
     id: 'junior-suite',
     name: 'Junior Suite',
-    tagline: 'Refined Retreat',
-    size: '31 sq.m / 340 sq.ft',
-    guests: 'Up to 2 guests',
-    price: '₹5,500',
+    size: '31 Sq. Mt',
+    sizeImperial: '340 sq.ft',
+    guests: 'Up to 2',
+    bed: 'King Bed',
     description:
-      'Indulge in elevated comfort and added luxury in our Junior Suite. Thoughtfully designed with spacious interiors, private bathtub, and well-stocked minibar for an indulgent experience.',
+      'Indulge in elevated comfort and added luxury in our Junior Suite. Thoughtfully designed with spacious interiors and elegant furnishings, the suite offers a refined retreat. Unwind in the relaxing bathtub and enjoy refreshments from the minibar.',
     image: '/images/rooms/junior-suite/junior-1.jpeg',
     href: '/rooms/junior-suite',
-    features: ['Private Bathtub', 'Minibar', 'Free WiFi', 'Breakfast Included'],
   },
   {
     id: 'presidential-suite',
     name: 'Presidential Suite',
-    tagline: 'Pinnacle of Luxury',
-    size: '66 sq.m / 716 sq.ft',
-    guests: 'Up to 2 guests',
-    price: '₹7,000',
+    size: '66 Sq. Mt',
+    sizeImperial: '716 sq.ft',
+    guests: 'Up to 2',
+    bed: 'King Bed',
     description:
-      'Experience the pinnacle of luxury in our Presidential Suite — expansive living spaces, elegant interiors, premium amenities and impeccable personalized hospitality.',
+      'Experience the pinnacle of luxury in our Presidential Suite, thoughtfully designed for guests who appreciate exceptional comfort and sophistication. Featuring expansive living spaces, elegant interiors and premium amenities.',
     image: '/images/rooms/presidential-suite/ps-1.jpeg',
     href: '/rooms/presidential-suite',
-    features: ['Separate Living Area', 'Luxury Bathtub', 'Premium Minibar', 'Breakfast Included'],
   },
 ];
 
@@ -73,90 +74,152 @@ export default function RoomsPage() {
       <HeroSection
         title="Rooms & Suites"
         subtitle="An Experience of Comfort, Style and Hospitality"
-        imageSrc="/images/rooms/presidential-suite/ps-4.png"
+        imageSrc="/images/rooms/presidential-suite/ps-1.jpeg"
         imageAlt="Hotel Winway Indore — Luxury Rooms and Suites"
-        showScrollHint={false}
       />
 
-      <section className="section-padding bg-[#F9F6F0]">
+      {/* Intro */}
+      <section className="section-padding" style={{ background: '#F3F4F6' }}>
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          {/* Intro */}
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="section-label">Accommodations</span>
-            <h1 className="font-serif text-4xl sm:text-5xl font-light text-[#1A1A1A] mt-3 mb-4">
-              Our Rooms &amp; Suites
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <h1 className="heading-mixed mb-4">
+              A Symphony of <strong>Elegance and Comfort</strong>
             </h1>
-            <p className="prose-luxury text-[#57585B] text-sm">
-              Designed to offer a perfect balance of comfort and sophistication, our rooms and
-              suites provide a welcoming retreat in the heart of Indore. Thoughtfully appointed
-              interiors, contemporary amenities and elegant furnishings create an atmosphere
-              that is both relaxing and refined.
+            <p
+              className="text-[#57585B]"
+              style={{ fontFamily: 'var(--font-sans)', fontSize: 15, lineHeight: 1.85 }}
+            >
+              Designed to offer a perfect balance of comfort and sophistication, the rooms and suites at Hotel Winway provide a welcoming retreat in the heart of Indore city. Thoughtfully appointed interiors, contemporary amenities and elegant furnishings create an atmosphere that is both relaxing and refined.
             </p>
           </div>
 
-          {/* Rooms Grid */}
-          <div className="space-y-12">
-            {rooms.map((room, index) => (
+          {/* 3-column grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            {rooms.slice(0, 3).map((room) => (
               <div
                 key={room.id}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white shadow-sm hover:shadow-xl transition-shadow duration-500 ${
-                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
-                }`}
+                className="bg-white group"
+                style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
               >
-                {/* Image */}
-                <div className={`relative aspect-[4/3] card-image-zoom overflow-hidden ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                <div className="relative overflow-hidden card-image-zoom" style={{ aspectRatio: '4/3' }}>
                   <Image
                     src={room.image}
                     alt={`${room.name} at Hotel Winway Indore`}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  {/* Price badge */}
-                  <div className="absolute top-6 left-6 bg-[#C9A96E] px-4 py-2">
-                    <p className="font-serif text-xl text-white font-light leading-none">{room.price}</p>
-                    <p className="text-[10px] text-white/80 mt-0.5">+ taxes / double occ.</p>
-                  </div>
                 </div>
 
-                {/* Content */}
-                <div className={`p-8 lg:p-12 flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <span className="section-label">{room.tagline}</span>
-                  <h2 className="font-serif text-3xl text-[#1A1A1A] font-light mt-2 mb-4">{room.name}</h2>
-
-                  <div className="flex gap-6 mb-5">
-                    <div className="flex items-center gap-1.5 text-[#8B8A84] text-sm">
-                      <Maximize2 size={14} className="text-[#C9A96E]" />
+                <div className="p-6">
+                  {/* Highlights label above name */}
+                  <div className="flex items-center gap-3 mb-3 pb-3 border-b border-gray-100">
+                    <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 11 }}>
+                      <Maximize2 size={11} />
                       {room.size}
                     </div>
-                    <div className="flex items-center gap-1.5 text-[#8B8A84] text-sm">
-                      <Users size={14} className="text-[#C9A96E]" />
-                      {room.guests}
+                    <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 11 }}>
+                      <Users size={11} />
+                      {room.guests} guests
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 11 }}>
+                      <Wifi size={11} />
+                      WiFi
                     </div>
                   </div>
 
-                  <div className="w-8 h-px bg-[#C9A96E] mb-5" />
-
-                  <p className="prose-luxury text-[#57585B] text-sm mb-6">{room.description}</p>
-
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {room.features.map((f) => (
-                      <span key={f} className="text-xs bg-[#F9F6F0] border border-[#E8DDD0] text-[#57585B] px-3 py-1.5">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Link
-                    href={room.href}
-                    className="inline-flex items-center gap-3 bg-[#1A1A1A] hover:bg-[#C9A96E] text-white px-6 py-3 text-sm font-semibold tracking-[0.1em] uppercase transition-all duration-300 self-start"
+                  <h2
+                    className="text-[#1A1A1A] font-bold mb-2"
+                    style={{ fontFamily: 'var(--font-sans)', fontSize: 16, fontWeight: 700 }}
                   >
-                    View Room Details
-                    <ArrowRight size={14} />
-                  </Link>
+                    {room.name}
+                  </h2>
+                  <p
+                    className="text-[#57585B] mb-5 line-clamp-3"
+                    style={{ fontFamily: 'var(--font-sans)', fontSize: 13, lineHeight: 1.75 }}
+                  >
+                    {room.description}
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <Link
+                      href={room.href}
+                      className="text-[#C9A96E] hover:text-[#1A1A1A] transition-colors"
+                      style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
+                    >
+                      Room Details ›
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className="text-[#57585B] hover:text-[#C9A96E] transition-colors"
+                      style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
+                    >
+                      Enquire Now ›
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Presidential Suite — featured wide card */}
+          <div
+            className="bg-white grid grid-cols-1 lg:grid-cols-2"
+            style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
+          >
+            <div className="relative overflow-hidden card-image-zoom" style={{ minHeight: 320 }}>
+              <Image
+                src={rooms[3].image}
+                alt={`${rooms[3].name} at Hotel Winway Indore`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <div className="p-8 lg:p-12 flex flex-col justify-center">
+              <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gray-100">
+                <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 12 }}>
+                  <Maximize2 size={12} />
+                  {rooms[3].size}
+                </div>
+                <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 12 }}>
+                  <Users size={12} />
+                  {rooms[3].guests} guests
+                </div>
+                <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 12 }}>
+                  <Wifi size={12} />
+                  Inclusive of WiFi
+                </div>
+              </div>
+              <h2
+                className="text-[#1A1A1A] font-bold mb-3"
+                style={{ fontFamily: 'var(--font-sans)', fontSize: 22, fontWeight: 700 }}
+              >
+                {rooms[3].name}
+              </h2>
+              <p
+                className="text-[#57585B] mb-6"
+                style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
+              >
+                {rooms[3].description}
+              </p>
+              <div className="flex items-center gap-6">
+                <Link
+                  href={rooms[3].href}
+                  className="text-[#C9A96E] hover:text-[#1A1A1A] transition-colors"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
+                >
+                  Room Details ›
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-[#57585B] hover:text-[#C9A96E] transition-colors"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
+                >
+                  Enquire Now ›
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

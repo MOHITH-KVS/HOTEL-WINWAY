@@ -106,12 +106,14 @@ export default function LocalAttractionsPage() {
       <section className="section-padding bg-[#F9F6F0]">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           {/* Intro */}
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="section-label">Explore Indore</span>
-            <h1 className="font-serif text-4xl sm:text-5xl font-light text-[#1A1A1A] mt-3 mb-4">
-              Top Attractions
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h1 className="heading-mixed mb-4">
+              Attractions &amp; Places <strong>to Visit in Indore</strong>
             </h1>
-            <p className="prose-luxury text-[#57585B] text-sm">
+            <p
+              className="text-[#57585B]"
+              style={{ fontFamily: 'var(--font-sans)', fontSize: 15, lineHeight: 1.85 }}
+            >
               Indore blends historical significance with a thriving contemporary culture. From Rajwada
               Palace and Lal Bagh Palace to bustling food streets like Sarafa Bazaar — the city offers
               diverse experiences. Our concierge team is always available to assist with transportation

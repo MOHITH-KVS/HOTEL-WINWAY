@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
 import WelcomeSection from '@/components/sections/WelcomeSection';
 import RoomsPreview from '@/components/sections/RoomsPreview';
+import AmenitiesSection from '@/components/sections/AmenitiesSection';
 import DiningPreview from '@/components/sections/DiningPreview';
 import AttractionsSection from '@/components/sections/AttractionsSection';
 import ExperiencesSection from '@/components/sections/ExperiencesSection';
@@ -37,15 +38,17 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {/* Hero — auto-playing slider with 5 facade images + corner badges */}
       <HeroSection
         title="Hotel Winway"
         subtitle="Where the Warmth of Malwa Meets Modern Luxury"
-        imageSrc="/images/facade/facade-1.png"
-        imageAlt="Hotel Winway Indore — Luxury Business Hotel on RNT Marg"
+        locationLabel="Indore, Madhya Pradesh"
         showScrollHint={true}
+        showCornerBadges={true}
       />
       <WelcomeSection />
       <RoomsPreview />
+      <AmenitiesSection />
       <DiningPreview />
       <AttractionsSection />
       <ExperiencesSection />

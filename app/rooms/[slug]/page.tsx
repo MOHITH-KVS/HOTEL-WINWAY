@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Wifi, Tv, Coffee, Bath, Maximize2, Users, ChevronRight, Phone, MessageCircle } from 'lucide-react';
 import ContactCTA from '@/components/sections/ContactCTA';
 import RoomGalleryClient from '@/components/rooms/RoomGalleryClient';
-import EnquireButton from '@/components/ui/EnquireButton';
 
 const roomData = {
   'standard-room': {
@@ -14,8 +13,6 @@ const roomData = {
     size: '24 sq.m / 260 sq.ft',
     guests: 'Up to 2 guests',
     bed: 'Double Bed',
-    price: '₹4,000',
-    priceNote: '+ taxes (double occupancy)',
     description: `Experience effortless comfort in our thoughtfully appointed Standard Room. Designed with contemporary elegance and practical convenience in mind, the room features inviting interiors, comfortable bedding and modern amenities to ensure a pleasant and relaxing stay.
 
 Whether visiting Indore for business or leisure, guests can enjoy a welcoming atmosphere, attentive service and all the essentials required for a comfortable and memorable experience.`,
@@ -48,8 +45,6 @@ Whether visiting Indore for business or leisure, guests can enjoy a welcoming at
     size: '29 sq.m / 316 sq.ft',
     guests: 'Up to 2 guests',
     bed: 'King-size Bed',
-    price: '₹4,200',
-    priceNote: '+ taxes (double occupancy)',
     description: `Enjoy an elevated stay experience in our Deluxe Room, thoughtfully designed to offer enhanced comfort and contemporary style. Featuring spacious interiors, elegant furnishings and modern amenities, the room provides the perfect setting to relax and recharge.
 
 Whether travelling for business or leisure, guests can enjoy a seamless blend of comfort, convenience and warm hospitality in the heart of Indore.`,
@@ -84,8 +79,6 @@ Whether travelling for business or leisure, guests can enjoy a seamless blend of
     size: '31 sq.m / 340 sq.ft',
     guests: 'Up to 2 guests',
     bed: 'King-size Bed',
-    price: '₹5,500',
-    priceNote: '+ taxes (double occupancy)',
     description: `Indulge in elevated comfort and added luxury in our Junior Suite. Thoughtfully designed with spacious interiors and elegant furnishings, the suite offers a refined retreat for discerning travellers.
 
 Unwind in the relaxing bathtub, enjoy refreshments from the minibar, and experience modern amenities crafted to make every stay comfortable, convenient and memorable.`,
@@ -117,8 +110,6 @@ Unwind in the relaxing bathtub, enjoy refreshments from the minibar, and experie
     size: '66 sq.m / 716 sq.ft',
     guests: 'Up to 2 guests',
     bed: 'King-size Bed',
-    price: '₹7,000',
-    priceNote: '+ taxes (double occupancy)',
     description: `Experience the pinnacle of luxury in our Presidential Suite, thoughtfully designed for guests who appreciate exceptional comfort and sophistication. Featuring expansive living spaces, elegant interiors and premium amenities, the suite offers an elevated stay experience.
 
 Relax in the indulgent bathtub, enjoy refreshments from the minibar and unwind in an atmosphere of refined elegance, complemented by personalized hospitality and impeccable attention to detail.`,
@@ -155,7 +146,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!room) return {};
   return {
     title: `${room.name} | Hotel Winway Indore`,
-    description: `Book the ${room.name} at Hotel Winway Indore — ${room.size}, ${room.bed}, starting from ${room.price}. ${room.description.split('\n')[0]}`,
+    description: `Stay in the ${room.name} at Hotel Winway Indore — ${room.size}, ${room.bed}. ${room.description.split('\n')[0]}`,
     alternates: { canonical: `https://www.hotelwinway.com/rooms/${slug}` },
   };
 }
@@ -287,14 +278,10 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
 
             {/* Right: Sidebar */}
             <div className="space-y-6">
-              {/* Price Card */}
+              {/* Enquiry Sidebar — no price */}
               <div className="bg-[#1A1A1A] text-white p-8 sticky top-24">
                 <p className="text-[#C9A96E] text-xs tracking-[0.2em] uppercase mb-2">{room.tagline}</p>
-                <h3 className="font-serif text-2xl font-light mb-1">{room.name}</h3>
-                <div className="my-4 pt-4 border-t border-[#333]">
-                  <p className="font-serif text-4xl text-[#C9A96E] font-light">{room.price}</p>
-                  <p className="text-xs text-[#8B8A84] mt-1">{room.priceNote}</p>
-                </div>
+                <h3 className="font-serif text-2xl font-light mb-4">{room.name}</h3>
 
                 <div className="space-y-3 py-4 border-y border-[#333] mb-6">
                   <div className="flex justify-between text-sm">
@@ -311,7 +298,13 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
                   </div>
                 </div>
 
-                <EnquireButton roomType={room.name} />
+                <Link
+                  href="/contact"
+                  className="w-full block text-center bg-[#C9A96E] hover:bg-[#b8955a] text-white py-4 text-sm font-bold tracking-[0.15em] uppercase transition-colors duration-300 mb-3"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  Enquire Now
+                </Link>
 
                 <a
                   href="https://wa.me/919752411015"
@@ -349,7 +342,7 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
 
       <ContactCTA />
 
-      {/* Mobile Sticky CTA Bar */}
+      {/* Mobile Sticky CTA Bar — no price display */}
       <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white border-t border-gray-200 shadow-2xl">
         <div className="flex items-center gap-0 max-w-full">
           <a
@@ -368,10 +361,12 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
             <MessageCircle size={18} />
             <span className="text-[9px] font-semibold tracking-wide uppercase">WhatsApp</span>
           </a>
-          <div className="flex-1 py-3 bg-[#C9A96E] text-center">
-            <span className="text-white font-serif text-base leading-none block">{room.price}</span>
-            <span className="text-white/80 text-[9px] block mt-0.5">per night + taxes</span>
-          </div>
+          <Link
+            href="/contact"
+            className="flex-1 py-3 bg-[#C9A96E] text-center text-white text-[11px] font-bold tracking-wide uppercase"
+          >
+            Enquire Now
+          </Link>
         </div>
       </div>
 

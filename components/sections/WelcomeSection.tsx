@@ -55,40 +55,41 @@ export default function WelcomeSection() {
           >
             <span className="section-label">Welcome to Hotel Winway</span>
 
-            <h2 className="font-serif text-4xl sm:text-5xl font-light text-[#1A1A1A] mt-4 mb-6 leading-tight">
-              Hospitality Rooted in the<br />
-              <em className="font-light not-italic text-[#C9A96E]">Warmth of Malwa</em>
+            <h2 className="heading-mixed mb-6" style={{ fontSize: 'clamp(1.3rem, 2vw, 1.7rem)' }}>
+              Where the Warmth of Malwa <strong>Meets Modern Luxury</strong>
             </h2>
 
             <div className="w-12 h-px bg-[#C9A96E] mb-6" />
 
-            <p className="prose-luxury text-[#57585B] mb-4">
-              At Hotel Winway, hospitality is more than a service — it is a tradition rooted in
-              the warmth and culture of Malwa. Located in the heart of Indore, the hotel offers
-              a harmonious blend of comfort, convenience and personalized attention.
+            <p
+              className="text-[#57585B] mb-4"
+              style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
+            >
+              At Hotel Winway, hospitality is more than a service — it is a tradition rooted in the warmth and culture of Malwa. Located in the heart of Indore, the hotel offers a harmonious blend of comfort, convenience and personalized attention.
             </p>
-            <p className="prose-luxury text-[#57585B] mb-8">
-              Strategically situated on R.N.T. Marg, one of the city&apos;s most prominent commercial
-              districts, Hotel Winway provides effortless access to business centres, educational
-              institutions, shopping destinations and key transport hubs.
+            <p
+              className="text-[#57585B] mb-8"
+              style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
+            >
+              Strategically situated on R.N.T. Marg, one of the city&apos;s most prominent commercial districts, Hotel Winway provides effortless access to business centres, educational institutions, shopping destinations and key transport hubs.
             </p>
 
-            {/* Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+            {/* Highlights — bullet style matching reference */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
               {highlights.map((item) => (
-                <div key={item} className="flex items-start gap-3">
-                  <CheckCircle size={16} className="text-[#C9A96E] flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-[#57585B]">{item}</span>
+                <div key={item} className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] mt-1.5 flex-shrink-0" />
+                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: '#57585B', lineHeight: 1.6 }}>{item}</span>
                 </div>
               ))}
             </div>
 
             <Link
               href="/about"
-              className="inline-flex items-center gap-3 text-[#1A1A1A] font-semibold text-sm tracking-[0.1em] uppercase hover:text-[#C9A96E] transition-colors group"
+              className="inline-flex items-center gap-2 text-[#57585B] hover:text-[#C9A96E] transition-colors"
+              style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}
             >
-              Discover Our Story
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              Discover Our Story <span>›</span>
             </Link>
           </motion.div>
         </div>

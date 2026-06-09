@@ -28,17 +28,17 @@ const footerLinks = {
   'Dining': [
     { label: 'Tiffin Restaurant', href: '/dining/tiffin' },
     { label: 'The Deck', href: '/dining/the-deck' },
-    { label: 'Alfresco', href: '/dining/alfresco' },
-    { label: 'Banquets & Events', href: '/dining/banquets-events' },
+    { label: 'Al Fresco', href: '/dining/al-fresco' },
+    { label: 'Cafe', href: '/dining/cafe' },
+    { label: 'Events & Banquet', href: '/events' },
   ],
   'Explore': [
     { label: 'About Hotel Winway', href: '/about' },
     { label: 'Local Attractions', href: '/local-attractions' },
-    { label: 'Experiences', href: '/experiences' },
     { label: 'Gallery', href: '/gallery' },
+    { label: 'Contact Us', href: '/contact' },
     { label: 'Terms & Conditions', href: '/terms-and-conditions' },
     { label: 'Privacy Policy', href: '/privacy-policy' },
-    { label: 'Contact Us', href: '/contact' },
   ],
 };
 
@@ -169,10 +169,11 @@ export default function Footer() {
               </a>
               <Link
                 href="/contact"
-                className="flex items-center gap-2 px-5 py-3 bg-[#C9A96E] text-white text-sm font-semibold hover:bg-[#b8955a] transition-colors"
+                className="flex items-center gap-2 px-5 py-3 bg-[#C9A96E] text-white text-sm font-bold tracking-[0.1em] uppercase hover:bg-[#b8955a] transition-colors"
+                style={{ fontFamily: 'var(--font-sans)' }}
               >
                 <Mail size={14} />
-                Send Enquiry
+                Enquire Now
               </Link>
             </div>
           </div>

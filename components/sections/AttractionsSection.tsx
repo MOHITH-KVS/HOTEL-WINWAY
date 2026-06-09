@@ -1,145 +1,189 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MapPin, Clock, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
 
 const attractions = [
   {
-    id: 'lal-bagh-palace',
-    name: 'Lal Bagh Palace',
-    tagline: 'Neoclassical Grandeur',
-    description: "Indore's most impressive neo-classical building — the former Holkar residence featuring Italian marble columns, Belgian stained glass windows and a rare coin collection.",
-    distance: '4.7 km from hotel',
-    duration: '1 hour visit',
+    id: 'patalpani',
+    name: 'Patalpani Waterfall',
+    description:
+      'A scenic waterfall hidden in the forests near Indore. Patalpani keeps secrets and offers a stunning natural retreat just 35 km from the city.',
+    image: '/images/attractions/attraction-9.avif',
+    distance: '35 km',
+  },
+  {
+    id: 'central-museum',
+    name: 'Central Museum',
+    description:
+      'Established in 1923 by the Holkar dynasty, the museum is a treasure trove of Madhya Pradesh\u2019s archaeological heritage and historical artefacts.',
     image: '/images/attractions/attraction-7.avif',
-    href: '/local-attractions#lal-bagh-palace',
+    distance: '4.7 km',
   },
   {
     id: 'rajwada-palace',
     name: 'Rajwada Palace',
-    tagline: 'Holkar Dynasty Legacy',
-    description: 'A 200-year-old seven-storey landmark showcasing a unique blend of Maratha, Mughal and French architecture — home to paintings, weapons and Holkar memorabilia.',
-    distance: '2.5 km from hotel',
-    duration: '45–60 mins',
+    description:
+      'Located in the heart of the city, this architectural gem is an impressive repository of the Holkar dynasty\u2019s history and Indore\u2019s royal past.',
     image: '/images/attractions/attraction-1.avif',
-    href: '/local-attractions#rajwada-palace',
+    distance: '2.5 km',
   },
   {
     id: 'sarafa-bazaar',
     name: 'Sarafa Bazaar',
-    tagline: 'Iconic Night Market',
-    description: 'Indore\'s iconic night street-food market transforms from a jewellery lane by day into a bustling vegetarian food haven between 9pm and 2am.',
-    distance: '2.6 km from hotel',
-    duration: '1–2 hours',
+    description:
+      'An iconic night street-food market, Sarafa Bazaar transforms after dark into a bustling vegetarian food haven between 9\u00a0pm and 2\u00a0am.',
     image: '/images/attractions/attraction-3.avif',
-    href: '/local-attractions#sarafa-bazaar',
+    distance: '2.6 km',
   },
   {
     id: 'chappan-dukan',
     name: 'Chappan Dukan',
-    tagline: '56 Legendary Stalls',
-    description: "An open-air food hub in New Palasia — famous for authentic, hygienic fast food including Johnny's hot dogs, khopra patties and shikanji.",
-    distance: '2.8 km from hotel',
-    duration: '1 hour',
+    description:
+      'Located in the upscale New Palasia area, Chappan Dukan (\'56 Shops\') is an open-air food hub beloved for authentic Indori snacks and street food.',
+    image: '/images/attractions/attraction-5.avif',
+    distance: '2.8 km',
+  },
+  {
+    id: 'lal-bagh-palace',
+    name: 'Lal Bagh Palace',
+    description:
+      'Indore\u2019s most impressive neo-classical building, Lal Bagh was the residence of the Holkars till 1978, later converted into a museum.',
     image: '/images/attractions/attraction-8.avif',
-    href: '/local-attractions#chappan-dukan',
+    distance: '4.7 km',
   },
 ];
 
-export default function AttractionsSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-100px' });
+export default function AttractionsCarousel() {
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, margin: '-80px' });
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: 'start',
+    loop: false,
+    slidesToScroll: 1,
+  });
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   return (
-    <section className="section-padding bg-[#F9F6F0]" ref={ref}>
+    <section ref={sectionRef} className="section-padding" style={{ background: '#F3F4F6' }}>
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        {/* Header */}
-        <div className="text-center mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+        {/* Section heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
+          <h2 className="heading-mixed mb-4">
+            Attractions &amp; Places <strong>to Visit in Indore</strong>
+          </h2>
+          <p
+            className="text-[#57585B] max-w-3xl mx-auto"
+            style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
           >
-            <span className="section-label">Discover Indore</span>
-            <h2 className="font-serif text-4xl sm:text-5xl font-light text-[#1A1A1A] mt-3 mb-4 leading-tight">
-              Local Attractions
-            </h2>
-            <p className="text-[#8B8A84] text-sm max-w-lg mx-auto leading-relaxed">
-              Indore blends historical significance with a thriving contemporary culture —
-              from grand palaces to legendary food streets.
-            </p>
-          </motion.div>
-        </div>
+            Indore blends historical significance with a thriving contemporary culture. From Rajwada
+            Palace and Lal Bagh Palace to bustling food streets like Sarafa Bazaar, the city offers
+            diverse experiences. Its vibrant culinary scene and growing urban character make it one
+            of central India\u2019s most engaging destinations.
+          </p>
+        </motion.div>
 
-        {/* Attractions Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {attractions.map((attraction, index) => (
-            <motion.div
-              key={attraction.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
-            >
-              <Link href={attraction.href} className="group block h-full">
-                <div className="bg-white h-full hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+        {/* Carousel with prev/next arrows — matches reference */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className="relative"
+        >
+          {/* Prev button */}
+          <button
+            onClick={scrollPrev}
+            aria-label="Previous attraction"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#C9A96E] hover:text-white transition-all duration-300"
+            style={{ border: '1px solid #e5e7eb' }}
+          >
+            <ChevronLeft size={18} />
+          </button>
+
+          {/* Carousel */}
+          <div className="embla overflow-hidden" ref={emblaRef}>
+            <div className="embla__container flex gap-4">
+              {attractions.map((attraction) => (
+                <div
+                  key={attraction.id}
+                  className="embla__slide flex-shrink-0 bg-white"
+                  style={{
+                    width: 'calc(33.333% - 12px)',
+                    minWidth: 260,
+                    boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
+                  }}
+                >
                   {/* Image */}
-                  <div className="relative aspect-[4/3] card-image-zoom overflow-hidden">
+                  <div className="relative overflow-hidden card-image-zoom" style={{ aspectRatio: '4/3' }}>
                     <Image
                       src={attraction.image}
-                      alt={`${attraction.name} - Indore landmark near Hotel Winway`}
+                      alt={attraction.name}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute top-3 left-3 bg-white/95 px-2.5 py-1">
-                      <span className="text-[10px] font-semibold text-[#C9A96E] tracking-wide uppercase">{attraction.tagline}</span>
-                    </div>
                   </div>
 
                   {/* Content */}
                   <div className="p-5">
-                    <h3 className="font-serif text-lg text-[#1A1A1A] font-medium mb-2 group-hover:text-[#C9A96E] transition-colors">
+                    <h3
+                      className="text-[#1A1A1A] font-bold mb-2 uppercase"
+                      style={{ fontFamily: 'var(--font-sans)', fontSize: 14, fontWeight: 900, letterSpacing: '0.05em' }}
+                    >
                       {attraction.name}
                     </h3>
-                    <p className="text-[#8B8A84] text-xs leading-relaxed mb-4 line-clamp-3">
+                    <p
+                      className="text-[#57585B] mb-4 line-clamp-3"
+                      style={{ fontFamily: 'var(--font-sans)', fontSize: 13, lineHeight: 1.7 }}
+                    >
                       {attraction.description}
                     </p>
-                    <div className="flex items-center justify-between text-[#57585B] text-xs border-t border-gray-100 pt-3">
-                      <div className="flex items-center gap-1">
-                        <MapPin size={10} className="text-[#C9A96E]" />
-                        {attraction.distance}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Clock size={10} className="text-[#C9A96E]" />
-                        {attraction.duration}
-                      </div>
-                    </div>
+                    <Link
+                      href="/local-attractions"
+                      className="text-[#C9A96E] hover:text-[#1A1A1A] transition-colors flex items-center gap-1"
+                      style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
+                    >
+                      View Details <span>›</span>
+                    </Link>
                   </div>
                 </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+              ))}
+            </div>
+          </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
-          className="text-center mt-10"
-        >
+          {/* Next button */}
+          <button
+            onClick={scrollNext}
+            aria-label="Next attraction"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#C9A96E] hover:text-white transition-all duration-300"
+            style={{ border: '1px solid #e5e7eb' }}
+          >
+            <ChevronRight size={18} />
+          </button>
+        </motion.div>
+
+        {/* View all */}
+        <div className="text-center mt-10">
           <Link
             href="/local-attractions"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#57585B] border-b border-[#C9A96E] hover:text-[#C9A96E] pb-0.5 transition-colors group"
+            className="inline-block border border-[#57585B] text-[#57585B] hover:bg-[#57585B] hover:text-white text-[12px] font-bold tracking-[0.2em] uppercase px-8 py-3 transition-all duration-300"
+            style={{ fontFamily: 'var(--font-sans)' }}
           >
             View All Attractions
-            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

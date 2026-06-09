@@ -4,10 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, Phone, ChevronDown } from 'lucide-react';
-import { useEnquiryModal } from '@/components/ui/EnquiryModalProvider';
 
 const NAV_ITEMS = [
-  { label: 'Home', href: '/' },
   {
     label: 'Rooms & Suites',
     href: '/rooms',
@@ -24,14 +22,14 @@ const NAV_ITEMS = [
     children: [
       { label: 'Tiffin', href: '/dining/tiffin' },
       { label: 'The Deck', href: '/dining/the-deck' },
-      { label: 'Alfresco', href: '/dining/alfresco' },
-      { label: 'Banquets & Events', href: '/dining/banquets-events' },
+      { label: 'Al Fresco', href: '/dining/al-fresco' },
+      { label: 'Cafe', href: '/dining/cafe' },
     ],
   },
-  { label: 'Experiences', href: '/experiences' },
-  { label: 'Attractions', href: '/local-attractions' },
+  { label: 'Events & Banquet', href: '/events' },
+  { label: 'Local Attractions', href: '/local-attractions' },
   { label: 'Gallery', href: '/gallery' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
 export default function Header() {
@@ -39,7 +37,6 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const { openModal } = useEnquiryModal();
   const dropdownTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -160,12 +157,13 @@ export default function Header() {
               <Phone size={14} />
               <span>0731-661-1111</span>
             </a>
-            <button
-              onClick={() => openModal()}
-              className="bg-[#C9A96E] hover:bg-[#b8955a] text-white text-[13px] font-semibold tracking-[0.1em] uppercase px-6 py-3 transition-all duration-300 hover:shadow-lg"
+            <Link
+              href="/contact"
+              className="bg-[#57585B] hover:bg-[#C9A96E] text-white text-[12px] font-bold tracking-[0.15em] uppercase px-6 py-3 transition-all duration-300"
+              style={{ fontFamily: 'var(--font-sans)' }}
             >
-              Send Enquiry
-            </button>
+              Enquire Now
+            </Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -265,12 +263,13 @@ export default function Header() {
               <Phone size={16} />
               <span className="text-sm">0731-661-1111</span>
             </a>
-            <button
-              onClick={() => { setMobileOpen(false); openModal(); }}
-              className="w-full bg-[#C9A96E] text-white py-3 text-sm font-semibold tracking-[0.1em] uppercase hover:bg-[#b8955a] transition-colors"
+            <Link
+              href="/contact"
+              className="w-full bg-[#57585B] text-white py-3 text-sm font-bold tracking-[0.15em] uppercase hover:bg-[#C9A96E] transition-colors text-center block"
+              style={{ fontFamily: 'var(--font-sans)' }}
             >
-              Send Enquiry
-            </button>
+              Enquire Now
+            </Link>
             <a
               href="https://wa.me/919752411015?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Hotel%20Winway"
               target="_blank"

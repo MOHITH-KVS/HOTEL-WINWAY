@@ -1,140 +1,241 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, MessageCircle, ArrowRight } from 'lucide-react';
-import { useEnquiryModal } from '@/components/ui/EnquiryModalProvider';
+import { MapPin, Images } from 'lucide-react';
+
+interface HeroImage {
+  src: string;
+  alt: string;
+}
 
 interface Props {
   title?: string;
   subtitle?: string;
-  imageSrc: string;
-  imageAlt: string;
+  locationLabel?: string;
+  images?: HeroImage[];
+  // Legacy single-image support for inner pages
+  imageSrc?: string;
+  imageAlt?: string;
   showScrollHint?: boolean;
+  showCornerBadges?: boolean;
 }
 
+const DEFAULT_IMAGES: HeroImage[] = [
+  { src: '/images/facade/facade-1.png', alt: 'Hotel Winway Indore — Front Facade' },
+  { src: '/images/facade/facade-2.png', alt: 'Hotel Winway Indore — Side View' },
+  { src: '/images/facade/facade-3.jpeg', alt: 'Hotel Winway Indore — Facade View' },
+  { src: '/images/facade/facade-4.jpeg', alt: 'Hotel Winway Indore — Evening View' },
+  { src: '/images/facade/facade-5.jpeg', alt: 'Hotel Winway Indore — Exterior' },
+];
+
+const SLIDE_DURATION = 5000; // 5 seconds per slide
+
 export default function HeroSection({
-  title = "Hotel Winway",
-  subtitle = "Where the Warmth of Malwa Meets Modern Luxury",
+  title = 'Hotel Winway',
+  subtitle = 'Where Warmth Meets Elegance',
+  locationLabel = 'Indore, Madhya Pradesh',
+  images,
   imageSrc,
   imageAlt,
-  showScrollHint = true,
+  showScrollHint = false,
+  showCornerBadges = false,
 }: Props) {
-  const { openModal } = useEnquiryModal();
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+  // If single imageSrc provided (inner pages), wrap as single-image array
+  const slides: HeroImage[] = imageSrc
+    ? [{ src: imageSrc, alt: imageAlt || title }]
+    : (images ?? DEFAULT_IMAGES);
+
+  const isSlider = slides.length > 1;
+  const [current, setCurrent] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const goToSlide = useCallback(
+    (idx: number) => {
+      setCurrent(idx);
+      setProgress(0);
+    },
+    []
+  );
+
+  const nextSlide = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+    setProgress(0);
+  }, [slides.length]);
+
+  // Auto-play + progress animation
+  useEffect(() => {
+    if (!isSlider) return;
+
+    // Progress bar tick every 50ms
+    progressRef.current = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 100) return 0;
+        return p + 100 / (SLIDE_DURATION / 50);
+      });
+    }, 50);
+
+    // Slide advance
+    timerRef.current = setInterval(nextSlide, SLIDE_DURATION);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (progressRef.current) clearInterval(progressRef.current);
+    };
+  }, [isSlider, nextSlide]);
 
   return (
-    <section className="relative w-full h-screen min-h-[600px] overflow-hidden flex items-center justify-center">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          className="object-cover ken-burns"
-          priority
-          sizes="100vw"
-          quality={90}
-        />
-        <div className="absolute inset-0 hero-overlay" />
-      </div>
-
-      {/* Content */}
-      <div
-        ref={ref}
-        className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto"
-      >
-        {/* Ornament */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex items-center justify-center gap-4 mb-6"
+    <section className="relative w-full overflow-hidden" style={{ height: '100dvh', minHeight: 560 }}>
+      {/* Slides */}
+      {slides.map((slide, idx) => (
+        <div
+          key={slide.src}
+          className="absolute inset-0 transition-opacity duration-1000"
+          style={{ opacity: idx === current ? 1 : 0, zIndex: idx === current ? 1 : 0 }}
         >
-          <div className="w-16 h-px bg-[#C9A96E]/60" />
-          <span className="text-[#C9A96E] text-xs tracking-[0.3em] uppercase font-light">
-            Indore, Madhya Pradesh
-          </span>
-          <div className="w-16 h-px bg-[#C9A96E]/60" />
-        </motion.div>
+          <Image
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            className="object-cover"
+            priority={idx === 0}
+            sizes="100vw"
+            quality={90}
+          />
+        </div>
+      ))}
 
-        {/* Main Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light text-white mb-6 leading-[1.1]"
+      {/* Dark overlay — matches reference gradient */}
+      <div
+        className="absolute inset-0 z-10"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.55) 100%)',
+        }}
+      />
+
+      {/* Corner badges — LOCATION + GALLERY (matches reference) */}
+      {showCornerBadges && (
+        <>
+          <Link
+            href="/contact#map"
+            className="absolute bottom-20 left-6 z-20 flex items-center gap-2 bg-black/40 hover:bg-black/60 text-white text-[11px] tracking-[0.15em] uppercase px-3 py-2 transition-colors duration-200"
+          >
+            <MapPin size={12} />
+            <span>Location</span>
+          </Link>
+          <Link
+            href="/gallery"
+            className="absolute bottom-20 right-6 z-20 flex items-center gap-2 bg-black/40 hover:bg-black/60 text-white text-[11px] tracking-[0.15em] uppercase px-3 py-2 transition-colors duration-200"
+          >
+            <Images size={12} />
+            <span>Gallery</span>
+          </Link>
+        </>
+      )}
+
+      {/* Hero Content — centered */}
+      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-6">
+        {/* Location label */}
+        <div
+          className="flex items-center gap-4 mb-6"
+          style={{
+            animation: 'fadeInUp 0.8s ease 0.2s both',
+          }}
+        >
+          <div className="w-12 h-px bg-white/50" />
+          <span
+            className="text-white/80 tracking-[0.25em] uppercase"
+            style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 400 }}
+          >
+            {locationLabel}
+          </span>
+          <div className="w-12 h-px bg-white/50" />
+        </div>
+
+        {/* Hotel Name */}
+        <h1
+          className="text-white mb-4"
+          style={{
+            fontFamily: 'var(--font-serif)',
+            fontSize: 'clamp(2.8rem, 7vw, 6rem)',
+            fontWeight: 400,
+            lineHeight: 1.1,
+            letterSpacing: '0.05em',
+            animation: 'fadeInUp 1s ease 0.4s both',
+          }}
         >
           {title}
-        </motion.h1>
+        </h1>
 
         {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-white/80 text-lg sm:text-xl font-light max-w-xl mx-auto mb-10 leading-relaxed"
+        <p
+          className="text-white/80 mb-10 max-w-lg"
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
+            fontWeight: 300,
+            letterSpacing: '0.05em',
+            animation: 'fadeInUp 0.8s ease 0.6s both',
+          }}
         >
           {subtitle}
-        </motion.p>
+        </p>
 
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        {/* Single CTA — ENQUIRE NOW → /contact */}
+        <Link
+          href="/contact"
+          className="inline-block text-white text-[12px] font-bold tracking-[0.2em] uppercase px-10 py-4 border border-white hover:bg-white hover:text-[#57585B] transition-all duration-300"
+          style={{
+            fontFamily: 'var(--font-sans)',
+            animation: 'fadeInUp 0.8s ease 0.8s both',
+          }}
         >
-          <button
-            onClick={() => openModal()}
-            className="flex items-center gap-3 bg-[#C9A96E] hover:bg-[#b8955a] text-white px-8 py-4 text-sm font-semibold tracking-[0.15em] uppercase transition-all duration-300 hover:shadow-xl min-w-[200px] justify-center"
-          >
-            Send Enquiry
-            <ArrowRight size={16} />
-          </button>
-          <a
-            href="https://wa.me/919752411015?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Hotel%20Winway"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 border border-white/60 hover:border-white text-white px-8 py-4 text-sm font-medium tracking-[0.1em] uppercase transition-all duration-300 hover:bg-white/10 min-w-[200px] justify-center"
-          >
-            <MessageCircle size={16} />
-            WhatsApp Us
-          </a>
-        </motion.div>
-
-        {/* Quick Contact */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mt-10 flex items-center justify-center gap-2 text-white/60 text-sm"
-        >
-          <Phone size={12} />
-          <a href="tel:+910731-661-1111" className="hover:text-[#C9A96E] transition-colors">
-            0731-661-1111
-          </a>
-          <span className="mx-2">|</span>
-          <a href="mailto:fom1@hotelwinway.com" className="hover:text-[#C9A96E] transition-colors">
-            fom1@hotelwinway.com
-          </a>
-        </motion.div>
+          Enquire Now
+        </Link>
       </div>
 
-      {/* Scroll Hint */}
+      {/* Slider progress bar — thin white bar at bottom (matches reference) */}
+      {isSlider && (
+        <div className="absolute bottom-0 left-0 right-0 z-30 flex" style={{ height: 3 }}>
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => goToSlide(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className="flex-1 bg-white/30 relative overflow-hidden cursor-pointer border-none p-0"
+              style={{ height: 3 }}
+            >
+              {idx === current && (
+                <span
+                  className="absolute inset-y-0 left-0 bg-white transition-none"
+                  style={{ width: `${progress}%` }}
+                />
+              )}
+              {idx < current && (
+                <span className="absolute inset-0 bg-white" />
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Scroll hint */}
       {showScrollHint && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50"
+        <div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-white/50"
+          style={{ animation: 'fadeInUp 0.8s ease 1.5s both' }}
         >
-          <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+          <span
+            style={{ fontFamily: 'var(--font-sans)', fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase' }}
+          >
+            Scroll
+          </span>
           <div className="w-px h-10 bg-gradient-to-b from-white/50 to-transparent animate-pulse" />
-        </motion.div>
+        </div>
       )}
     </section>
   );

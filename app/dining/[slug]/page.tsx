@@ -11,8 +11,6 @@ const diningData = {
     tagline: 'Home-style Hospitality',
     cuisine: 'Multi Cuisine',
     timing: '10:00 am – 10:00 pm',
-    avgCost: '₹1,500 for two',
-    reserve: '97524-11003',
     description: `Inspired by Mumbai's iconic dabbawala culture, Tiffin celebrates the warmth of home-style hospitality and the joy of shared meals. Bringing together authentic original flavours, attentive service and a welcoming ambience, the restaurant offers a dining experience that is both comforting and memorable, where every meal is served with care and every guest is welcomed like family.`,
     heroImage: '/images/dining/tiffin/tiffin-1.jpeg',
     images: Array.from({ length: 10 }, (_, i) => `/images/dining/tiffin/tiffin-${i + 1}.jpeg`),
@@ -22,41 +20,27 @@ const diningData = {
     tagline: 'Elevated Dining',
     cuisine: 'Multi Cuisine',
     timing: '24/7',
-    avgCost: '₹1,500 for two',
-    reserve: '97524-11003',
     description: `Escape to an elevated dining experience at The Deck — delightful cuisine sets the stage for birthdays, anniversaries and corporate parties for memorable moments. Whether gathering with loved ones or enjoying a quiet evening, every visit is complemented by warm hospitality, flavourful dishes and a setting designed for connection and celebration.`,
     heroImage: '/images/dining/the-deck/deck-1.jpeg',
     images: ['/images/dining/the-deck/deck-1.jpeg', '/images/dining/the-deck/deck-2.jpeg', '/images/dining/the-deck/deck-3.jpeg', '/images/dining/the-deck/deck-4.jpeg'],
   },
-  alfresco: {
-    name: 'Alfresco',
+  'al-fresco': {
+    name: 'Al Fresco',
     tagline: 'Open Sky Dining',
     cuisine: 'Multi Cuisine',
     timing: 'Evening onwards',
-    avgCost: 'Contact for details',
-    reserve: '97524-11003',
-    description: `Set amidst a refreshing outdoor setting, Alfresco offers a relaxed dining experience where nature, flavour and hospitality come together. Perfect for casual gatherings and leisurely meals, it provides a welcoming atmosphere to enjoy great food and memorable moments under the open sky.`,
+    description: `Set amidst a refreshing outdoor setting, Al Fresco offers a relaxed dining experience where nature, flavour and hospitality come together. Perfect for casual gatherings and leisurely meals, it provides a welcoming atmosphere to enjoy great food and memorable moments under the open sky.`,
     heroImage: '/images/dining/cafe/cafe-1.jpeg',
-    images: ['/images/dining/cafe/cafe-1.jpeg', '/images/dining/cafe/cafe-2.jpeg', '/images/dining/cafe/cafe-3.jpeg'],
+    images: ['/images/dining/cafe/cafe-1.jpeg', '/images/dining/cafe/cafe-2.jpeg'],
   },
-  'banquets-events': {
-    name: 'Banquets & Events',
-    tagline: 'Celebrate in Style',
-    cuisine: 'Event Hosting',
-    timing: 'As per booking',
-    avgCost: 'Contact for packages',
-    reserve: '97524-11003',
-    description: `Host your special celebrations, corporate meetings, conferences and social events in our versatile banquet spaces. With professional event management and customized catering, we ensure every occasion is memorable. Our dedicated team handles every detail, from setup to service, creating experiences tailored to your vision.`,
-    heroImage: '/images/dining/banquet/banquet-1.jpeg',
-    images: Array.from({ length: 7 }, (_, i) => `/images/dining/banquet/banquet-${i + 1}.jpeg`),
-    capacityTable: [
-      { layout: 'Theater', capacity: 80 },
-      { layout: 'Boardroom', capacity: 30 },
-      { layout: 'U-Shaped', capacity: 45 },
-      { layout: 'Classroom', capacity: 40 },
-      { layout: 'Cluster', capacity: 35 },
-      { layout: 'Reception', capacity: 120 },
-    ],
+  cafe: {
+    name: 'Cafe',
+    tagline: 'Casual & Inviting',
+    cuisine: 'Cafe & Snacks',
+    timing: '08:00 am – 10:00 pm',
+    description: `A cosy retreat for coffee lovers and casual diners alike. Our Cafe offers a curated selection of freshly brewed coffees, light bites and snacks in a warm, welcoming atmosphere perfect for a quick break or a relaxed afternoon.`,
+    heroImage: '/images/dining/cafe/cafe-1.jpeg',
+    images: ['/images/dining/cafe/cafe-1.jpeg', '/images/dining/cafe/cafe-2.jpeg'],
   },
 };
 
@@ -82,11 +66,9 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
   const venue = diningData[slug as DiningSlug];
   if (!venue) notFound();
 
-  const hasCapacity = 'capacityTable' in venue;
-
   const restaurantSchema = {
     '@context': 'https://schema.org',
-    '@type': hasCapacity ? 'EventVenue' : 'Restaurant',
+    '@type': 'Restaurant',
     name: `${venue.name} — Hotel Winway`,
     description: venue.description,
     image: `https://www.hotelwinway.com${venue.heroImage}`,
@@ -102,7 +84,6 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
     },
     servesCuisine: venue.cuisine,
     openingHours: venue.timing,
-    priceRange: venue.avgCost,
     parentOrganization: {
       '@type': 'Hotel',
       name: 'Hotel Winway',
@@ -124,6 +105,7 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+
       {/* Hero */}
       <div className="relative h-[60vh] min-h-[400px] overflow-hidden">
         <Image
@@ -143,56 +125,54 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
             <ChevronRight size={12} />
             <span className="text-white">{venue.name}</span>
           </nav>
-          <span className="text-[#C9A96E] text-xs tracking-[0.25em] uppercase mb-2">{venue.tagline}</span>
-          <h1 className="font-serif text-5xl lg:text-7xl text-white font-light">{venue.name}</h1>
+          <p
+            className="text-[#C9A96E] mb-2"
+            style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase' }}
+          >
+            {venue.tagline}
+          </p>
+          <h1
+            className="text-white"
+            style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 400, lineHeight: 1.1 }}
+          >
+            {venue.name}
+          </h1>
         </div>
       </div>
 
-      <section className="section-padding bg-[#F9F6F0]">
+      <section className="section-padding" style={{ background: '#F3F4F6' }}>
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
-              <div className="bg-white p-8 shadow-sm">
-                <h2 className="font-serif text-2xl text-[#1A1A1A] mb-4">About {venue.name}</h2>
-                <div className="w-8 h-px bg-[#C9A96E] mb-5" />
-                <p className="prose-luxury text-[#57585B] text-sm">{venue.description}</p>
+              <div className="bg-white p-8" style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}>
+                <h2
+                  className="text-[#1A1A1A] font-bold mb-4"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 20, fontWeight: 700 }}
+                >
+                  About {venue.name}
+                </h2>
+                <div className="w-8 h-0.5 bg-[#C9A96E] mb-5" />
+                <p
+                  className="text-[#57585B]"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
+                >
+                  {venue.description}
+                </p>
               </div>
 
-              {/* Capacity Table for Banquets */}
-              {hasCapacity && (venue as typeof diningData['banquets-events']).capacityTable && (
-                <div className="bg-white p-8 shadow-sm">
-                  <h2 className="font-serif text-2xl text-[#1A1A1A] mb-4">Venue Capacity</h2>
-                  <div className="w-8 h-px bg-[#C9A96E] mb-5" />
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b-2 border-[#C9A96E]">
-                        <th className="text-left py-3 pr-4 text-xs font-semibold tracking-[0.15em] uppercase text-[#1A1A1A]">Setup / Layout</th>
-                        <th className="text-right py-3 text-xs font-semibold tracking-[0.15em] uppercase text-[#1A1A1A]">Capacity</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {(venue as typeof diningData['banquets-events']).capacityTable!.map((row) => (
-                        <tr key={row.layout} className="border-b border-gray-100 hover:bg-[#F9F6F0] transition-colors">
-                          <td className="py-3 pr-4 text-sm text-[#57585B] font-medium">{row.layout}</td>
-                          <td className="py-3 text-right">
-                            <span className="font-serif text-xl text-[#C9A96E] font-light">{row.capacity}</span>
-                            <span className="text-xs text-[#8B8A84] ml-1">guests</span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-
               {/* Gallery */}
-              <div className="bg-white p-8 shadow-sm">
-                <h2 className="font-serif text-2xl text-[#1A1A1A] mb-4">Gallery</h2>
-                <div className="w-8 h-px bg-[#C9A96E] mb-5" />
+              <div className="bg-white p-8" style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}>
+                <h2
+                  className="text-[#1A1A1A] font-bold mb-4"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 20, fontWeight: 700 }}
+                >
+                  Gallery
+                </h2>
+                <div className="w-8 h-0.5 bg-[#C9A96E] mb-5" />
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {venue.images.slice(0, 6).map((img, i) => (
-                    <div key={i} className="relative aspect-[4/3] card-image-zoom overflow-hidden">
+                    <div key={i} className="relative overflow-hidden card-image-zoom" style={{ aspectRatio: '4/3' }}>
                       <Image
                         src={img}
                         alt={`${venue.name} ${i + 1}`}
@@ -206,41 +186,60 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
               </div>
             </div>
 
-            {/* Sidebar */}
-            <div className="space-y-6">
-              <div className="bg-[#1A1A1A] text-white p-8 sticky top-24">
-                <p className="text-[#C9A96E] text-xs tracking-[0.2em] uppercase mb-2">{venue.tagline}</p>
-                <h3 className="font-serif text-2xl font-light mb-4">{venue.name}</h3>
+            {/* Sidebar — no price */}
+            <div>
+              <div
+                className="bg-[#1A1A1A] text-white p-8 sticky top-24"
+              >
+                <p
+                  className="text-[#C9A96E] mb-2"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
+                >
+                  {venue.tagline}
+                </p>
+                <h3
+                  className="text-white font-bold mb-4"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 22, fontWeight: 700 }}
+                >
+                  {venue.name}
+                </h3>
 
-                <div className="space-y-3 py-4 border-y border-[#333] mb-6">
+                <div className="space-y-4 py-4 border-y border-[#333] mb-6">
                   <div className="flex items-center gap-3">
-                    <Clock size={14} className="text-[#C9A96E]" />
+                    <Clock size={14} className="text-[#C9A96E] flex-shrink-0" />
                     <div>
-                      <p className="text-[10px] text-[#8B8A84] uppercase tracking-wide">Timings</p>
-                      <p className="text-sm text-white">{venue.timing}</p>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10, color: '#8B8A84', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Timings</p>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'white' }}>{venue.timing}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-[#C9A96E] text-sm font-serif">₹</span>
+                    <Phone size={14} className="text-[#C9A96E] flex-shrink-0" />
                     <div>
-                      <p className="text-[10px] text-[#8B8A84] uppercase tracking-wide">Average Cost</p>
-                      <p className="text-sm text-white">{venue.avgCost}</p>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: 10, color: '#8B8A84', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Reservations</p>
+                      <a
+                        href="tel:+919752411003"
+                        style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'white' }}
+                        className="hover:text-[#C9A96E] transition-colors"
+                      >
+                        97524-11003
+                      </a>
                     </div>
                   </div>
                 </div>
 
-                <a
-                  href={`tel:${venue.reserve}`}
-                  className="w-full flex items-center justify-center gap-2 bg-[#C9A96E] hover:bg-[#b8955a] text-white py-4 text-sm font-semibold tracking-[0.1em] uppercase transition-all mb-3"
+                <Link
+                  href="/contact"
+                  className="w-full block text-center bg-[#C9A96E] hover:bg-[#b8955a] text-white py-4 text-[12px] font-bold tracking-[0.15em] uppercase transition-all mb-3"
+                  style={{ fontFamily: 'var(--font-sans)' }}
                 >
-                  <Phone size={16} />
-                  Reserve Table
-                </a>
+                  Enquire Now
+                </Link>
                 <a
                   href="https://wa.me/919752411015"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white py-4 text-sm font-medium hover:bg-[#1da851] transition-colors"
+                  className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white py-4 hover:bg-[#1da851] transition-colors"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700 }}
                 >
                   WhatsApp Enquiry
                 </a>
