@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
-import SecondaryNav from '@/components/layout/SecondaryNav';
-import WelcomeSection from '@/components/sections/WelcomeSection';
+import SecondaryNav from '@/components/sections/SecondaryNav';
+import IntroSection from '@/components/sections/IntroSection';
+import HighlightsCarousel from '@/components/sections/HighlightsCarousel';
+
 import RoomsPreview from '@/components/sections/RoomsPreview';
 import AmenitiesSection from '@/components/sections/AmenitiesSection';
 import DiningPreview from '@/components/sections/DiningPreview';
@@ -44,10 +46,12 @@ export default function HomePage() {
         subtitle="Where the Warmth of Malwa Meets Modern Luxury"
         locationLabel="INDORE, MADHYA PRADESH"
         showCornerBadges={true}
-        showEnquiryStrip={true}
       />
+
       <SecondaryNav />
-      <WelcomeSection />
+      <IntroSection />
+      <HighlightsCarousel />
+
       <RoomsPreview />
       <AmenitiesSection />
       <DiningPreview />

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import EnquiryModalProvider from "@/components/ui/EnquiryModalProvider";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 
@@ -170,13 +169,15 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <EnquiryModalProvider>
-          <Header />
-          <main className="relative z-0">{children}</main>
-          <Footer />
-          <WhatsAppButton />
-          <ScrollToTop />
-        </EnquiryModalProvider>
+        <Header />
+        
+        <main className="relative z-0">
+          {children}
+        </main>
+
+        <Footer />
+        <WhatsAppButton />
+        <ScrollToTop />
       </body>
     </html>
   );

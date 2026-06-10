@@ -5,7 +5,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import SectionCarousel from '@/components/ui/SectionCarousel';
+
 
 const galleryImages = [
   { src: '/images/facade/facade-1.png', alt: 'Hotel Winway Facade' },
@@ -31,44 +31,62 @@ export default function GalleryPreview() {
       <div className="container-main">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: 'easeInOut' }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="section-label">Visual Stories</span>
             <h2 className="heading-mixed mt-4">Gallery</h2>
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.2 }}>
-            <Link href="/gallery" className="btn-ghost text-[12px]">
-              View Full Gallery ›
+            <Link href="/gallery" className="text-[#a67c5b] text-sm font-semibold tracking-wider hover:text-black transition-colors uppercase">
+              View Full Gallery →
             </Link>
           </motion.div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.1, ease: 'easeInOut' }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <SectionCarousel slideWidth="calc(25% - 15px)" minSlideWidth={260} gap={20}>
-            {galleryImages.map((img, index) => (
-              <button
-                key={img.src}
-                type="button"
-                className="relative aspect-[4/3] overflow-hidden card-image-zoom w-full text-left"
-                onClick={() => setLightbox(index)}
-              >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 80vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-black/0 hover:bg-black/25 transition-all duration-300" />
-              </button>
-            ))}
-          </SectionCarousel>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button
+              type="button"
+              suppressHydrationWarning
+              className="relative overflow-hidden card-image-zoom w-full h-[300px] md:h-full text-left md:col-span-1"
+              onClick={() => setLightbox(0)}
+            >
+              <Image
+                src={galleryImages[0].src}
+                alt={galleryImages[0].alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all duration-300" />
+            </button>
+            <div className="grid grid-cols-2 gap-4 md:col-span-1">
+              {galleryImages.slice(1, 5).map((img, index) => (
+                <button
+                  key={img.src}
+                  type="button"
+                  suppressHydrationWarning
+                  className="relative aspect-square overflow-hidden card-image-zoom w-full text-left"
+                  onClick={() => setLightbox(index + 1)}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all duration-300" />
+                </button>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
 

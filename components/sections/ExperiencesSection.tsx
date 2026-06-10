@@ -43,7 +43,7 @@ export default function ExperiencesSection() {
         {/* Header */}
         <div className="text-center mb-14">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
@@ -128,7 +128,7 @@ export default function ExperiencesSection() {
 
         {/* Concierge Note */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.6 }}
           className="mt-10 p-6 bg-[#F9F6F0] border border-[#E8DDD0] flex flex-col sm:flex-row items-start sm:items-center gap-4"

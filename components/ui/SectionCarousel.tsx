@@ -36,6 +36,7 @@ export default function SectionCarousel({
         onClick={scrollPrev}
         className="carousel-arrow carousel-arrow-prev"
         aria-label="Previous slide"
+        suppressHydrationWarning
       >
         <ChevronLeft size={20} strokeWidth={1.5} />
       </button>
@@ -59,6 +60,7 @@ export default function SectionCarousel({
         onClick={scrollNext}
         className="carousel-arrow carousel-arrow-next"
         aria-label="Next slide"
+        suppressHydrationWarning
       >
         <ChevronRight size={20} strokeWidth={1.5} />
       </button>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
-import EnquireButton from '@/components/ui/EnquireButton';
+import ContactForm from '@/components/ui/ContactForm';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Hotel Winway Indore',
@@ -140,9 +140,9 @@ export default function ContactPage() {
                 <p className="text-[#C9A96E] text-xs tracking-[0.2em] uppercase mb-2">Quick Enquiry</p>
                 <h2 className="font-serif text-2xl font-light mb-4">Send Us a Message</h2>
                 <p className="text-[#8B8A84] text-sm mb-6">
-                  Fill out the enquiry form and our team will get back to you promptly via WhatsApp or email.
+                  Fill out the enquiry form and our team will get back to you promptly via email.
                 </p>
-                <EnquireButton />
+                <ContactForm />
 
                 <div className="mt-6 pt-6 border-t border-[#333] grid grid-cols-2 gap-4 text-center">
                   {[

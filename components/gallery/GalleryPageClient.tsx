@@ -75,7 +75,7 @@ export default function GalleryPageClient() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4, delay: index * 0.03 }}
+              transition={{ duration: 0.8, delay: index * 0.03 }}
               className="masonry-item cursor-pointer group"
               onClick={() => setLightbox(index)}
             >

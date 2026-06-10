@@ -2,61 +2,59 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Phone, MessageCircle, Mail, MapPin } from 'lucide-react';
-import { useEnquiryModal } from '@/components/ui/EnquiryModalProvider';
+import { Phone, Mail, MapPin } from 'lucide-react';
+import ContactForm from '@/components/ui/ContactForm';
 
 export default function ContactCTA() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
-  const { openModal } = useEnquiryModal();
 
   return (
     <section
       id="contact"
-      className="relative z-0 section-padding overflow-hidden bg-[#45443f] scroll-mt-32"
+      className="relative z-0 overflow-hidden bg-[#45443f] scroll-mt-32"
+      style={{ paddingTop: '60px', paddingBottom: '80px' }}
       ref={ref}
     >
       <div className="container-main">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, ease: 'easeInOut' }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="section-label text-[#a67c5b]">Get in Touch</span>
-            <h2 className="heading-mixed text-white mt-4 mb-6">
-              Plan Your Stay at <strong className="text-[#a67c5b]">Hotel Winway</strong>
+            <h2 style={{ color: '#FFFFFF', fontSize: '42px', fontFamily: '"Libre Baskerville", serif', fontWeight: '400', marginBottom: '20px', marginTop: '0' }}>
+              HOTEL WINWAY
             </h2>
-            <div className="w-12 h-px bg-[#8d6346] mb-6" />
-            <p className="body-lg text-white/70 mb-8 max-w-md">
+            <p style={{ color: '#CCCCCC', fontSize: '15px', lineHeight: '1.8', marginBottom: '32px', maxWidth: '400px' }}>
               Whether visiting for work, celebration or relaxation — our team is here to ensure your experience is seamless and rewarding.
             </p>
-            <div className="space-y-5">
-              <div className="flex items-center gap-4">
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
                 <div className="w-11 h-11 border border-[#8d6346]/40 flex items-center justify-center flex-shrink-0">
                   <Phone size={16} className="text-[#a67c5b]" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/50 mb-0.5 tracking-wide uppercase" style={{ fontFamily: 'var(--font-display)' }}>Reception (24/7)</p>
-                  <a href="tel:+910731-661-1111" className="text-white font-medium hover:text-[#a67c5b] transition-colors">0731-661-1111</a>
+                  <p style={{ fontSize: '10px', letterSpacing: '0.15em', color: '#888888', fontWeight: '600', marginBottom: '4px', textTransform: 'uppercase' }}>Reception 24/7</p>
+                  <a href="tel:+910731-661-1111" style={{ fontSize: '15px', color: '#FFFFFF', fontWeight: '400', textDecoration: 'none' }}>0731-661-1111</a>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
                 <div className="w-11 h-11 border border-[#8d6346]/40 flex items-center justify-center flex-shrink-0">
                   <Mail size={16} className="text-[#a67c5b]" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/50 mb-0.5 tracking-wide uppercase" style={{ fontFamily: 'var(--font-display)' }}>Email</p>
-                  <a href="mailto:fom1@hotelwinway.com" className="text-white font-medium hover:text-[#a67c5b] transition-colors">fom1@hotelwinway.com</a>
+                  <p style={{ fontSize: '10px', letterSpacing: '0.15em', color: '#888888', fontWeight: '600', marginBottom: '4px', textTransform: 'uppercase' }}>Email</p>
+                  <a href="mailto:fom1@hotelwinway.com" style={{ fontSize: '15px', color: '#FFFFFF', fontWeight: '400', textDecoration: 'none' }}>fom1@hotelwinway.com</a>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', marginBottom: '20px' }}>
                 <div className="w-11 h-11 border border-[#8d6346]/40 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <MapPin size={16} className="text-[#a67c5b]" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/50 mb-0.5 tracking-wide uppercase" style={{ fontFamily: 'var(--font-display)' }}>Address</p>
-                  <a href="https://maps.google.com/?q=Hotel+Winway+164+RNT+Marg+Indore" target="_blank" rel="noopener noreferrer" className="text-white text-sm hover:text-[#a67c5b] transition-colors leading-relaxed">
+                  <p style={{ fontSize: '10px', letterSpacing: '0.15em', color: '#888888', fontWeight: '600', marginBottom: '4px', textTransform: 'uppercase' }}>Address</p>
+                  <a href="https://maps.google.com/?q=Hotel+Winway+164+RNT+Marg+Indore" target="_blank" rel="noopener noreferrer" style={{ fontSize: '15px', color: '#FFFFFF', fontWeight: '400', textDecoration: 'none', display: 'block', lineHeight: '1.6' }}>
                     164/1 RNT Marg, Near Madhumilan Square,<br />South Tukoganj, Indore — 452001
                   </a>
                 </div>
@@ -65,33 +63,11 @@ export default function ContactCTA() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1, ease: 'easeInOut' }}
-            className="bg-white/5 border border-white/10 p-8 lg:p-10"
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h3 className="heading-section text-white mb-6">Make an Enquiry</h3>
-            <div className="space-y-3">
-              <button type="button" onClick={() => openModal()} className="btn btn-accent w-full">
-                <Mail size={16} /> Send Enquiry
-              </button>
-              <a href="https://wa.me/919752411015?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Hotel%20Winway%2C%20Indore." target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp w-full">
-                <MessageCircle size={16} /> WhatsApp
-              </a>
-              <a href="tel:+910731-661-1111" className="btn btn-outline-light w-full">
-                <Phone size={16} /> Call Now
-              </a>
-            </div>
-            <div className="mt-8 pt-6 border-t border-white/10 grid grid-cols-2 gap-4 text-center">
-              <div>
-                <p className="text-2xl text-[#a67c5b]" style={{ fontFamily: 'var(--font-display)' }}>12:00</p>
-                <p className="text-xs text-white/50 mt-1 uppercase tracking-wide">Check-in</p>
-              </div>
-              <div>
-                <p className="text-2xl text-[#a67c5b]" style={{ fontFamily: 'var(--font-display)' }}>11:00</p>
-                <p className="text-xs text-white/50 mt-1 uppercase tracking-wide">Check-out</p>
-              </div>
-            </div>
+            <ContactForm />
           </motion.div>
         </div>
       </div>

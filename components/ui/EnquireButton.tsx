@@ -1,14 +1,13 @@
 'use client';
 
-import { useEnquiryModal } from '@/components/ui/EnquiryModalProvider';
+import Link from 'next/link';
 import { Mail } from 'lucide-react';
 
 export default function EnquireButton() {
-  const { openModal } = useEnquiryModal();
   return (
-    <button type="button" onClick={() => openModal()} className="btn btn-accent w-full">
+    <Link href="/contact" className="btn btn-accent w-full text-center flex items-center justify-center gap-2">
       <Mail size={16} />
       Send Enquiry
-    </button>
+    </Link>
   );
 }
