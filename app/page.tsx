@@ -9,6 +9,7 @@ import AmenitiesSection from '@/components/sections/AmenitiesSection';
 import DiningPreview from '@/components/sections/DiningPreview';
 import AttractionsSection from '@/components/sections/AttractionsSection';
 import GalleryPreview from '@/components/sections/GalleryPreview';
+import HotelInformation from '@/components/sections/HotelInformation';
 import ContactCTA from '@/components/sections/ContactCTA';
 
 export const metadata: Metadata = {
@@ -57,6 +58,7 @@ export default function HomePage() {
       <DiningPreview />
       <AttractionsSection />
       <GalleryPreview />
+      <HotelInformation />
       <ContactCTA />
     </>
   );

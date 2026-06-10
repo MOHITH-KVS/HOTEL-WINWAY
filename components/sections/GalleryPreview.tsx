@@ -27,7 +27,7 @@ export default function GalleryPreview() {
   const nextImage = () => setLightbox((p) => (p !== null ? (p + 1) % galleryImages.length : 0));
 
   return (
-    <section id="gallery" className="section-padding bg-[#faf9f7] scroll-mt-32" ref={ref}>
+    <section id="gallery" className="section-padding bg-[#faf9f7] scroll-mt-32" ref={ref} style={{ paddingTop: '50px' }}>
       <div className="container-main">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
           <motion.div

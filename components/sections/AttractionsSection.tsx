@@ -112,14 +112,6 @@ export default function AttractionsCarousel() {
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
   const [activeModal, setActiveModal] = useState<typeof attractions[0] | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
@@ -158,7 +150,7 @@ export default function AttractionsCarousel() {
       <style>{`
         .attr-section {
           background-color: #fcfbf9;
-          padding: 100px 0 120px 0;
+          padding: 100px 0 60px 0;
           font-family: 'Lato', sans-serif;
           position: relative;
           overflow: hidden;
@@ -320,7 +312,9 @@ export default function AttractionsCarousel() {
           margin-top: auto;
           display: flex;
           align-items: center;
-          gap: 24px;
+          justify-content: space-between;
+          padding-top: 10px;
+          min-height: 44px; /* Ensure uniform footer height across all cards */
         }
 
         .attr-promo-btn {
@@ -328,7 +322,7 @@ export default function AttractionsCarousel() {
           color: #1a1a1a;
           border: none;
           padding: 0;
-          font-size: 12px;
+          font-size: 11px;
           letter-spacing: 2px;
           text-transform: uppercase;
           font-weight: 600;
@@ -361,21 +355,23 @@ export default function AttractionsCarousel() {
         }
 
         .attr-enquire-btn {
-          background: #1a1a1a;
-          color: #fff;
+          background: #8B5E3C;
+          color: #ffffff;
           border: none;
-          padding: 12px 24px;
-          font-size: 10px;
+          padding: 14px 26px;
+          font-size: 11px;
           letter-spacing: 2px;
           text-transform: uppercase;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
+          display: inline-block;
         }
 
         .attr-enquire-btn:hover {
-          background: #8B5E3C;
-          color: #fff;
+          background: #6a462c;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(139, 94, 60, 0.25);
         }
 
         /* Arrows */
@@ -426,19 +422,23 @@ export default function AttractionsCarousel() {
           backdrop-filter: blur(4px);
           z-index: 9999;
           display: flex;
-          align-items: flex-start; /* Required for Drawer */
-          justify-content: flex-end; /* Required for Drawer */
+          align-items: center;
+          justify-content: center;
+          padding: 4vw;
         }
 
-        /* --- Drawer/Sheet Content --- */
-        .attr-drawer {
+        /* --- Centered Modal Content --- */
+        .attr-modal-content {
           background: #ffffff;
           position: relative;
+          width: 100%;
+          max-width: 1100px;
+          max-height: 90vh;
           overflow-y: auto;
-          box-shadow: -10px 0 40px rgba(0,0,0,0.2);
+          box-shadow: 0 24px 60px rgba(0,0,0,0.25);
         }
 
-        .attr-drawer-close {
+        .attr-modal-close {
           position: absolute;
           top: 24px;
           right: 24px;
@@ -457,28 +457,28 @@ export default function AttractionsCarousel() {
           transition: transform 0.3s ease;
         }
 
-        .attr-drawer-close:hover {
+        .attr-modal-close:hover {
           transform: scale(1.1);
         }
 
-        .attr-drawer-hero {
+        .attr-modal-hero {
           width: 100%;
-          height: 340px;
+          height: 400px;
           position: relative;
         }
 
-        .attr-drawer-hero img {
+        .attr-modal-hero img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
         }
 
-        .attr-drawer-body {
-          padding: 48px;
+        .attr-modal-body {
+          padding: 48px 60px;
         }
 
-        .attr-drawer-title {
+        .attr-modal-title {
           font-family: 'Libre Baskerville', serif;
           font-size: 32px;
           font-weight: 700;
@@ -488,16 +488,16 @@ export default function AttractionsCarousel() {
           margin-bottom: 24px;
         }
 
-        .attr-drawer-desc {
-          font-size: 15.5px;
+        .attr-modal-desc {
+          font-size: 16px;
           color: #444;
           line-height: 1.8;
           margin-bottom: 40px;
         }
 
-        .attr-drawer-grid {
+        .attr-modal-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 24px;
           margin-bottom: 40px;
           border-top: 1px solid #e0ddd8;
@@ -505,7 +505,7 @@ export default function AttractionsCarousel() {
           padding: 32px 0;
         }
 
-        .attr-drawer-badge {
+        .attr-modal-badge {
           display: flex;
           flex-direction: column;
         }
@@ -520,19 +520,19 @@ export default function AttractionsCarousel() {
         }
 
         .attr-badge-value {
-          font-size: 15px;
+          font-size: 16px;
           font-weight: 500;
           color: #1a1a1a;
         }
 
-        .attr-drawer-footer {
-          background: #f9f9f9;
-          padding: 24px;
+        .attr-modal-footer {
+          background: #fcfbf9;
+          padding: 24px 32px;
           border-left: 4px solid #8B5E3C;
         }
 
-        .attr-drawer-footer p {
-          font-size: 14px;
+        .attr-modal-footer p {
+          font-size: 14.5px;
           color: #555;
           line-height: 1.6;
           margin: 0;
@@ -540,13 +540,6 @@ export default function AttractionsCarousel() {
         }
 
         /* Responsive Breakpoints */
-        @media (min-width: 769px) {
-          .attr-drawer {
-            width: 550px;
-            height: 100vh;
-          }
-        }
-
         @media (max-width: 1100px) {
           .attr-embla__slide { flex: 0 0 45vw; }
           .attr-arrow { top: 190px; }
@@ -558,18 +551,19 @@ export default function AttractionsCarousel() {
           .attr-arrow { display: none; }
           .attr-embla__container { gap: 20px; }
           
-          /* Bottom Sheet Override */
-          .attr-modal-overlay {
-            align-items: flex-end; /* Pin to bottom */
+          .attr-modal-body { padding: 32px 24px; }
+          .attr-modal-grid { grid-template-columns: 1fr; gap: 20px; }
+          .attr-modal-hero { height: 260px; }
+          
+          .attr-cta-row {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
           }
-          .attr-drawer {
-            width: 100%;
-            height: 85vh;
-            border-radius: 24px 24px 0 0;
+          
+          .attr-enquire-btn {
+            text-align: center;
           }
-          .attr-drawer-body { padding: 32px 24px; }
-          .attr-drawer-grid { grid-template-columns: 1fr; gap: 20px; }
-          .attr-drawer-hero { height: 260px; }
         }
       `}</style>
 
@@ -625,7 +619,7 @@ export default function AttractionsCarousel() {
                           View Details &#8594;
                         </button>
                         <a href="#contact" className="attr-enquire-btn">
-                          Enquire
+                          Enquire Now
                         </a>
                       </div>
                     </div>
@@ -646,7 +640,7 @@ export default function AttractionsCarousel() {
         </motion.div>
       </section>
 
-      {/* Side Drawer / Bottom Sheet Implementation */}
+      {/* Centered Modal Overlay Implementation */}
       <AnimatePresence>
         {activeModal && (
           <motion.div 
@@ -658,43 +652,43 @@ export default function AttractionsCarousel() {
             onClick={() => setActiveModal(null)}
           >
             <motion.div 
-              initial={isMobile ? { y: '100%' } : { x: '100%' }}
-              animate={isMobile ? { y: 0 } : { x: 0 }}
-              exit={isMobile ? { y: '100%' } : { x: '100%' }}
+              initial={{ scale: 0.95, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.98, y: 10, opacity: 0 }}
               transition={{ type: 'tween', duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="attr-drawer" 
+              className="attr-modal-content" 
               onClick={e => e.stopPropagation()}
             >
-              <button suppressHydrationWarning className="attr-drawer-close" onClick={() => setActiveModal(null)}>
+              <button suppressHydrationWarning className="attr-modal-close" onClick={() => setActiveModal(null)}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
               </button>
 
-              <div className="attr-drawer-hero">
+              <div className="attr-modal-hero">
                 <img src={activeModal.image} alt={activeModal.name} />
               </div>
 
-              <div className="attr-drawer-body">
-                <h3 className="attr-drawer-title">{activeModal.name}</h3>
-                <div className="attr-drawer-desc">
+              <div className="attr-modal-body">
+                <h3 className="attr-modal-title">{activeModal.name}</h3>
+                <div className="attr-modal-desc">
                   {activeModal.description}
                 </div>
 
-                <div className="attr-drawer-grid">
-                  <div className="attr-drawer-badge">
+                <div className="attr-modal-grid">
+                  <div className="attr-modal-badge">
                     <span className="attr-badge-label">Distance</span>
                     <span className="attr-badge-value">{activeModal.distance}</span>
                   </div>
-                  <div className="attr-drawer-badge">
+                  <div className="attr-modal-badge">
                     <span className="attr-badge-label">Best Time To Visit</span>
                     <span className="attr-badge-value">{activeModal.bestTime}</span>
                   </div>
-                  <div className="attr-drawer-badge">
+                  <div className="attr-modal-badge">
                     <span className="attr-badge-label">Ideal Duration</span>
                     <span className="attr-badge-value">{activeModal.duration}</span>
                   </div>
                 </div>
 
-                <div className="attr-drawer-footer">
+                <div className="attr-modal-footer">
                   <p>
                     <strong>Additional Information:</strong> For assistance with transportation and tour guide services, please reach out to the hotel concierge.
                   </p>
