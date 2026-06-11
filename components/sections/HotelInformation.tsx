@@ -194,20 +194,21 @@ export default function HotelInformation() {
 
         /* --- NEED ASSISTANCE MODULE --- */
         .info-assistance-card {
-          margin-top: 30px;
+          margin-top: 40px;
           background: #ffffff;
-          border: 1px solid #e0ddd8;
+          border: 1px solid #C9A030;
           border-radius: 8px;
           padding: 40px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.03);
-          transition: border-color 0.3s ease;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .info-assistance-card:hover {
-          border-color: #8B5E3C;
+          border-color: #b38b25;
+          box-shadow: 0 15px 40px rgba(0,0,0,0.08);
         }
 
         .info-assistance-text h4 {
@@ -241,14 +242,14 @@ export default function HotelInformation() {
         }
 
         .info-contact-item svg {
-          color: #8B5E3C;
+          color: #C9A030;
         }
 
         .info-enquire-btn {
-          background: #8B5E3C;
+          background: #C9A030;
           color: #ffffff;
           border: none;
-          padding: 16px 32px;
+          padding: 12px 24px;
           font-size: 12px;
           letter-spacing: 2px;
           text-transform: uppercase;
@@ -259,7 +260,7 @@ export default function HotelInformation() {
         }
 
         .info-enquire-btn:hover {
-          background: #6a462c;
+          background: #b38b25;
           transform: translateY(-2px);
           box-shadow: 0 4px 12px rgba(139, 94, 60, 0.25);
         }
@@ -469,7 +470,7 @@ export default function HotelInformation() {
           </div>
 
           {/* NEED ASSISTANCE MINI CARD */}
-          <div className="help-section">
+          <div className="info-assistance-card">
             <div className="info-assistance-text">
               <h4>Need Assistance?</h4>
               <p>Our concierge team is available round the clock to help clarify any policies or assist with your booking.</p>

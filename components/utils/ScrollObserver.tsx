@@ -12,6 +12,11 @@ export default function ScrollObserver() {
       return;
     }
 
+    // Disable animations on terms and conditions page to prevent hydration and rendering crashes
+    if (pathname === '/terms-and-conditions') {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

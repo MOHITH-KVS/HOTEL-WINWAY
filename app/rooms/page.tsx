@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Wifi, Users, Maximize2 } from 'lucide-react';
+import { Wifi, Users, Maximize2, BedDouble, ArrowRight } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
 import ContactCTA from '@/components/sections/ContactCTA';
+import SecondaryNav from '@/components/sections/SecondaryNav';
+import RoomsGrid from '@/components/sections/RoomsGrid';
+import DiningPreview from '@/components/sections/DiningPreview';
+import AttractionsSection from '@/components/sections/AttractionsSection';
 
 export const metadata: Metadata = {
   title: 'Rooms & Suites | Hotel Winway Indore',
@@ -17,60 +21,238 @@ export const metadata: Metadata = {
   },
 };
 
-const rooms = [
-  {
-    id: 'standard-room',
-    name: 'Standard Room',
-    size: '24 Sq. Mt',
-    sizeImperial: '260 sq.ft',
-    guests: 'Up to 2',
-    bed: 'Double Bed',
-    description:
-      'Experience effortless comfort in our thoughtfully appointed Room. Designed with contemporary elegance and practical convenience in mind, the room features inviting interiors, comfortable bedding and modern amenities to ensure a pleasant and relaxing stay.',
-    image: '/images/rooms/standard-room/standard-1.jpeg',
-    href: '/rooms/standard-room',
-  },
-  {
-    id: 'deluxe-room',
-    name: 'Deluxe Room',
-    size: '29 Sq. Mt',
-    sizeImperial: '316 sq.ft',
-    guests: 'Up to 2',
-    bed: 'Double Bed',
-    description:
-      'Enjoy an elevated stay experience in our Deluxe Room, thoughtfully designed to offer enhanced comfort and contemporary style. Featuring spacious interiors, elegant furnishings and modern amenities, the room provides the perfect setting to relax and recharge.',
-    image: '/images/rooms/deluxe-room/deluxe-1.jpeg',
-    href: '/rooms/deluxe-room',
-  },
-  {
-    id: 'junior-suite',
-    name: 'Junior Suite',
-    size: '31 Sq. Mt',
-    sizeImperial: '340 sq.ft',
-    guests: 'Up to 2',
-    bed: 'King Bed',
-    description:
-      'Indulge in elevated comfort and added luxury in our Junior Suite. Thoughtfully designed with spacious interiors and elegant furnishings, the suite offers a refined retreat. Unwind in the relaxing bathtub and enjoy refreshments from the minibar.',
-    image: '/images/rooms/junior-suite/junior-1.jpeg',
-    href: '/rooms/junior-suite',
-  },
-  {
-    id: 'presidential-suite',
-    name: 'Presidential Suite',
-    size: '66 Sq. Mt',
-    sizeImperial: '716 sq.ft',
-    guests: 'Up to 2',
-    bed: 'King Bed',
-    description:
-      'Experience the pinnacle of luxury in our Presidential Suite, thoughtfully designed for guests who appreciate exceptional comfort and sophistication. Featuring expansive living spaces, elegant interiors and premium amenities.',
-    image: '/images/rooms/presidential-suite/ps-1.jpeg',
-    href: '/rooms/presidential-suite',
-  },
-];
+
 
 export default function RoomsPage() {
   return (
     <>
+      <style>{`
+        .rooms-page-section {
+          padding: 80px 0;
+          background-color: #F8F7F5;
+        }
+
+        .intro-heading-wrapper {
+          text-align: center;
+          margin-bottom: 60px;
+          padding: 0 20px;
+        }
+
+        .intro-heading {
+          font-family: 'Libre Baskerville', serif;
+          font-size: 32px;
+          color: #c4a47c;
+          font-weight: 400;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          margin-bottom: 24px;
+        }
+
+        .intro-heading strong {
+          color: #4a3320;
+          font-weight: 700;
+        }
+
+        .intro-subdesc {
+          max-width: 800px;
+          margin: 0 auto;
+          color: #57585B;
+          font-size: 16px;
+          line-height: 1.8;
+        }
+
+        .rooms-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 40px;
+          padding: 0 60px;
+          max-width: 1400px;
+          margin: 0 auto;
+        }
+
+        .room-card-page {
+          background: #ffffff;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+          border: 1px solid #eaeaea;
+        }
+
+        .room-img-wrapper {
+          position: relative;
+          width: 100%;
+          height: 280px;
+          overflow: hidden;
+        }
+
+        .room-img-wrapper img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.4s ease;
+        }
+
+        .room-card-page:hover .room-img-wrapper img {
+          transform: scale(1.05);
+        }
+
+        .gallery-icon-btn {
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          width: 36px;
+          height: 36px;
+          background: rgba(255,255,255,0.9);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #1a1a1a;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          border: none;
+          cursor: pointer;
+        }
+
+        .room-content {
+          padding: 24px;
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+        }
+
+        .room-name-page {
+          font-weight: 700;
+          font-size: 20px;
+          color: #1a1a1a;
+          margin-bottom: 12px;
+          font-family: 'Lato', sans-serif;
+        }
+
+        .room-desc-page {
+          font-size: 14px;
+          color: #666;
+          line-height: 1.6;
+          margin-bottom: 20px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .read-more {
+          color: #b8935a;
+          font-weight: 600;
+          cursor: pointer;
+          white-space: nowrap;
+        }
+
+        .highlights-label {
+          font-size: 11px;
+          color: #888;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: 700;
+          margin-bottom: 4px;
+        }
+
+        .highlights-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px 16px;
+          margin: 12px 0 24px;
+        }
+
+        .highlight-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          color: #555;
+        }
+
+        .highlight-icon {
+          color: #b8935a;
+          flex-shrink: 0;
+        }
+
+        .price-section {
+          margin-top: auto;
+          margin-bottom: 16px;
+          border-top: 1px solid #f0f0f0;
+          padding-top: 16px;
+        }
+
+        .member-rate-label {
+          font-size: 11px;
+          color: #888;
+          display: block;
+          margin-bottom: 4px;
+        }
+
+        .price-amount {
+          font-size: 24px;
+          font-weight: 700;
+          color: #1a1a1a;
+          display: inline-block;
+          margin-right: 6px;
+        }
+
+        .per-night {
+          font-size: 11px;
+          color: #888;
+        }
+
+        .room-card-buttons {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .btn-enquire {
+          background: #2c2c2c;
+          color: #fff;
+          padding: 12px 20px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          border: none;
+          border-radius: 0;
+          cursor: pointer;
+          transition: background 0.3s;
+          text-decoration: none;
+        }
+
+        .btn-enquire:hover {
+          background: #b8935a;
+        }
+
+        .btn-room-details {
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          color: #1a1a1a;
+          text-decoration: underline;
+          background: none;
+          border: none;
+          cursor: pointer;
+          transition: color 0.3s;
+        }
+
+        .btn-room-details:hover {
+          color: #b8935a;
+        }
+
+        @media (max-width: 1024px) {
+          .rooms-grid { grid-template-columns: repeat(2, 1fr); padding: 0 40px; }
+        }
+        @media (max-width: 640px) {
+          .rooms-grid { grid-template-columns: 1fr; padding: 0 20px; }
+          .intro-heading { font-size: 24px; }
+        }
+      `}</style>
+
       <HeroSection
         title="Rooms & Suites"
         subtitle="An Experience of Comfort, Style and Hospitality"
@@ -78,151 +260,26 @@ export default function RoomsPage() {
         imageAlt="Hotel Winway Indore — Luxury Rooms and Suites"
       />
 
-      {/* Intro */}
-      <section className="section-padding" style={{ background: '#F3F4F6' }}>
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <h1 className="heading-mixed mb-4">
-              A Symphony of <strong>Elegance and Comfort</strong>
-            </h1>
-            <p
-              className="text-[#57585B]"
-              style={{ fontFamily: 'var(--font-sans)', fontSize: 15, lineHeight: 1.85 }}
-            >
-              Designed to offer a perfect balance of comfort and sophistication, the rooms and suites at Hotel Winway provide a welcoming retreat in the heart of Indore city. Thoughtfully appointed interiors, contemporary amenities and elegant furnishings create an atmosphere that is both relaxing and refined.
-            </p>
-          </div>
+      <SecondaryNav />
 
-          {/* 3-column grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-            {rooms.slice(0, 3).map((room) => (
-              <div
-                key={room.id}
-                className="bg-white group"
-                style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
-              >
-                <div className="relative overflow-hidden card-image-zoom" style={{ aspectRatio: '4/3' }}>
-                  <Image
-                    src={room.image}
-                    alt={`${room.name} at Hotel Winway Indore`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-
-                <div className="p-6">
-                  {/* Highlights label above name */}
-                  <div className="flex items-center gap-3 mb-3 pb-3 border-b border-gray-100">
-                    <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 11 }}>
-                      <Maximize2 size={11} />
-                      {room.size}
-                    </div>
-                    <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 11 }}>
-                      <Users size={11} />
-                      {room.guests} guests
-                    </div>
-                    <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 11 }}>
-                      <Wifi size={11} />
-                      WiFi
-                    </div>
-                  </div>
-
-                  <h2
-                    className="text-[#1A1A1A] font-bold mb-2"
-                    style={{ fontFamily: 'var(--font-sans)', fontSize: 16, fontWeight: 700 }}
-                  >
-                    {room.name}
-                  </h2>
-                  <p
-                    className="text-[#57585B] mb-5 line-clamp-3"
-                    style={{ fontFamily: 'var(--font-sans)', fontSize: 13, lineHeight: 1.75 }}
-                  >
-                    {room.description}
-                  </p>
-
-                  <div className="flex items-center gap-4">
-                    <Link
-                      href={room.href}
-                      className="text-[#8d6346] hover:text-[#1A1A1A] transition-colors"
-                      style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
-                    >
-                      Room Details ›
-                    </Link>
-                    <Link
-                      href="/contact"
-                      className="text-[#57585B] hover:text-[#8d6346] transition-colors"
-                      style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
-                    >
-                      Contact Us ›
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Presidential Suite — featured wide card */}
-          <div
-            className="bg-white grid grid-cols-1 lg:grid-cols-2"
-            style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
-          >
-            <div className="relative overflow-hidden card-image-zoom" style={{ minHeight: 320 }}>
-              <Image
-                src={rooms[3].image}
-                alt={`${rooms[3].name} at Hotel Winway Indore`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-            <div className="p-8 lg:p-12 flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gray-100">
-                <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 12 }}>
-                  <Maximize2 size={12} />
-                  {rooms[3].size}
-                </div>
-                <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 12 }}>
-                  <Users size={12} />
-                  {rooms[3].guests} guests
-                </div>
-                <div className="flex items-center gap-1.5 text-[#8B8A84]" style={{ fontSize: 12 }}>
-                  <Wifi size={12} />
-                  Inclusive of WiFi
-                </div>
-              </div>
-              <h2
-                className="text-[#1A1A1A] font-bold mb-3"
-                style={{ fontFamily: 'var(--font-sans)', fontSize: 22, fontWeight: 700 }}
-              >
-                {rooms[3].name}
-              </h2>
-              <p
-                className="text-[#57585B] mb-6"
-                style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
-              >
-                {rooms[3].description}
-              </p>
-              <div className="flex items-center gap-6">
-                <Link
-                  href={rooms[3].href}
-                  className="text-[#8d6346] hover:text-[#1A1A1A] transition-colors"
-                  style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
-                >
-                  Room Details ›
-                </Link>
-                <Link
-                  href="/contact"
-                  className="text-[#57585B] hover:text-[#8d6346] transition-colors"
-                  style={{ fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}
-                >
-                  Contact Us ›
-                </Link>
-              </div>
-            </div>
-          </div>
+      <section className="rooms-page-section">
+        <div className="intro-heading-wrapper">
+          <h1 className="intro-heading">
+            AN EXPERIENCE OF <strong>COMFORT, STYLE AND HOSPITALITY</strong>
+          </h1>
+          <p className="intro-subdesc">
+            Designed to offer a perfect balance of comfort and sophistication, the rooms
+            and suites at Hotel Winway provide a welcoming retreat in the heart of Indore
+            city. Thoughtfully appointed interiors, contemporary amenities and elegant
+            furnishings create an atmosphere that is both relaxing and refined.
+          </p>
         </div>
+
+          <RoomsGrid />
       </section>
+
+      <DiningPreview />
+      <AttractionsSection />
 
       <ContactCTA />
     </>

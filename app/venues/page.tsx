@@ -1,266 +1,294 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ChevronRight, Phone } from 'lucide-react';
-import HeroSection from '@/components/sections/HeroSection';
 import ContactCTA from '@/components/sections/ContactCTA';
+import SecondaryNav from '@/components/sections/SecondaryNav';
+import HeroSection from '@/components/sections/HeroSection';
 
 export const metadata: Metadata = {
-  title: 'Events & Banquet | Hotel Winway Indore',
-  description:
-    'Host your next event at Hotel Winway Indore. From intimate corporate meetings to grand weddings and celebrations, our versatile banquet halls cater to every occasion.',
-  alternates: { canonical: 'https://www.hotelwinway.com/events' },
-  openGraph: {
-    title: 'Events & Banquet | Hotel Winway Indore',
-    description: 'Versatile event spaces in Indore for corporate meetings, weddings and celebrations at Hotel Winway.',
-    images: [{ url: '/images/dining/banquet/banquet-1.jpeg' }],
-  },
+  title: 'Event Venues | Hotel Winway Indore',
+  description: 'Versatile and elegantly appointed banquet space at Hotel Winway, ideal for corporate events, social gatherings and milestone celebrations.',
+  alternates: { canonical: 'https://www.hotelwinway.com/venues' },
 };
 
-const venues = [
-  {
-    id: 'grand-hall',
-    name: 'Grand Hall',
-    subtitle: 'The Premier Event Space',
-    description:
-      'Our flagship event hall offers an expansive setting for grand celebrations, corporate conferences and prestigious social events. Featuring state-of-the-art audio-visual systems, elegant décor and dedicated event management, the Grand Hall delivers a flawless event experience every time.',
-    image: '/images/dining/banquet/banquet-1.jpeg',
-    capacity: {
-      Theatre: 300,
-      Classroom: 180,
-      'U-Shaped': 60,
-      Circular: 200,
-      Boardroom: 40,
-      Reception: 350,
-    },
-  },
-  {
-    id: 'conference-room',
-    name: 'Conference Room',
-    subtitle: 'Boardroom Excellence',
-    description:
-      'Designed for high-level boardroom meetings, leadership summits and confidential discussions, our Conference Room blends sophisticated design with cutting-edge technology. Featuring comfortable executive seating, LED displays and high-speed internet connectivity.',
-    image: '/images/dining/banquet/banquet-2.jpeg',
-    capacity: {
-      Theatre: 40,
-      Classroom: 25,
-      'U-Shaped': 20,
-      Circular: 30,
-      Boardroom: 18,
-      Reception: 50,
-    },
-  },
-  {
-    id: 'the-pavilion',
-    name: 'The Pavilion',
-    subtitle: 'Intimate Gatherings & Celebrations',
-    description:
-      'The Pavilion is the ideal venue for intimate social gatherings, cocktail evenings, product launches and private dinners. Featuring elegant lighting, flexible seating arrangements and direct access to the hotel gardens.',
-    image: '/images/dining/banquet/banquet-3.jpeg',
-    capacity: {
-      Theatre: 120,
-      Classroom: 80,
-      'U-Shaped': 40,
-      Circular: 100,
-      Boardroom: 25,
-      Reception: 150,
-    },
-  },
-];
-
-const galleryImages = [
-  '/images/dining/banquet/banquet-4.jpeg',
-  '/images/dining/banquet/banquet-5.jpeg',
-  '/images/dining/banquet/banquet-6.jpeg',
-  '/images/dining/banquet/banquet-7.jpeg',
-];
-
-export default function EventsPage() {
+export default function VenuesPage() {
   return (
     <>
+      <style>{`
+        /* Hero Section */
+        .venues-hero {
+          background-color: #FAF9F6;
+          background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(201,169,110,0.03) 10px,
+            rgba(201,169,110,0.03) 20px
+          );
+          padding: 80px 24px 60px 24px;
+          text-align: center;
+        }
+
+        .venues-hero-title {
+          margin-bottom: 24px;
+        }
+
+        .venues-hero-line1 {
+          display: block;
+          font-family: var(--font-sans);
+          font-weight: 300;
+          font-size: 24px;
+          letter-spacing: 0.15em;
+          color: #5a4a3a;
+          text-transform: uppercase;
+        }
+
+        .venues-hero-line2 {
+          display: block;
+          font-family: var(--font-sans);
+          font-weight: 700;
+          font-size: 36px;
+          letter-spacing: 0.1em;
+          color: #C9A030;
+          text-transform: uppercase;
+          margin-top: 8px;
+        }
+
+        .venues-hero-desc {
+          max-width: 700px;
+          margin: 0 auto;
+          font-size: 15px;
+          line-height: 1.8;
+          color: #555;
+        }
+
+        /* Venue Section */
+        .venue-section {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 80px 40px;
+        }
+
+        .venue-heading {
+          text-align: center;
+          margin-bottom: 60px;
+        }
+
+        .venue-heading-the {
+          font-family: var(--font-sans);
+          font-weight: 300;
+          font-size: 28px;
+          letter-spacing: 0.15em;
+          color: #5a4a3a;
+          text-transform: uppercase;
+          margin-right: 8px;
+        }
+
+        .venue-heading-name {
+          font-family: var(--font-sans);
+          font-weight: 700;
+          font-size: 28px;
+          letter-spacing: 0.1em;
+          color: #C9A030;
+          text-transform: uppercase;
+        }
+
+        .venue-content {
+          display: flex;
+          gap: 40px;
+        }
+
+        /* Left Column (Table) */
+        .venue-left {
+          flex: 0 0 35%;
+        }
+
+        .capacity-table {
+          width: 100%;
+          border: 1px solid #d0c8be;
+          border-collapse: collapse;
+          margin-bottom: 30px;
+        }
+
+        .capacity-table td {
+          padding: 14px 20px;
+          border-bottom: 1px solid #e8e4df;
+          font-size: 15px;
+          color: #333;
+        }
+
+        .capacity-table tr:last-child td {
+          border-bottom: none;
+        }
+
+        .capacity-table td:first-child {
+          border-right: 1px solid #e8e4df;
+        }
+
+        .capacity-table td:last-child {
+          text-align: center;
+        }
+
+        .btn-quote {
+          display: block;
+          width: 100%;
+          text-align: center;
+          border: 1px solid #555;
+          background: transparent;
+          color: #333;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          font-size: 11px;
+          padding: 16px;
+          text-decoration: none;
+          transition: all 0.3s;
+          font-weight: 600;
+        }
+
+        .btn-quote:hover {
+          background: #333;
+          color: #fff;
+        }
+
+        /* Right Column (Info + Image) */
+        .venue-right {
+          flex: 0 0 calc(65% - 40px);
+        }
+
+        .hotel-tag {
+          font-family: var(--font-sans);
+          font-size: 11px;
+          letter-spacing: 2px;
+          color: #C9A030;
+          text-transform: uppercase;
+          margin-bottom: 12px;
+          font-weight: 600;
+        }
+
+        .venue-desc {
+          font-size: 15px;
+          line-height: 1.8;
+          color: #555;
+          margin-bottom: 30px;
+        }
+
+        .venue-image {
+          width: 100%;
+          height: 280px;
+          position: relative;
+        }
+
+        .venue-image img {
+          object-fit: cover;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+          .venue-content {
+            flex-direction: column;
+          }
+          .venue-left, .venue-right {
+            flex: 0 0 100%;
+          }
+          .venue-section {
+            padding: 60px 20px;
+          }
+          .venues-hero {
+            padding: 60px 20px 40px 20px;
+          }
+          .venues-hero-line1 { font-size: 18px; }
+          .venues-hero-line2 { font-size: 26px; }
+          .venue-heading-the, .venue-heading-name { font-size: 22px; }
+        }
+      `}</style>
+
       <HeroSection
-        title="Events & Banquet"
-        subtitle="Create Unforgettable Celebrations"
+        title="VENUES & EVENTS"
+        subtitle="Where Every Event Becomes an Unforgettable Experience"
+        locationLabel="INDORE, MADHYA PRADESH"
         imageSrc="/images/dining/banquet/banquet-1.jpeg"
-        imageAlt="Hotel Winway Indore — Banquet and Events"
+        imageAlt="Hotel Winway Indore — Banquet and Event Venues"
       />
 
-      {/* Intro Section */}
-      <section className="section-padding" style={{ background: '#F3F4F6' }}>
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h1 className="heading-mixed mb-5">
-              Unveil Extraordinary <strong>Moments at Hotel Winway</strong>
-            </h1>
-            <p
-              className="text-[#57585B]"
-              style={{ fontFamily: 'var(--font-sans)', fontSize: 15, lineHeight: 1.85 }}
-            >
-              At Hotel Winway, Indore, our versatile event spaces cater to every occasion — whether
-              it is an intimate gathering, a grand corporate conference, a wedding celebration or a
-              social event. Our dedicated events team ensures every detail is meticulously planned
-              for a seamless and memorable experience.
+      <SecondaryNav />
+
+      {/* SECTION 1 - Hero */}
+      <section className="venues-hero">
+        <h1 className="venues-hero-title">
+          <span className="venues-hero-line1">Unveil Extraordinary</span>
+          <span className="venues-hero-line2">Moments at Hotel Winway</span>
+        </h1>
+        <p className="venues-hero-desc">
+          Hotel Winway offers a versatile and elegantly appointed banquet space, ideal for corporate events, social gatherings and milestone celebrations. With modern amenities, attentive service and a warm ambience, our venue is designed to make every occasion truly memorable.
+        </p>
+      </section>
+
+      {/* SECTION 2 - Single Venue */}
+      <section className="venue-section">
+        <div className="venue-heading">
+          <span className="venue-heading-the">THE</span>
+          <span className="venue-heading-name">BANQUET HALL</span>
+        </div>
+
+        <div className="venue-content">
+          {/* Left Column */}
+          <div className="venue-left">
+            <table className="capacity-table">
+              <tbody>
+                <tr>
+                  <td>Max Capacity</td>
+                  <td>90</td>
+                </tr>
+                <tr>
+                  <td>Theatre</td>
+                  <td>80</td>
+                </tr>
+                <tr>
+                  <td>Boardroom</td>
+                  <td>30</td>
+                </tr>
+                <tr>
+                  <td>U-Shaped</td>
+                  <td>45</td>
+                </tr>
+                <tr>
+                  <td>Classroom</td>
+                  <td>40</td>
+                </tr>
+                <tr>
+                  <td>Cluster</td>
+                  <td>35</td>
+                </tr>
+                <tr>
+                  <td>Reception</td>
+                  <td>120</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <a href="mailto:fom1@hotelwinway.com" className="btn-quote">
+              REQUEST A QUOTE
+            </a>
+          </div>
+
+          {/* Right Column */}
+          <div className="venue-right">
+            <div className="hotel-tag">HOTEL WINWAY, INDORE</div>
+            <p className="venue-desc">
+              The Banquet Hall at Hotel Winway is a sophisticated and versatile event space, perfectly suited for corporate conferences, social celebrations, weddings and private gatherings. Thoughtfully designed with modern amenities and warm interiors, the hall accommodates a variety of seating arrangements to suit the nature and scale of your event. Our dedicated events team ensures every detail is managed with precision, delivering a seamless and memorable experience for you and your guests.
             </p>
-          </div>
-
-          {/* Venue cards — matches reference layout: capacity table left + description + image right */}
-          <div className="space-y-12">
-            {venues.map((venue, index) => (
-              <div
-                key={venue.id}
-                className="bg-white"
-                style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}
-              >
-                {/* Venue heading */}
-                <div className="px-8 pt-8 pb-0 text-center">
-                  <h2 className="heading-mixed mb-1">
-                    <strong>{venue.name}</strong>
-                  </h2>
-                  <p
-                    className="text-[#C9A96E] mb-2"
-                    style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}
-                  >
-                    Hotel Winway, Indore
-                  </p>
-                </div>
-
-                <div className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? '' : ''}`}>
-                  {/* Capacity Table — left column */}
-                  <div className="p-8">
-                    <p
-                      className="text-[#57585B] mb-8"
-                      style={{ fontFamily: 'var(--font-sans)', fontSize: 14, lineHeight: 1.85 }}
-                    >
-                      {venue.description}
-                    </p>
-
-                    {/* Capacity grid — matches reference layout */}
-                    <div
-                      className="border border-gray-200"
-                      style={{ background: '#FAFAFA' }}
-                    >
-                      <div
-                        className="px-4 py-3 border-b border-gray-200"
-                        style={{ background: '#F3F4F6' }}
-                      >
-                        <p
-                          style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#57585B' }}
-                        >
-                          Seating Capacity
-                        </p>
-                      </div>
-                      <div className="grid grid-cols-2 divide-x divide-y divide-gray-200">
-                        {Object.entries(venue.capacity).map(([setup, count]) => (
-                          <div key={setup} className="p-4">
-                            <p
-                              className="text-[#1A1A1A] font-bold mb-0.5"
-                              style={{ fontFamily: 'var(--font-sans)', fontSize: 13 }}
-                            >
-                              {setup}
-                            </p>
-                            <p
-                              className="text-[#8B8A84]"
-                              style={{ fontFamily: 'var(--font-sans)', fontSize: 13 }}
-                            >
-                              {count}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTA */}
-                    <div className="mt-8 flex items-center gap-6">
-                      <Link
-                        href="/contact"
-                        className="inline-block bg-[#57585B] hover:bg-[#C9A96E] text-white text-[12px] font-bold tracking-[0.15em] uppercase px-8 py-3 transition-all duration-300"
-                        style={{ fontFamily: 'var(--font-sans)' }}
-                      >
-                        Enquire for Events
-                      </Link>
-                      <a
-                        href="tel:+910731-661-1111"
-                        className="flex items-center gap-2 text-[#57585B] hover:text-[#C9A96E] transition-colors"
-                        style={{ fontFamily: 'var(--font-sans)', fontSize: 13 }}
-                      >
-                        <Phone size={14} />
-                        0731-661-1111
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Image — right column */}
-                  <div className="relative min-h-[320px] lg:min-h-0 overflow-hidden">
-                    <Image
-                      src={venue.image}
-                      alt={`${venue.name} — Hotel Winway Indore Events`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
+            <div className="venue-image">
+              <Image 
+                src="/images/dining/banquet/banquet-1.jpeg" 
+                alt="The Banquet Hall at Hotel Winway, Indore" 
+                fill 
+                sizes="(max-width: 900px) 100vw, 65vw"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Gallery Strip */}
-      <section className="section-padding bg-white">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <h2 className="heading-mixed text-center mb-10">
-            Event <strong>Gallery</strong>
-          </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {galleryImages.map((src, idx) => (
-              <div key={idx} className="relative aspect-square overflow-hidden card-image-zoom">
-                <Image
-                  src={src}
-                  alt={`Hotel Winway events gallery ${idx + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 50vw, 25vw"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="section-padding" style={{ background: '#F3F4F6' }}>
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <h2 className="heading-mixed text-center mb-12">
-            Why Choose <strong>Hotel Winway</strong>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: 'Expert Event Team', desc: 'Our dedicated planners handle every detail from setup to execution' },
-              { title: 'Premium AV Equipment', desc: 'State-of-the-art audio, visual and lighting systems for every event' },
-              { title: 'Customised Catering', desc: 'Bespoke menus crafted to suit every palate and occasion' },
-              { title: 'Central Location', desc: 'Conveniently located on RNT Marg, easily accessible from across Indore' },
-            ].map((item) => (
-              <div key={item.title} className="bg-white p-6" style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}>
-                <div className="w-8 h-1 bg-[#C9A96E] mb-4" />
-                <h3
-                  className="text-[#1A1A1A] font-bold mb-2"
-                  style={{ fontFamily: 'var(--font-sans)', fontSize: 15, fontWeight: 700 }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  className="text-[#57585B]"
-                  style={{ fontFamily: 'var(--font-sans)', fontSize: 13, lineHeight: 1.7 }}
-                >
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* SECTION 3 - Contact CTA */}
       <ContactCTA />
     </>
   );

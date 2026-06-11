@@ -30,8 +30,8 @@ const diningData = {
     cuisine: 'Multi Cuisine',
     timing: 'Evening onwards',
     description: `Set amidst a refreshing outdoor setting, Al Fresco offers a relaxed dining experience where nature, flavour and hospitality come together. Perfect for casual gatherings and leisurely meals, it provides a welcoming atmosphere to enjoy great food and memorable moments under the open sky.`,
-    heroImage: '/images/dining/cafe/cafe-1.jpeg',
-    images: ['/images/dining/cafe/cafe-1.jpeg', '/images/dining/cafe/cafe-2.jpeg'],
+    heroImage: '/images/dining/alfresco/alfresco-1.jpeg',
+    images: ['/images/dining/alfresco/alfresco-1.jpeg', '/images/dining/alfresco/alfresco-card.jpeg'],
   },
   cafe: {
     name: 'Cafe',
@@ -40,7 +40,7 @@ const diningData = {
     timing: '08:00 am – 10:00 pm',
     description: `A cosy retreat for coffee lovers and casual diners alike. Our Cafe offers a curated selection of freshly brewed coffees, light bites and snacks in a warm, welcoming atmosphere perfect for a quick break or a relaxed afternoon.`,
     heroImage: '/images/dining/cafe/cafe-1.jpeg',
-    images: ['/images/dining/cafe/cafe-1.jpeg', '/images/dining/cafe/cafe-2.jpeg'],
+    images: Array.from({ length: 6 }, (_, i) => `/images/dining/cafe/cafe-${i + 1}.jpeg`),
   },
 };
 
@@ -170,7 +170,11 @@ export default async function DiningDetailPage({ params }: { params: Promise<{ s
                   Gallery
                 </h2>
                 <div className="w-8 h-0.5 bg-[#8d6346] mb-5" />
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className={`grid gap-3 ${
+                  venue.images.length === 1 ? 'grid-cols-1 max-w-lg mx-auto' :
+                  venue.images.length === 2 ? 'grid-cols-2 max-w-2xl mx-auto' :
+                  'grid-cols-2 sm:grid-cols-3'
+                }`}>
                   {venue.images.slice(0, 6).map((img, i) => (
                     <div key={i} className="relative overflow-hidden card-image-zoom" style={{ aspectRatio: '4/3' }}>
                       <Image
