@@ -1,24 +1,17 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function WelcomeSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
     <section id="overview" className="section-padding bg-[#faf9f7] scroll-mt-32" ref={ref}>
       <div className="container-main">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
-          >
+          <div className="relative">
             <div className="relative aspect-[4/5] card-image-zoom">
               <Image
                 src="/images/lobby/lobby-1.jpeg"
@@ -33,13 +26,9 @@ export default function WelcomeSection() {
               <p className="text-3xl font-semibold leading-tight" style={{ fontFamily: 'var(--font-display)' }}>2010</p>
               <p className="text-xs tracking-[0.2em] uppercase mt-1 text-white/80">Indore</p>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div>
             <span className="section-label">Welcome to Hotel Winway</span>
             <h2 className="heading-mixed mt-4 mb-6">
               Where the Warmth of Malwa <strong>Meets Modern Luxury</strong>
@@ -57,7 +46,7 @@ export default function WelcomeSection() {
             <Link href="/about" className="btn-ghost text-[12px]">
               Discover Our Story ›
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

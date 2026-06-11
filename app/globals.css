@@ -24,8 +24,8 @@
   --nav-height: 80px;
   --subnav-height: 52px;
   --container-max: 1320px;
-  --section-padding: 96px;
-  --section-padding-mobile: 56px;
+  --section-padding: 60px;
+  --section-padding-mobile: 60px;
   --hero-height: min(88vh, 860px);
   --hero-strip-height: 76px;
   --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -37,6 +37,24 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* Universal section spacing — applies to EVERY section on every page */
+section {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+/* Gallery section — remove excess bottom padding */
+.gallery-section,
+[class*="gallery"] {
+  padding-bottom: 0px;   /* gallery images already have visual weight */
+}
+
+/* Terms section — remove excess top padding */
+.terms-section,
+[class*="terms"] {
+  padding-top: 60px;   /* was ~140px — cut to match everything else */
 }
 
 html {
@@ -569,4 +587,85 @@ img {
 @media (max-width: 640px) {
   .masonry-grid { columns: 1; }
   :root { --section-padding: var(--section-padding-mobile); }
+}
+
+/* ==========================================================================
+   SCROLL ANIMATION SYSTEM (Intersection Observer)
+   ========================================================================== */
+
+/* All sections start invisible and slightly below */
+.section-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: transform, opacity;
+}
+
+/* When section enters viewport — animate in */
+.section-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Parallax Background */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  will-change: background-position;
+}
+
+@media (max-width: 768px) {
+  .parallax-bg {
+    background-attachment: scroll; /* disable on mobile — prevents jank */
+  }
+}
+
+/* Subtle card stagger animation (rooms, attractions cards) */
+.card-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: transform, opacity;
+}
+
+.card-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for cards 1–6 */
+.card-animate:nth-child(1) { transition-delay: 0s; }
+.card-animate:nth-child(2) { transition-delay: 0.1s; }
+.card-animate:nth-child(3) { transition-delay: 0.2s; }
+.card-animate:nth-child(4) { transition-delay: 0.3s; }
+.card-animate:nth-child(5) { transition-delay: 0.4s; }
+.card-animate:nth-child(6) { transition-delay: 0.5s; }
+
+/* Heading text reveal (section titles) */
+.heading-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+  will-change: transform, opacity;
+}
+
+.heading-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .section-animate,
+  .card-animate,
+  .heading-animate {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .parallax-bg {
+    background-attachment: scroll;
+  }
 }

@@ -65,7 +65,7 @@ export default function DiningPreview() {
 
         .dining-header-wrap {
           background: #2a2a2a;
-          padding: 80px 24px 60px 24px;
+          padding: 60px 24px;
           text-align: center;
         }
 

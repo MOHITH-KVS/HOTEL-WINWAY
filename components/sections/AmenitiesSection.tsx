@@ -77,7 +77,7 @@ export default function AmenitiesSection() {
       <style>{`
         .amenities-section {
           background: #fff;
-          padding: 40px 0 100px 0;
+          padding: 60px 0;
           font-family: 'Lato', sans-serif;
         }
 
@@ -231,7 +231,7 @@ export default function AmenitiesSection() {
           
           {/* LEFT COLUMN */}
           <div className="left-column">
-            <div className="category-block">
+            <div className="category-block amenity-card">
               <div className="category-heading">
                 <svg className="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M13 21V3l6 4v14"/><path d="M9 11h2"/><path d="M9 15h2"/>
@@ -243,7 +243,7 @@ export default function AmenitiesSection() {
 
             <hr className="category-divider" />
 
-            <div className="category-block">
+            <div className="category-block amenity-card">
               <div className="category-heading">
                 <svg className="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>

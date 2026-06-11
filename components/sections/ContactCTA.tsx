@@ -1,13 +1,11 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import ContactForm from '@/components/ui/ContactForm';
 
 export default function ContactCTA() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
     <section
@@ -18,11 +16,7 @@ export default function ContactCTA() {
     >
       <div className="container-main">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div>
             <h2 style={{ color: '#FFFFFF', fontSize: '42px', fontFamily: '"Libre Baskerville", serif', fontWeight: '400', marginBottom: '20px', marginTop: '0' }}>
               HOTEL WINWAY
             </h2>
@@ -60,15 +54,11 @@ export default function ContactCTA() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div>
             <ContactForm />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

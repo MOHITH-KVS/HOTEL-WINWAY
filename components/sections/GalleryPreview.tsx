@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -20,36 +19,27 @@ const galleryImages = [
 
 export default function GalleryPreview() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const prevImage = () => setLightbox((p) => (p !== null ? (p - 1 + galleryImages.length) % galleryImages.length : 0));
   const nextImage = () => setLightbox((p) => (p !== null ? (p + 1) % galleryImages.length : 0));
 
   return (
-    <section id="gallery" className="section-padding bg-[#faf9f7] scroll-mt-32" ref={ref} style={{ paddingTop: '50px' }}>
+    <section id="gallery" className="section-padding bg-[#faf9f7] scroll-mt-32 gallery-section" ref={ref}>
       <div className="container-main">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div>
             <span className="section-label">Visual Stories</span>
             <h2 className="heading-mixed mt-4">Gallery</h2>
-          </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.2 }}>
+          </div>
+          <div>
             <Link href="/gallery" className="text-[#a67c5b] text-sm font-semibold tracking-wider hover:text-black transition-colors uppercase">
               View Full Gallery →
             </Link>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <button
               type="button"
@@ -87,46 +77,35 @@ export default function GalleryPreview() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      <AnimatePresence>
-        {lightbox !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] lightbox-backdrop flex items-center justify-center"
-            onClick={() => setLightbox(null)}
+      {lightbox !== null && (
+        <div className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-md flex items-center justify-center" onClick={() => setLightbox(null)}>
+          <button className="absolute top-4 right-4 text-white/80 hover:text-white p-2" onClick={() => setLightbox(null)} aria-label="Close">
+            <X size={24} />
+          </button>
+          <button className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2" onClick={(e) => { e.stopPropagation(); prevImage(); }} aria-label="Previous">
+            <ChevronLeft size={36} />
+          </button>
+          <div
+            className="relative w-full max-w-4xl max-h-[85vh] mx-10"
+            onClick={(e) => e.stopPropagation()}
           >
-            <button className="absolute top-4 right-4 text-white/80 hover:text-white p-2" onClick={() => setLightbox(null)} aria-label="Close">
-              <X size={24} />
-            </button>
-            <button className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2" onClick={(e) => { e.stopPropagation(); prevImage(); }} aria-label="Previous">
-              <ChevronLeft size={36} />
-            </button>
-            <motion.div
-              key={lightbox}
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="relative w-full max-w-4xl max-h-[85vh] mx-10"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={galleryImages[lightbox].src}
-                alt={galleryImages[lightbox].alt}
-                width={1200}
-                height={800}
-                className="object-contain w-full h-full max-h-[80vh]"
-              />
-              <p className="text-center text-white/70 text-sm mt-3">{galleryImages[lightbox].alt}</p>
-            </motion.div>
-            <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2" onClick={(e) => { e.stopPropagation(); nextImage(); }} aria-label="Next">
-              <ChevronRight size={36} />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <Image
+              src={galleryImages[lightbox].src}
+              alt={galleryImages[lightbox].alt}
+              width={1200}
+              height={800}
+              className="object-contain w-full h-full max-h-[80vh]"
+            />
+            <p className="text-center text-white/70 text-sm mt-3">{galleryImages[lightbox].alt}</p>
+          </div>
+          <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-2" onClick={(e) => { e.stopPropagation(); nextImage(); }} aria-label="Next">
+            <ChevronRight size={36} />
+          </button>
+        </div>
+      )}
     </section>
   );
 }

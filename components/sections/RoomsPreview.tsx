@@ -138,7 +138,7 @@ export default function RoomsPreview() {
       <style>{`
         .rooms-section {
           background: #fdfdfd;
-          padding: 80px 0 20px 0;
+          padding: 60px 0;
         }
 
         .rooms-header {

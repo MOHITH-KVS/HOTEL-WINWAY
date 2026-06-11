@@ -1,12 +1,10 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, ConciergeBell, CalendarCheck, PhoneCall, Mail } from 'lucide-react';
 
 export default function HotelInformation() {
   const sectionRef = useRef(null);
-  const inView = useInView(sectionRef, { once: true, margin: '-80px' });
 
   // State to track which card's modal is active (1, 2, or 3)
   const [activeModal, setActiveModal] = useState<number | null>(null);
@@ -32,7 +30,7 @@ export default function HotelInformation() {
       <style>{`
         .hotel-info-section {
           background-color: #fcfbf9;
-          padding: 120px 0;
+          padding: 60px 0;
           font-family: 'Lato', sans-serif;
           position: relative;
         }
@@ -410,24 +408,14 @@ export default function HotelInformation() {
       `}</style>
 
       <section id="hotel-info" ref={sectionRef} className="hotel-info-section scroll-mt-32">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="info-header-wrapper"
-        >
+        <div className="info-header-wrapper">
           <span className="info-small-label">Hotel Information</span>
           <h2 className="info-main-title">HOTEL TERMS & CONDITIONS</h2>
           <div className="info-divider"></div>
-        </motion.div>
+        </div>
 
         <div className="info-grid-container">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="info-grid"
-          >
+          <div className="info-grid">
             {/* CARD 1: GUEST POLICIES */}
             <div className="info-card">
               <ShieldCheck size={36} className="info-card-icon" strokeWidth={1.5} />
@@ -478,15 +466,10 @@ export default function HotelInformation() {
                 VIEW DETAILS &#8594;
               </button>
             </div>
-          </motion.div>
+          </div>
 
           {/* NEED ASSISTANCE MINI CARD */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="info-assistance-card"
-          >
+          <div className="help-section">
             <div className="info-assistance-text">
               <h4>Need Assistance?</h4>
               <p>Our concierge team is available round the clock to help clarify any policies or assist with your booking.</p>
@@ -503,29 +486,20 @@ export default function HotelInformation() {
               </div>
               <a href="#contact" className="info-enquire-btn" style={{ marginTop: '8px' }}>ENQUIRE NOW</a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* --- CENTERED MODALS --- */}
-      <AnimatePresence>
-        {activeModal === 1 && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="info-modal-overlay" 
-            onClick={() => setActiveModal(null)}
+      {activeModal === 1 && (
+        <div 
+          className="info-modal-overlay" 
+          onClick={() => setActiveModal(null)}
+        >
+          <div 
+            className="info-modal-content" 
+            onClick={e => e.stopPropagation()}
           >
-            <motion.div 
-              initial={{ scale: 0.95, y: 20, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.98, y: 10, opacity: 0 }}
-              transition={{ type: 'tween', duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="info-modal-content" 
-              onClick={e => e.stopPropagation()}
-            >
               <button suppressHydrationWarning className="info-modal-close" onClick={() => setActiveModal(null)}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
               </button>
@@ -566,24 +540,16 @@ export default function HotelInformation() {
                   <li>The hotel reserves the right of admission and may refuse service at its discretion.</li>
                 </ul>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
 
         {activeModal === 2 && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+          <div 
             className="info-modal-overlay" 
             onClick={() => setActiveModal(null)}
           >
-            <motion.div 
-              initial={{ scale: 0.95, y: 20, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.98, y: 10, opacity: 0 }}
-              transition={{ type: 'tween', duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            <div 
               className="info-modal-content" 
               onClick={e => e.stopPropagation()}
             >
@@ -617,24 +583,16 @@ export default function HotelInformation() {
                   Should you have any questions or require any further assistance regarding our facilities, our concierge team is always at your disposal.
                 </p>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
 
         {activeModal === 3 && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+          <div 
             className="info-modal-overlay" 
             onClick={() => setActiveModal(null)}
           >
-            <motion.div 
-              initial={{ scale: 0.95, y: 20, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.98, y: 10, opacity: 0 }}
-              transition={{ type: 'tween', duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            <div 
               className="info-modal-content" 
               onClick={e => e.stopPropagation()}
             >
@@ -666,10 +624,9 @@ export default function HotelInformation() {
                   <li>All GST related notes: Taxes are applicable as per government regulations and are subject to change without prior notice.</li>
                 </ul>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
     </>
   );
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const attractions = [
   {
@@ -99,7 +98,6 @@ const attractions = [
 
 export default function AttractionsCarousel() {
   const sectionRef = useRef(null);
-  const inView = useInView(sectionRef, { once: true, margin: '-80px' });
   const [activeModal, setActiveModal] = useState<typeof attractions[0] | null>(null);
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -143,7 +141,7 @@ export default function AttractionsCarousel() {
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23e6dac3' fill-opacity='0.4'%3E%3Cpath d='M50 0l50 50-50 50L0 50z'/%3E%3Cpath d='M50 15l35 35-35 35-35-35z' fill='%23f5f0e8'/%3E%3Ccircle cx='50' cy='50' r='12'/%3E%3C/g%3E%3C/svg%3E");
           background-repeat: repeat;
           background-size: 300px 300px;
-          padding: 60px 0 80px;
+          padding: 60px 0;
           font-family: 'Lato', sans-serif;
           position: relative;
           overflow: hidden;
@@ -548,22 +546,12 @@ export default function AttractionsCarousel() {
 
       <section id="attractions" ref={sectionRef} className="local-attractions-section">
         
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="attr-header"
-        >
+        <div className="attr-header">
           <span className="attr-label">Explore Indore</span>
           <h2 className="attr-title">LOCAL ATTRACTIONS</h2>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="attractions-carousel-wrapper"
-        >
+        <div className="attractions-carousel-wrapper">
           <button 
             className="carousel-arrow carousel-arrow-left" 
             onClick={slideLeft}
@@ -615,67 +603,57 @@ export default function AttractionsCarousel() {
           >
             &#8594;
           </button>
-        </motion.div>
+        </div>
       </section>
 
       {/* Centered Modal Overlay Implementation */}
-      <AnimatePresence>
-        {activeModal && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="attr-modal-overlay" 
-            onClick={() => setActiveModal(null)}
+      {activeModal && (
+        <div 
+          className="attr-modal-overlay" 
+          onClick={() => setActiveModal(null)}
+        >
+          <div 
+            className="attr-modal-content" 
+            onClick={e => e.stopPropagation()}
           >
-            <motion.div 
-              initial={{ scale: 0.95, y: 20, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.98, y: 10, opacity: 0 }}
-              transition={{ type: 'tween', duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="attr-modal-content" 
-              onClick={e => e.stopPropagation()}
-            >
-              <button suppressHydrationWarning className="attr-modal-close" onClick={() => setActiveModal(null)}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-              </button>
+            <button suppressHydrationWarning className="attr-modal-close" onClick={() => setActiveModal(null)}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
 
-              <div className="attr-modal-hero">
-                <img src={activeModal.image} alt={activeModal.name} />
+            <div className="attr-modal-hero">
+              <img src={activeModal.image} alt={activeModal.name} />
+            </div>
+
+            <div className="attr-modal-body">
+              <h3 className="attr-modal-title">{activeModal.name}</h3>
+              <div className="attr-modal-desc">
+                {activeModal.description}
               </div>
 
-              <div className="attr-modal-body">
-                <h3 className="attr-modal-title">{activeModal.name}</h3>
-                <div className="attr-modal-desc">
-                  {activeModal.description}
+              <div className="attr-modal-grid">
+                <div className="attr-modal-badge">
+                  <span className="attr-badge-label">Distance</span>
+                  <span className="attr-badge-value">{activeModal.distance}</span>
                 </div>
-
-                <div className="attr-modal-grid">
-                  <div className="attr-modal-badge">
-                    <span className="attr-badge-label">Distance</span>
-                    <span className="attr-badge-value">{activeModal.distance}</span>
-                  </div>
-                  <div className="attr-modal-badge">
-                    <span className="attr-badge-label">Best Time To Visit</span>
-                    <span className="attr-badge-value">{activeModal.bestTime}</span>
-                  </div>
-                  <div className="attr-modal-badge">
-                    <span className="attr-badge-label">Ideal Duration</span>
-                    <span className="attr-badge-value">{activeModal.duration}</span>
-                  </div>
+                <div className="attr-modal-badge">
+                  <span className="attr-badge-label">Best Time To Visit</span>
+                  <span className="attr-badge-value">{activeModal.bestTime}</span>
                 </div>
-
-                <div className="attr-modal-footer">
-                  <p>
-                    <strong>Additional Information:</strong> For assistance with transportation and tour guide services, please reach out to the hotel concierge.
-                  </p>
+                <div className="attr-modal-badge">
+                  <span className="attr-badge-label">Ideal Duration</span>
+                  <span className="attr-badge-value">{activeModal.duration}</span>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+              <div className="attr-modal-footer">
+                <p>
+                  <strong>Additional Information:</strong> For assistance with transportation and tour guide services, please reach out to the hotel concierge.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

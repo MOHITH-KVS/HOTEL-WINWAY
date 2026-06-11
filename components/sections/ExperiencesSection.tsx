@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Clock, Users, ArrowRight, Calendar } from 'lucide-react';
@@ -35,18 +34,13 @@ const experiences = [
 
 export default function ExperiencesSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
     <section className="section-padding bg-white" ref={ref}>
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         {/* Header */}
         <div className="text-center mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
+          <div>
             <span className="section-label">Curated Journeys</span>
             <h2 className="font-serif text-4xl sm:text-5xl font-light text-[#1A1A1A] mt-3 mb-4 leading-tight">
               Experiences &amp; Itineraries
@@ -55,18 +49,13 @@ export default function ExperiencesSection() {
               Thoughtfully curated tours that reveal the soul of Indore — from heritage trails
               to spiritual circuits
             </p>
-          </motion.div>
+          </div>
         </div>
 
         {/* Experience Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-            >
+            <div key={exp.id} className="attraction-card">
               <Link href={exp.href} className="group block">
                 <div className="grid grid-cols-1 sm:grid-cols-2 bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 h-full">
                   {/* Image */}
@@ -122,17 +111,12 @@ export default function ExperiencesSection() {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Concierge Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6 }}
-          className="mt-10 p-6 bg-[#F9F6F0] border border-[#E8DDD0] flex flex-col sm:flex-row items-start sm:items-center gap-4"
-        >
+        <div className="mt-10 p-6 bg-[#F9F6F0] border border-[#E8DDD0] flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="w-10 h-10 bg-[#C9A96E]/10 flex items-center justify-center flex-shrink-0">
             <Calendar size={18} className="text-[#C9A96E]" />
           </div>
@@ -145,7 +129,7 @@ export default function ExperiencesSection() {
               <a href="mailto:fom1@hotelwinway.com" className="text-[#C9A96E] hover:underline">fom1@hotelwinway.com</a>
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -85,19 +85,13 @@ export default function HeroSection({
       {slides.map((slide, idx) => (
         <div
           key={slide.src}
-          className="absolute inset-0 transition-opacity duration-[1000ms] ease-in-out"
-          style={{ opacity: idx === current ? 1 : 0, zIndex: idx === current ? 1 : 0 }}
-        >
-          <Image
-            src={slide.src}
-            alt={slide.alt}
-            fill
-            className="object-cover object-center"
-            priority={idx === 0}
-            sizes="100vw"
-            quality={90}
-          />
-        </div>
+          className="absolute inset-0 transition-opacity duration-[1000ms] ease-in-out parallax-bg"
+          style={{ 
+            opacity: idx === current ? 1 : 0, 
+            zIndex: idx === current ? 1 : 0,
+            backgroundImage: `url('${slide.src}')`
+          }}
+        />
       ))}
 
       <div className="absolute inset-0 z-10" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.7) 100%)' }} />

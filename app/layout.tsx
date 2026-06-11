@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import ScrollObserver from "@/components/utils/ScrollObserver";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.hotelwinway.com"),
@@ -178,6 +179,7 @@ export default function RootLayout({
         <Footer />
         <WhatsAppButton />
         <ScrollToTop />
+        <ScrollObserver />
       </body>
     </html>
   );
