@@ -28,45 +28,53 @@ export default function Header() {
   return (
     <header className="main-navbar" style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-      background: scrolled ? 'rgba(255,255,255,0.98)' : 'transparent',
+      background: scrolled ? 'rgba(255,255,255,0.98)' : 'rgba(0,0,0,0.55)',
       backdropFilter: scrolled ? 'blur(10px)' : 'none',
       boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.08)' : 'none',
       transform: hideMain ? 'translateY(-100%)' : 'translateY(0)',
       transition: 'transform 0.3s ease, background 0.4s ease, padding 0.4s ease',
-      padding: scrolled ? '0 60px' : '0 60px',
-      height: '72px',
-      display: 'flex', alignItems: 'center', justifyContent: 'space-between'
+      padding: '0 0 0 24px',
+      height: '64px',
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      flexWrap: 'nowrap', whiteSpace: 'nowrap', width: '100%', boxSizing: 'border-box'
     }}>
 
       {/* LOGO */}
       <Link href="/" style={{
         fontFamily: 'Lato, sans-serif',
-        fontSize: '20px',
-        fontWeight: '800',
-        letterSpacing: '0.3em',
+        fontSize: '14px',
+        fontWeight: '700',
+        letterSpacing: '2px',
         color: scrolled ? '#1a1a1a' : '#FFFFFF',
         textShadow: scrolled ? 'none' : '0 2px 8px rgba(0,0,0,0.4)',
         textDecoration: 'none',
         textTransform: 'uppercase',
-        transition: 'color 0.4s ease'
+        transition: 'color 0.4s ease',
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
+        lineHeight: 1
       }}>
         HOTEL WINWAY
       </Link>
 
       {/* NAV LINKS */}
-      <nav style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
+      <nav style={{ 
+        display: 'flex', alignItems: 'center', gap: '16px', 
+        flex: 1, justifyContent: 'center', listStyle: 'none', margin: 0, padding: 0 
+      }}>
 
         {/* ROOMS DROPDOWN */}
         <div style={{ position: 'relative' }}
           onMouseEnter={() => setRoomsOpen(true)}
           onMouseLeave={() => setRoomsOpen(false)}>
           <span style={{
-            fontFamily: 'Lato', fontSize: '13px', fontWeight: '700',
-            letterSpacing: '0.15em', textTransform: 'uppercase',
+            fontFamily: 'Lato', fontSize: '11px', fontWeight: '500',
+            letterSpacing: '1.5px', textTransform: 'uppercase',
             color: scrolled ? '#1a1a1a' : '#FFFFFF',
             textShadow: scrolled ? 'none' : '0 1px 6px rgba(0,0,0,0.5)',
             cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px',
-            transition: 'color 0.4s ease, text-shadow 0.4s ease'
+            transition: 'color 0.4s ease, text-shadow 0.4s ease',
+            whiteSpace: 'nowrap'
           }}>
             ROOMS & SUITES
             <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
@@ -85,10 +93,10 @@ export default function Header() {
               {[['Standard Room','/rooms/standard-room'],['Deluxe Room','/rooms/deluxe-room'],['Junior Suite','/rooms/junior-suite'],['Presidential Suite','/rooms/presidential-suite']].map(([name, href]) => (
                 <Link key={href} href={href} style={{
                   display: 'block', padding: '12px 24px',
-                  fontFamily: 'Lato', fontSize: '12px',
-                  letterSpacing: '0.08em', color: '#333333',
+                  fontFamily: 'Lato', fontSize: '11px',
+                  letterSpacing: '1px', color: '#333333',
                   textDecoration: 'none', textTransform: 'uppercase',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease', whiteSpace: 'nowrap'
                 }}
                 onMouseOver={e => { e.currentTarget.style.color = '#B8965A'; e.currentTarget.style.paddingLeft = '28px'; }}
                 onMouseOut={e => { e.currentTarget.style.color = '#333333'; e.currentTarget.style.paddingLeft = '24px'; }}>
@@ -104,12 +112,13 @@ export default function Header() {
           onMouseEnter={() => setDiningOpen(true)}
           onMouseLeave={() => setDiningOpen(false)}>
           <span style={{
-            fontFamily: 'Lato', fontSize: '13px', fontWeight: '700',
-            letterSpacing: '0.15em', textTransform: 'uppercase',
+            fontFamily: 'Lato', fontSize: '11px', fontWeight: '500',
+            letterSpacing: '1.5px', textTransform: 'uppercase',
             color: scrolled ? '#1a1a1a' : '#FFFFFF',
             textShadow: scrolled ? 'none' : '0 1px 6px rgba(0,0,0,0.5)',
             cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px',
-            transition: 'color 0.4s ease, text-shadow 0.4s ease'
+            transition: 'color 0.4s ease, text-shadow 0.4s ease',
+            whiteSpace: 'nowrap'
           }}>
             DINING
             <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
@@ -128,10 +137,10 @@ export default function Header() {
               {[['Tiffin','/dining/tiffin'],['The Deck','/dining/the-deck'],['Al Fresco','/dining/al-fresco'],['Cafe','/dining/cafe']].map(([name, href]) => (
                 <Link key={href} href={href} style={{
                   display: 'block', padding: '12px 24px',
-                  fontFamily: 'Lato', fontSize: '12px',
-                  letterSpacing: '0.08em', color: '#333333',
+                  fontFamily: 'Lato', fontSize: '11px',
+                  letterSpacing: '1px', color: '#333333',
                   textDecoration: 'none', textTransform: 'uppercase',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease', whiteSpace: 'nowrap'
                 }}
                 onMouseOver={e => { e.currentTarget.style.color = '#B8965A'; e.currentTarget.style.paddingLeft = '28px'; }}
                 onMouseOut={e => { e.currentTarget.style.color = '#333333'; e.currentTarget.style.paddingLeft = '24px'; }}>
@@ -145,11 +154,12 @@ export default function Header() {
         {/* REGULAR LINKS */}
         {[['EVENTS & BANQUET','/events'],['LOCAL ATTRACTIONS','/local-attractions'],['GALLERY','/gallery'],['CONTACT US','/contact']].map(([name, href]) => (
           <Link key={href} href={href} style={{
-            fontFamily: 'Lato', fontSize: '13px', fontWeight: '700',
-            letterSpacing: '0.15em', textTransform: 'uppercase',
+            fontFamily: 'Lato', fontSize: '11px', fontWeight: '500',
+            letterSpacing: '1.5px', textTransform: 'uppercase',
             color: scrolled ? '#1a1a1a' : '#FFFFFF',
             textShadow: scrolled ? 'none' : '0 1px 6px rgba(0,0,0,0.5)',
-            textDecoration: 'none', transition: 'color 0.4s ease, text-shadow 0.4s ease'
+            textDecoration: 'none', transition: 'color 0.4s ease, text-shadow 0.4s ease',
+            whiteSpace: 'nowrap'
           }}
           onMouseOver={e => e.currentTarget.style.color = '#B8965A'}
           onMouseOut={e => e.currentTarget.style.color = scrolled ? '#1a1a1a' : '#FFFFFF'}>
@@ -159,30 +169,33 @@ export default function Header() {
 
         {/* PHONE */}
         <a href="tel:07316611111" style={{
-          fontFamily: 'Lato', fontSize: '13px', fontWeight: '700',
-          letterSpacing: '0.08em', color: scrolled ? '#1a1a1a' : '#FFFFFF',
+          fontFamily: 'Lato', fontSize: '13px', fontWeight: '500',
+          letterSpacing: '1px', color: scrolled ? '#1a1a1a' : '#FFFFFF',
           textShadow: scrolled ? 'none' : '0 1px 6px rgba(0,0,0,0.5)',
-          textDecoration: 'none', transition: 'color 0.4s ease, text-shadow 0.4s ease'
+          textDecoration: 'none', transition: 'color 0.4s ease, text-shadow 0.4s ease',
+          whiteSpace: 'nowrap', flexShrink: 0, marginRight: '16px'
         }}>
           📞 0731-661-1111
         </a>
-
-        {/* ENQUIRE NOW BUTTON */}
-        <Link href="/contact" style={{
-          fontFamily: 'Lato', fontSize: '12px', fontWeight: '800',
-          letterSpacing: '0.2em', textTransform: 'uppercase',
-          background: '#B8965A', color: '#FFFFFF',
-          padding: '14px 28px', textDecoration: 'none',
-          border: '2px solid #B8965A', cursor: 'pointer',
-          boxShadow: '0 4px 15px rgba(184,150,90,0.5)',
-          transition: 'all 0.3s ease'
-        }}
-        onMouseOver={e => { e.currentTarget.style.background = '#FFFFFF'; e.currentTarget.style.color = '#B8965A'; }}
-        onMouseOut={e => { e.currentTarget.style.background = '#B8965A'; e.currentTarget.style.color = '#FFFFFF'; }}>
-          ENQUIRE NOW
-        </Link>
-
       </nav>
+
+      {/* ENQUIRE NOW BUTTON */}
+      <Link href="/contact" style={{
+        fontFamily: 'Lato', fontSize: '12px', fontWeight: '600',
+        letterSpacing: '2px', textTransform: 'uppercase',
+        background: '#B8965A', color: '#FFFFFF',
+        padding: '0 20px', textDecoration: 'none',
+        border: 'none', cursor: 'pointer',
+        boxShadow: 'none', borderRadius: 0,
+        transition: 'all 0.3s ease',
+        whiteSpace: 'nowrap', flexShrink: 0, height: '100%',
+        display: 'flex', alignItems: 'center'
+      }}
+      onMouseOver={e => { e.currentTarget.style.background = scrolled ? '#1a1a1a' : '#FFFFFF'; e.currentTarget.style.color = scrolled ? '#FFFFFF' : '#B8965A'; }}
+      onMouseOut={e => { e.currentTarget.style.background = '#B8965A'; e.currentTarget.style.color = '#FFFFFF'; }}>
+        ENQUIRE NOW
+      </Link>
+
     </header>
   );
 }

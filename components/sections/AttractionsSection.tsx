@@ -1,14 +1,13 @@
 'use client';
 
-import { useRef, useCallback, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import useEmblaCarousel from 'embla-carousel-react';
 
 const attractions = [
   {
     id: 'lal-bagh-palace',
     name: 'Lal Bagh Palace',
-    distance: '4.7 km',
+    distance: '4.7 KM',
     badge: 'HERITAGE',
     bestTime: 'Throughout the year',
     duration: '1 hour',
@@ -32,7 +31,7 @@ const attractions = [
   {
     id: 'chappan-dukan',
     name: 'Chappan Dukan',
-    distance: '2.8 km',
+    distance: '2.8 KM',
     badge: 'MUST VISIT',
     bestTime: 'Evening',
     duration: '1 hour',
@@ -47,8 +46,8 @@ const attractions = [
   {
     id: 'rajwada-palace',
     name: 'Rajwada Palace',
-    distance: '2.5 km',
-    badge: 'POPULAR',
+    distance: '2.5 KM',
+    badge: 'HERITAGE',
     bestTime: 'Throughout the year',
     duration: '45–60 mins',
     teaser: "Historic seven-storey palace showcasing Maratha, Mughal and French architectural influences.",
@@ -77,8 +76,8 @@ const attractions = [
   {
     id: 'sarafa-bazaar',
     name: 'Sarafa Bazaar',
-    distance: '2.6 km',
-    badge: 'LOCAL FAVORITE',
+    distance: '2.6 KM',
+    badge: 'FOOD',
     bestTime: 'Night',
     duration: '1–2 hours',
     teaser: "Iconic night food market famous for bhutte ka kees, dahi bada, rabdi malpua and Indore street food culture.",
@@ -101,33 +100,10 @@ const attractions = [
 export default function AttractionsCarousel() {
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { once: true, margin: '-80px' });
-
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: 'start',
-    loop: false,
-    dragFree: false,
-    containScroll: 'trimSnaps'
-  });
-
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(true);
   const [activeModal, setActiveModal] = useState<typeof attractions[0] | null>(null);
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on('select', onSelect);
-    emblaApi.on('reInit', onSelect);
-  }, [emblaApi, onSelect]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -145,12 +121,29 @@ export default function AttractionsCarousel() {
     };
   }, [activeModal]);
 
+  const slideRight = () => {
+    if (isAnimating || currentSlide >= attractions.length - 2) return;
+    setIsAnimating(true);
+    setCurrentSlide(prev => prev + 1);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const slideLeft = () => {
+    if (isAnimating || currentSlide <= 0) return;
+    setIsAnimating(true);
+    setCurrentSlide(prev => prev - 1);
+    setTimeout(() => setIsAnimating(false), 500);
+  };
+
   return (
     <>
       <style>{`
-        .attr-section {
-          background-color: #fcfbf9;
-          padding: 100px 0 60px 0;
+        .local-attractions-section {
+          background-color: #f2ece4;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23e6dac3' fill-opacity='0.4'%3E%3Cpath d='M50 0l50 50-50 50L0 50z'/%3E%3Cpath d='M50 15l35 35-35 35-35-35z' fill='%23f5f0e8'/%3E%3Ccircle cx='50' cy='50' r='12'/%3E%3C/g%3E%3C/svg%3E");
+          background-repeat: repeat;
+          background-size: 300px 300px;
+          padding: 60px 0 80px;
           font-family: 'Lato', sans-serif;
           position: relative;
           overflow: hidden;
@@ -158,261 +151,258 @@ export default function AttractionsCarousel() {
 
         .attr-header {
           text-align: center;
-          margin-bottom: 70px;
+          margin-bottom: 24px;
+          padding-bottom: 0;
           display: flex;
           flex-direction: column;
           align-items: center;
         }
 
         .attr-label {
-          color: #8B5E3C;
+          color: #b8935a;
           font-size: 13px;
-          letter-spacing: 0.15em;
+          letter-spacing: 3px;
           text-transform: uppercase;
           display: block;
-          margin-bottom: 16px;
-          font-weight: 700;
+          margin-bottom: 8px;
+          font-weight: 500;
         }
 
         .attr-title {
           font-family: 'Libre Baskerville', serif;
-          font-size: 38px;
-          font-weight: 700;
+          font-size: 42px;
+          font-weight: 800;
           text-transform: uppercase;
           color: #1a1a1a;
-          letter-spacing: 2px;
-          margin: 0;
+          letter-spacing: 4px;
+          margin: 0 0 24px 0;
         }
 
-        .attr-carousel-wrapper {
-          position: relative;
+        /* CAROUSEL WRAPPER */
+        .attractions-carousel-wrapper {
           width: 100%;
-        }
-
-        .attr-embla {
           overflow: hidden;
-          padding: 0 5vw;
-          cursor: grab;
-        }
-        
-        .attr-embla:active {
-          cursor: grabbing;
+          position: relative;
         }
 
-        .attr-embla__container {
+        .attractions-carousel-track {
           display: flex;
-          gap: 40px;
-          padding-bottom: 30px; 
-          padding-top: 10px;
+          flex-direction: row;
+          gap: 28px;
+          transition: transform 0.5s ease;
+          padding: 20px 100px;
+          will-change: transform;
         }
 
-        .attr-embla__slide {
-          flex: 0 0 35vw;
-          min-width: 0;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .attr-promo-card {
+        /* EXACT CARD STRUCTURE */
+        .attraction-card {
+          background: #ffffff;          /* white by default */
+          border: 1.5px solid #c9c0b5;
+          border-radius: 0;
+          overflow: hidden;
           display: flex;
           flex-direction: column;
+          padding: 16px;                /* this padding is KEY — brown shows around image on hover */
+          gap: 14px;
+          flex: 0 0 calc(40vw);
+          position: relative;
+          box-sizing: border-box;
+          transition: background-color 0.35s ease, border-color 0.35s ease;
+          cursor: pointer;
+        }
+
+        /* ========== HOVER STATE ========== */
+
+        /* Entire card background turns brown — image padding area + content area all brown */
+        .attraction-card:hover {
+          background: #6b3f18;          /* whole card = brown */
+          border-color: #6b3f18;
+        }
+
+        /* Subtle image zoom — image stays fully clear */
+        .attraction-card:hover .card-image-wrapper img {
+          transform: scale(1.04);
+        }
+
+        /* Text turns white */
+        .attraction-card:hover .card-title {
+          color: #ffffff;
+        }
+
+        .attraction-card:hover .card-description {
+          color: #f0dfc8;
+        }
+
+        .attraction-card:hover .card-distance {
+          color: #ddc9aa;
+        }
+
+        .attraction-card:hover .card-distance::before {
+          color: #f5c97a;
+        }
+
+        /* VIEW DETAILS → white */
+        .attraction-card:hover .btn-view-details {
+          color: #ffffff;
+          text-decoration-color: #ffffff;
+        }
+
+        /* ENQUIRE NOW inverts */
+        .attraction-card:hover .btn-enquire-now {
           background: #ffffff;
-          border: 1px solid #d4cfc5; 
-          height: 100%;
-          transition: all 300ms ease;
-          position: relative;
+          color: #6b3f18;
         }
 
-        .attr-promo-card:hover {
-          transform: translateY(-6px);
-          border-color: #8B5E3C;
-          box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-        }
-
-        .attr-promo-img-wrap {
+        /* IMAGE — FLUSH TO TOP, NO GAP */
+        .card-image-wrapper {
           width: 100%;
-          height: 380px;
-          position: relative;
+          height: 280px;
           overflow: hidden;
+          flex-shrink: 0;
+          position: relative;
         }
 
-        .attr-promo-img {
+        .card-image-wrapper img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: center;
           display: block;
-          transition: transform 0.6s ease;
+          transition: transform 0.4s ease;
         }
 
-        .attr-promo-card:hover .attr-promo-img {
-          transform: scale(1.03);
-        }
-
-        .attr-promo-badge {
+        /* CATEGORY TAG — INSIDE image wrapper, top-right corner */
+        .category-tag {
           position: absolute;
-          top: 20px;
-          right: 20px;
-          background: #1a1a1a;
-          color: #ffffff;
+          top: 0;
+          right: 0;
+          background: #111;
+          color: #fff;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 2.5px;
+          text-transform: uppercase;
+          padding: 8px 14px;
+          z-index: 2;
+        }
+
+        /* CONTENT BOX — tight padding, white, directly below image */
+        .card-content {
+          background: transparent;      /* TRANSPARENT — inherits card background */
+          padding: 0;                   /* no extra padding — card handles it */
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          transition: none;             /* no separate transition needed */
+        }
+
+        /* TITLE */
+        .card-title {
+          font-size: 17px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: #111;
+          margin: 0 0 10px 0;
+          transition: color 0.35s ease;
+        }
+
+        /* DESCRIPTION */
+        .card-description {
+          font-size: 14px;
+          color: #666;
+          line-height: 1.6;
+          margin: 0 0 14px 0;
+          transition: color 0.35s ease;
+        }
+
+        /* DISTANCE */
+        .card-distance {
+          font-size: 13px;
+          color: #888;
+          margin: 0 0 18px 0;
+          transition: color 0.35s ease;
+        }
+        .card-distance::before {
+          content: "• ";
+          color: #b8935a;
+          transition: color 0.35s ease;
+        }
+
+        /* BUTTONS ROW */
+        .card-buttons {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: auto;
+        }
+
+        .btn-view-details {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          color: #111;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          transition: color 0.35s ease, text-decoration-color 0.35s ease;
+        }
+
+        .btn-enquire-now {
+          background: #5c3d1e;
+          color: #fff;
           font-size: 10px;
           font-weight: 700;
           letter-spacing: 2px;
           text-transform: uppercase;
-          padding: 8px 16px;
-          z-index: 2;
-        }
-
-        .attr-promo-content {
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-          padding: 32px 28px 28px 28px;
-        }
-
-        .attr-promo-name {
-          font-family: 'Libre Baskerville', serif;
-          font-size: 24px;
-          font-weight: 700;
-          text-transform: uppercase;
-          color: #1a1a1a;
-          letter-spacing: 1px;
-          line-height: 1.3;
-          margin-bottom: 12px;
-        }
-
-        .attr-promo-desc {
-          font-size: 14.5px;
-          color: #555555;
-          line-height: 1.7;
-          margin-bottom: 24px;
-        }
-
-        .attr-promo-distance {
-          font-size: 11px;
-          color: #888;
-          text-transform: uppercase;
-          letter-spacing: 2px;
-          font-weight: 700;
-          margin-bottom: 32px;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-
-        .attr-promo-distance::before {
-          content: '';
-          display: inline-block;
-          width: 4px;
-          height: 4px;
-          background: #8B5E3C;
-          border-radius: 50%;
-        }
-
-        .attr-cta-row {
-          margin-top: auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding-top: 10px;
-          min-height: 44px; /* Ensure uniform footer height across all cards */
-        }
-
-        .attr-promo-btn {
-          background: transparent;
-          color: #1a1a1a;
+          padding: 13px 18px;
           border: none;
-          padding: 0;
-          font-size: 11px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          font-weight: 600;
+          border-radius: 0;
           cursor: pointer;
-          position: relative;
+          text-decoration: none;
           display: inline-block;
-          transition: color 0.3s ease;
+          transition: background-color 0.35s ease, color 0.35s ease;
         }
 
-        .attr-promo-btn::after {
-          content: '';
+        /* CAROUSEL CONTROLS */
+        .carousel-arrow {
           position: absolute;
-          width: 100%;
-          transform: scaleX(1);
-          height: 1px;
-          bottom: -4px;
-          left: 0;
-          background-color: currentColor;
-          transform-origin: bottom right;
-          transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
-        }
-
-        .attr-promo-btn:hover::after {
-          transform: scaleX(0);
-          transform-origin: bottom left;
-        }
-
-        .attr-promo-btn:hover {
-          color: #8B5E3C;
-        }
-
-        .attr-enquire-btn {
-          background: #8B5E3C;
-          color: #ffffff;
-          border: none;
-          padding: 14px 26px;
-          font-size: 11px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          display: inline-block;
-        }
-
-        .attr-enquire-btn:hover {
-          background: #6a462c;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(139, 94, 60, 0.25);
-        }
-
-        /* Arrows */
-        .attr-arrow {
-          position: absolute;
-          top: 190px; 
+          top: 50%;
           transform: translateY(-50%);
-          width: 54px;
-          height: 54px;
-          background: #ffffff;
-          border: 1px solid #e0ddd8;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
+          background: rgba(255,255,255,0.95);
+          border: 1px solid #e0ddd8;
+          cursor: pointer;
+          font-size: 20px;
+          color: #111;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          z-index: 10;
           display: flex;
           align-items: center;
           justify-content: center;
-          cursor: pointer;
-          color: #1a1a1a;
-          z-index: 10;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+          transition: all 0.2s ease;
         }
 
-        .attr-arrow:hover:not(:disabled) {
-          background: #1a1a1a;
+        .carousel-arrow:hover:not(:disabled) {
+          background: #111;
           color: #ffffff;
-          border-color: #1a1a1a;
           transform: translateY(-50%) scale(1.05);
+          box-shadow: 0 6px 16px rgba(0,0,0,0.12);
         }
 
-        .attr-arrow:disabled {
-          opacity: 0;
-          pointer-events: none;
+        .carousel-arrow:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
         }
 
-        .attr-arrow-prev {
-          left: calc(5vw - 27px);
-        }
-
-        .attr-arrow-next {
-          right: calc(5vw - 27px);
-        }
+        .carousel-arrow-left  { left: 24px; }
+        .carousel-arrow-right { right: 24px; }
 
         /* --- Overlay Base --- */
         .attr-modal-overlay {
@@ -453,7 +443,7 @@ export default function AttractionsCarousel() {
           cursor: pointer;
           z-index: 10;
           box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-          color: #1a1a1a;
+          color: #111;
           transition: transform 0.3s ease;
         }
 
@@ -483,7 +473,7 @@ export default function AttractionsCarousel() {
           font-size: 32px;
           font-weight: 700;
           text-transform: uppercase;
-          color: #1a1a1a;
+          color: #111;
           letter-spacing: 1px;
           margin-bottom: 24px;
         }
@@ -522,13 +512,14 @@ export default function AttractionsCarousel() {
         .attr-badge-value {
           font-size: 16px;
           font-weight: 500;
-          color: #1a1a1a;
+          color: #111;
         }
 
         .attr-modal-footer {
-          background: #fcfbf9;
+          background: #ffffff;
           padding: 24px 32px;
           border-left: 4px solid #8B5E3C;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
 
         .attr-modal-footer p {
@@ -540,34 +531,22 @@ export default function AttractionsCarousel() {
         }
 
         /* Responsive Breakpoints */
-        @media (max-width: 1100px) {
-          .attr-embla__slide { flex: 0 0 45vw; }
-          .attr-arrow { top: 190px; }
+        @media (max-width: 1024px) {
+          .attraction-card { flex: 0 0 calc(60vw); }
+          .attractions-carousel-track { padding: 20px 40px; }
         }
         
         @media (max-width: 768px) {
-          .attr-embla__slide { flex: 0 0 85vw; }
-          .attr-promo-img-wrap { height: 300px; }
-          .attr-arrow { display: none; }
-          .attr-embla__container { gap: 20px; }
-          
+          .attraction-card { flex: 0 0 calc(85vw); }
+          .attractions-carousel-track { padding: 20px; }
+          .carousel-arrow { display: none; }
           .attr-modal-body { padding: 32px 24px; }
           .attr-modal-grid { grid-template-columns: 1fr; gap: 20px; }
           .attr-modal-hero { height: 260px; }
-          
-          .attr-cta-row {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 16px;
-          }
-          
-          .attr-enquire-btn {
-            text-align: center;
-          }
         }
       `}</style>
 
-      <section id="attractions" ref={sectionRef} className="attr-section">
+      <section id="attractions" ref={sectionRef} className="local-attractions-section">
         
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -583,59 +562,58 @@ export default function AttractionsCarousel() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="attr-carousel-wrapper"
+          className="attractions-carousel-wrapper"
         >
           <button 
-            className="attr-arrow attr-arrow-prev" 
-            onClick={scrollPrev} 
-            disabled={!canScrollPrev}
+            className="carousel-arrow carousel-arrow-left" 
+            onClick={slideLeft}
+            disabled={currentSlide === 0}
             suppressHydrationWarning
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            &#8592;
           </button>
 
-          <div className="attr-embla" ref={emblaRef}>
-            <div className="attr-embla__container">
-              {attractions.map((attraction) => (
-                <div className="attr-embla__slide" key={attraction.id}>
-                  <div className="attr-promo-card">
-                    <div className="attr-promo-img-wrap">
-                      <img src={attraction.image} alt={attraction.name} className="attr-promo-img" />
-                      <span className="attr-promo-badge">{attraction.badge}</span>
-                    </div>
-                    
-                    <div className="attr-promo-content">
-                      <h3 className="attr-promo-name">{attraction.name}</h3>
-                      <p className="attr-promo-desc">{attraction.teaser}</p>
-                      
-                      <span className="attr-promo-distance">{attraction.distance}</span>
-                      
-                      <div className="attr-cta-row">
-                        <button 
-                          className="attr-promo-btn"
-                          onClick={() => setActiveModal(attraction)}
-                          suppressHydrationWarning
-                        >
-                          View Details &#8594;
-                        </button>
-                        <a href="#contact" className="attr-enquire-btn">
-                          Enquire Now
-                        </a>
-                      </div>
-                    </div>
+          <div 
+            className="attractions-carousel-track"
+            style={{ transform: `translateX(calc(-${currentSlide} * (40vw + 28px)))` }}
+          >
+            {attractions.map((attraction) => (
+              <div className="attraction-card" key={attraction.id}>
+                <div className="card-image-wrapper">
+                  <img src={attraction.image} alt={attraction.name} />
+                  {attraction.badge && <span className="category-tag">{attraction.badge}</span>}
+                </div>
+                
+                <div className="card-content">
+                  <h3 className="card-title">{attraction.name}</h3>
+                  <p className="card-description">{attraction.teaser}</p>
+                  
+                  <div className="card-distance">{attraction.distance}</div>
+                  
+                  <div className="card-buttons">
+                    <button 
+                      className="btn-view-details"
+                      onClick={() => setActiveModal(attraction)}
+                      suppressHydrationWarning
+                    >
+                      View Details &#8594;
+                    </button>
+                    <a href="#contact" className="btn-enquire-now">
+                      Enquire Now
+                    </a>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
           <button 
-            className="attr-arrow attr-arrow-next" 
-            onClick={scrollNext} 
-            disabled={!canScrollNext}
+            className="carousel-arrow carousel-arrow-right" 
+            onClick={slideRight}
+            disabled={currentSlide >= attractions.length - 2}
             suppressHydrationWarning
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            &#8594;
           </button>
         </motion.div>
       </section>
