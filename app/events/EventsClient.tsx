@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import EventsGallery from '@/components/sections/EventsGallery';
 
 export default function EventsClient() {
   return (
@@ -227,19 +228,7 @@ export default function EventsClient() {
       </section>
 
       {/* SECTION 3 - IMAGE GALLERY GRID */}
-      <section style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0' }}>
-        {['bh2.jpeg','bh3.jpeg','bh4.jpeg','bh5.jpeg','bh6.jpeg','bh7.jpeg'].map((img) => (
-          <div key={img} style={{ height: '380px', overflow: 'hidden', position: 'relative' }}>
-            <img
-              src={`/images/events/${img}`}
-              alt="Banquet Hall"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease', display: 'block' }}
-              onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.05)')}
-              onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
-            />
-          </div>
-        ))}
-      </section>
+      <EventsGallery />
 
       {/* SECTION 4 - CAPACITY TABLE */}
       <section className="events-capacity" style={{

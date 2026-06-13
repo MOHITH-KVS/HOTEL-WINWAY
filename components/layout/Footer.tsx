@@ -231,14 +231,24 @@ export default function Footer() {
             </div>
 
             <div className="footer-column">
-              <h4>EXPLORE</h4>
+              <h4>ROOMS &amp; SUITES</h4>
               <ul className="footer-links">
-                <li><Link href="/rooms">Rooms &amp; Suites</Link></li>
-                <li><Link href="/dining">Dining</Link></li>
-                <li><Link href="/events">Events &amp; Banquet</Link></li>
-                <li><Link href="/wellness">Wellness</Link></li>
-                <li><Link href="/gallery">Gallery</Link></li>
-                <li><Link href="/local-attractions">Local Attractions</Link></li>
+                <li><Link href="/rooms/standard-room">Standard Room</Link></li>
+                <li><Link href="/rooms/deluxe-room">Deluxe Room</Link></li>
+                <li><Link href="/rooms/junior-suite">Junior Suite</Link></li>
+                <li><Link href="/rooms/presidential-suite">Presidential Suite</Link></li>
+                <li><Link href="/rooms">View All Rooms</Link></li>
+              </ul>
+            </div>
+
+            <div className="footer-column">
+              <h4>DINING</h4>
+              <ul className="footer-links">
+                <li><Link href="/dining/tiffin">Tiffin (Fine Dining)</Link></li>
+                <li><Link href="/dining/the-deck">The Deck (Rooftop)</Link></li>
+                <li><Link href="/dining/al-fresco">Al Fresco (Poolside)</Link></li>
+                <li><Link href="/dining/cafe">Winway Cafe</Link></li>
+                <li><Link href="/dining">View All Dining</Link></li>
               </ul>
             </div>
 
@@ -246,20 +256,11 @@ export default function Footer() {
               <h4>QUICK LINKS</h4>
               <ul className="footer-links">
                 <li><Link href="/about">About Us</Link></li>
+                <li><Link href="/events">Events &amp; Banquet</Link></li>
+                <li><Link href="/local-attractions">Local Attractions</Link></li>
+                <li><Link href="/gallery">Gallery</Link></li>
                 <li><Link href="/contact">Contact Us</Link></li>
-                <li><Link href="/privacy-policy">Privacy Policy</Link></li>
-                <li><Link href="/terms-and-conditions">Terms &amp; Conditions</Link></li>
-                <li><Link href="/cancellation-policy">Cancellation Policy</Link></li>
-                <li><Link href="/sitemap">Sitemap</Link></li>
               </ul>
-            </div>
-
-            <div className="footer-column">
-              <h4>BOOK YOUR STAY</h4>
-              <p className="footer-book-text">
-                Plan your unforgettable stay at Hotel Winway and discover the true essence of Indore.
-              </p>
-              <Link href="/contact" className="footer-btn">ENQUIRE NOW</Link>
             </div>
           </div>
         </div>
