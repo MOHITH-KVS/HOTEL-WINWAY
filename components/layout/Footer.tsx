@@ -6,7 +6,7 @@ export default function Footer() {
     <footer style={{ background: '#1C1C1C', color: '#FFFFFF', fontFamily: 'Lato, sans-serif' }}>
 
       {/* MAIN FOOTER */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '70px 60px 50px', display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: '60px' }}>
+      <div className="footer-grid" style={{ maxWidth: '1200px', margin: '0 auto', padding: '70px 60px 50px', display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: '60px' }}>
 
         {/* COL 1 — Brand */}
         <div>
@@ -128,7 +128,7 @@ export default function Footer() {
       </div>
 
       {/* BOTTOM BAR */}
-      <div style={{ borderTop: '1px solid #2C2C2C', maxWidth: '1200px', margin: '0 auto', padding: '20px 60px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="footer-bottom" style={{ borderTop: '1px solid #2C2C2C', maxWidth: '1200px', margin: '0 auto', padding: '20px 60px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontSize: '12px', color: '#555555', letterSpacing: '0.04em' }}>
           © 2026 Hotel Winway. All Rights Reserved.
         </span>
@@ -139,6 +139,15 @@ export default function Footer() {
         </div>
       </div>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; padding: 40px 24px !important; }
+          .footer-bottom { flex-direction: column !important; gap: 12px !important; text-align: center !important; padding: 16px 24px !important; }
+        }
+        @media (max-width: 480px) {
+          .footer-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </footer>
   );
 }

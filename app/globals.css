@@ -669,3 +669,63 @@ img {
     background-attachment: scroll;
   }
 }
+
+/* ── GLOBAL RESPONSIVE ── */
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
+
+@media (max-width: 768px) {
+  /* Hero text */
+  h1 { font-size: 36px !important; }
+  h2 { font-size: 24px !important; }
+
+  /* Grids → single column */
+  [style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr 1fr !important; }
+  [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: 1.6fr 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: 1fr 1px 1fr"] { grid-template-columns: 1fr !important; }
+
+  /* Padding */
+  [style*="padding: '0 60px'"] { padding: 0 20px !important; }
+  [style*="padding: '80px 0'"] { padding: 40px 0 !important; }
+
+  /* Footer */
+  footer [style*="max-width: '1200px'"] { padding: 40px 20px !important; }
+
+  /* Hero height */
+  [style*="height: '100vh'"] { height: 80vh !important; }
+  [style*="height: '85vh'"] { height: 70vh !important; }
+
+  /* Room cards */
+  [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: 1fr !important; }
+
+  /* Amenities table */
+  [style*="grid-template-columns: '1fr 1px 1fr'"] { grid-template-columns: 1fr !important; }
+
+  /* Contact form */
+  [style*="grid-template-columns: '1fr 1fr'"] { grid-template-columns: 1fr !important; }
+
+  /* Gallery grid */
+  [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr 1fr !important; }
+
+  /* Dining cards */
+  [style*="grid-template-columns: '1fr 1fr 1fr'"] { grid-template-columns: 1fr !important; }
+
+  /* Hero title */
+  [style*="font-size: '64px'"] { font-size: 32px !important; }
+  [style*="font-size: '72px'"] { font-size: 32px !important; }
+
+  /* Two column layouts */
+  [style*="grid-template-columns: '1fr 1fr'"] { grid-template-columns: 1fr !important; }
+
+  /* Welcome section image + text */
+  [style*="gridTemplateColumns: '1fr 1fr'"] { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 28px !important; }
+  h2 { font-size: 20px !important; }
+  [style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  [style*="padding: '80px 60px'"] { padding: 30px 16px !important; }
+}
