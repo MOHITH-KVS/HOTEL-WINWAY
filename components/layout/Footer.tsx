@@ -1,283 +1,107 @@
 'use client';
-
 import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <>
-      <style>{`
-        .site-footer {
-          background: #1a1a1a;
-          color: #ccc;
-          padding: 60px 0 0 0;
-          box-sizing: border-box;
-          width: 100%;
-          overflow-x: hidden;
-          font-family: var(--font-sans);
-        }
+    <footer style={{ background: '#1C1C1C', color: '#FFFFFF', fontFamily: 'Lato, sans-serif' }}>
 
-        .footer-container {
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 0 60px;
-        }
+      {/* MAIN FOOTER */}
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '70px 60px 50px', display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: '60px' }}>
 
-        .footer-main {
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1.5fr;
-          gap: 60px;
-          padding-bottom: 60px;
-        }
-
-        .footer-brand .footer-logo {
-          font-size: 22px;
-          letter-spacing: 0.2em;
-          color: #fff;
-          margin-bottom: 24px;
-          font-weight: 700;
-        }
-
-        .footer-brand-desc {
-          font-size: 14px;
-          line-height: 1.8;
-          color: #aaa;
-          margin-bottom: 24px;
-          max-width: 300px;
-        }
-
-        .footer-contact {
-          font-size: 14px;
-          line-height: 1.8;
-          color: #aaa;
-          margin-bottom: 24px;
-        }
-
-        .footer-contact a {
-          color: #aaa;
-          text-decoration: none;
-          transition: color 0.3s;
-        }
-
-        .footer-contact a:hover {
-          color: #C9A030;
-        }
-
-        .footer-socials {
-          display: flex;
-          gap: 16px;
-        }
-
-        .social-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 36px;
-          height: 36px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 50%;
-          color: #fff;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          font-size: 14px;
-        }
-
-        .social-icon:hover {
-          background: #C9A030;
-          border-color: #C9A030;
-          color: #fff;
-          transform: translateY(-2px);
-        }
-
-        .footer-column h4 {
-          font-size: 13px;
-          letter-spacing: 0.2em;
-          color: #fff;
-          text-transform: uppercase;
-          margin-bottom: 30px;
-          font-weight: 600;
-        }
-
-        .footer-links {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-
-        .footer-links li {
-          margin-bottom: 16px;
-        }
-
-        .footer-links a {
-          font-size: 14px;
-          color: #aaa;
-          text-decoration: none;
-          transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-          color: #C9A030;
-        }
-
-        .footer-book-text {
-          font-size: 14px;
-          color: #aaa;
-          margin-bottom: 24px;
-          line-height: 1.6;
-        }
-
-        .footer-btn {
-          display: inline-block;
-          background: #C9A030;
-          color: #fff;
-          padding: 14px 32px;
-          font-size: 13px;
-          font-weight: 600;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          text-decoration: none;
-          transition: background 0.3s;
-        }
-
-        .footer-btn:hover {
-          background: #a88526;
-        }
-
-        .footer-bottom {
-          background: #111;
-          padding: 24px 0;
-          border-top: 1px solid #222;
-        }
-
-        .footer-bottom-container {
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 0 60px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .footer-copyright,
-        .footer-bottom-links {
-          font-size: 13px;
-          color: #888;
-        }
-
-        .footer-bottom-links a {
-          color: #888;
-          text-decoration: none;
-          transition: color 0.3s;
-        }
-
-        .footer-bottom-links a:hover {
-          color: #C9A030;
-        }
-
-        .footer-bottom-links span {
-          margin: 0 12px;
-          color: #444;
-        }
-
-        @media (max-width: 1024px) {
-          .footer-main {
-            grid-template-columns: 1fr 1fr;
-            gap: 60px 40px;
-          }
-          .footer-container, .footer-bottom-container {
-            padding: 0 40px;
-          }
-        }
-
-        @media (max-width: 640px) {
-          .footer-main {
-            grid-template-columns: 1fr;
-            gap: 50px;
-          }
-          .footer-container, .footer-bottom-container {
-            padding: 0 24px;
-          }
-          .site-footer {
-            padding-top: 60px;
-          }
-          .footer-bottom-container {
-            flex-direction: column;
-            gap: 16px;
-            text-align: center;
-          }
-        }
-      `}</style>
-      <footer className="site-footer">
-        <div className="footer-container">
-          
-          <div className="footer-main">
-            <div className="footer-brand">
-              <h3 className="footer-logo">HOTEL WINWAY</h3>
-              <p className="footer-brand-desc">
-                Experience the perfect blend of modern luxury and traditional Malwa hospitality in the heart of Indore.
-              </p>
-              <div className="footer-contact">
-                <p>R.N.T. Marg, Indore, Madhya Pradesh<br/>India — 452 001</p>
-                <p style={{ marginTop: '12px' }}>
-                  <a href="tel:+917316611111">&#9990; 0731-661-1111</a><br/>
-                  <a href="mailto:fom1@hotelwinway.com">&#9993; fom1@hotelwinway.com</a>
-                </p>
-              </div>
-              <div className="footer-socials">
-                <a href="#" className="social-icon" aria-label="Instagram">IG</a>
-                <a href="#" className="social-icon" aria-label="Facebook">FB</a>
-                <a href="#" className="social-icon" aria-label="LinkedIn">IN</a>
-                <a href="#" className="social-icon" aria-label="YouTube">YT</a>
-              </div>
-            </div>
-
-            <div className="footer-column">
-              <h4>ROOMS &amp; SUITES</h4>
-              <ul className="footer-links">
-                <li><Link href="/rooms/standard-room">Standard Room</Link></li>
-                <li><Link href="/rooms/deluxe-room">Deluxe Room</Link></li>
-                <li><Link href="/rooms/junior-suite">Junior Suite</Link></li>
-                <li><Link href="/rooms/presidential-suite">Presidential Suite</Link></li>
-                <li><Link href="/rooms">View All Rooms</Link></li>
-              </ul>
-            </div>
-
-            <div className="footer-column">
-              <h4>DINING</h4>
-              <ul className="footer-links">
-                <li><Link href="/dining/tiffin">Tiffin (Fine Dining)</Link></li>
-                <li><Link href="/dining/the-deck">The Deck (Rooftop)</Link></li>
-                <li><Link href="/dining/al-fresco">Al Fresco (Poolside)</Link></li>
-                <li><Link href="/dining/cafe">Winway Cafe</Link></li>
-                <li><Link href="/dining">View All Dining</Link></li>
-              </ul>
-            </div>
-
-            <div className="footer-column">
-              <h4>QUICK LINKS</h4>
-              <ul className="footer-links">
-                <li><Link href="/about">About Us</Link></li>
-                <li><Link href="/events">Events &amp; Banquet</Link></li>
-                <li><Link href="/local-attractions">Local Attractions</Link></li>
-                <li><Link href="/gallery">Gallery</Link></li>
-                <li><Link href="/contact">Contact Us</Link></li>
-              </ul>
-            </div>
+        {/* COL 1 — Brand */}
+        <div>
+          <h3 style={{ fontFamily: 'Lato, sans-serif', fontSize: '16px', fontWeight: '700', letterSpacing: '0.25em', color: '#FFFFFF', marginBottom: '16px', marginTop: '0' }}>
+            HOTEL WINWAY
+          </h3>
+          <p style={{ fontSize: '13px', color: '#999999', lineHeight: '1.9', marginBottom: '24px', maxWidth: '240px' }}>
+            Experience the perfect blend of modern luxury and traditional Malwa hospitality in the heart of Indore.
+          </p>
+          <p style={{ fontSize: '13px', color: '#999999', lineHeight: '1.9', marginBottom: '6px' }}>
+            R.N.T. Marg, Indore, Madhya Pradesh
+          </p>
+          <p style={{ fontSize: '13px', color: '#999999', lineHeight: '1.9', marginBottom: '6px' }}>
+            India — 452 001
+          </p>
+          <p style={{ fontSize: '13px', color: '#999999', lineHeight: '1.9', marginBottom: '6px' }}>
+            ✆ 0731-661-1111
+          </p>
+          <p style={{ fontSize: '13px', color: '#999999', lineHeight: '1.9', marginBottom: '24px' }}>
+            ✉ fom1@hotelwinway.com
+          </p>
+          {/* Social */}
+          <div style={{ display: 'flex', gap: '10px' }}>
+            {[['FB','#'],['IG','#'],['TW','#'],['YT','#']].map(([label, href]) => (
+              <a key={label} href={href} style={{ width: '34px', height: '34px', borderRadius: '50%', border: '1px solid #444', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999999', fontSize: '10px', fontWeight: '700', textDecoration: 'none', letterSpacing: '0.05em', transition: 'all 0.3s ease' }}
+                onMouseOver={e => { e.currentTarget.style.borderColor = '#B8965A'; e.currentTarget.style.color = '#B8965A'; }}
+                onMouseOut={e => { e.currentTarget.style.borderColor = '#444'; e.currentTarget.style.color = '#999999'; }}>
+                {label}
+              </a>
+            ))}
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <div className="footer-bottom-container">
-            <div className="footer-copyright">
-              © 2026 Hotel Winway. All Rights Reserved.
+        {/* COL 2 — Rooms */}
+        <div>
+          <h4 style={{ fontFamily: 'Lato', fontSize: '11px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '0.2em', marginBottom: '24px', marginTop: '0', textTransform: 'uppercase' }}>
+            ROOMS & SUITES
+          </h4>
+          {[['Standard Room','/rooms/standard-room'],['Deluxe Room','/rooms/deluxe-room'],['Junior Suite','/rooms/junior-suite'],['Presidential Suite','/rooms/presidential-suite']].map(([name, href]) => (
+            <div key={name} style={{ marginBottom: '14px' }}>
+              <Link href={href} style={{ fontSize: '13px', color: '#999999', textDecoration: 'none', transition: 'color 0.3s ease' }}
+                onMouseOver={e => e.currentTarget.style.color = '#B8965A'}
+                onMouseOut={e => e.currentTarget.style.color = '#999999'}>
+                {name}
+              </Link>
             </div>
-            <div className="footer-bottom-links">
-              <Link href="/privacy-policy">Privacy Policy</Link>
-              <span>|</span>
-              <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
-            </div>
-          </div>
+          ))}
         </div>
-      </footer>
-    </>
+
+        {/* COL 3 — Dining */}
+        <div>
+          <h4 style={{ fontFamily: 'Lato', fontSize: '11px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '0.2em', marginBottom: '24px', marginTop: '0', textTransform: 'uppercase' }}>
+            DINING
+          </h4>
+          {[['Tiffin Restaurant','/dining/tiffin'],['The Deck','/dining/the-deck'],['Al Fresco','/dining/al-fresco'],['Cafe','/dining/cafe'],['Events & Banquet','/events']].map(([name, href]) => (
+            <div key={name} style={{ marginBottom: '14px' }}>
+              <Link href={href} style={{ fontSize: '13px', color: '#999999', textDecoration: 'none', transition: 'color 0.3s ease' }}
+                onMouseOver={e => e.currentTarget.style.color = '#B8965A'}
+                onMouseOut={e => e.currentTarget.style.color = '#999999'}>
+                {name}
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* COL 4 — Quick Links */}
+        <div>
+          <h4 style={{ fontFamily: 'Lato', fontSize: '11px', fontWeight: '700', color: '#FFFFFF', letterSpacing: '0.2em', marginBottom: '24px', marginTop: '0', textTransform: 'uppercase' }}>
+            QUICK LINKS
+          </h4>
+          {[['About Us','/about'],['Local Attractions','/local-attractions'],['Gallery','/gallery'],['Contact Us','/contact'],['Terms & Conditions','/terms-and-conditions'],['Privacy Policy','/privacy-policy']].map(([name, href]) => (
+            <div key={name} style={{ marginBottom: '14px' }}>
+              <Link href={href} style={{ fontSize: '13px', color: '#999999', textDecoration: 'none', transition: 'color 0.3s ease' }}
+                onMouseOver={e => e.currentTarget.style.color = '#B8965A'}
+                onMouseOut={e => e.currentTarget.style.color = '#999999'}>
+                {name}
+              </Link>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+      {/* BOTTOM BAR */}
+      <div style={{ borderTop: '1px solid #2C2C2C', maxWidth: '1200px', margin: '0 auto', padding: '20px 60px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: '12px', color: '#555555', letterSpacing: '0.04em' }}>
+          © 2026 Hotel Winway. All Rights Reserved.
+        </span>
+        <div style={{ display: 'flex', gap: '20px' }}>
+          <Link href="/privacy-policy" style={{ fontSize: '12px', color: '#555555', textDecoration: 'none' }}>Privacy Policy</Link>
+          <span style={{ color: '#333' }}>|</span>
+          <Link href="/terms-and-conditions" style={{ fontSize: '12px', color: '#555555', textDecoration: 'none' }}>Terms & Conditions</Link>
+        </div>
+      </div>
+
+    </footer>
   );
 }
