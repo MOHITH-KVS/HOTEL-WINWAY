@@ -28,15 +28,52 @@ export default function Footer() {
           <p style={{ fontSize: '13px', color: '#999999', lineHeight: '1.9', marginBottom: '24px' }}>
             ✉ fom1@hotelwinway.com
           </p>
-          {/* Social */}
-          <div style={{ display: 'flex', gap: '10px' }}>
-            {[['FB','#'],['IG','#'],['TW','#'],['YT','#']].map(([label, href]) => (
-              <a key={label} href={href} style={{ width: '34px', height: '34px', borderRadius: '50%', border: '1px solid #444', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999999', fontSize: '10px', fontWeight: '700', textDecoration: 'none', letterSpacing: '0.05em', transition: 'all 0.3s ease' }}
-                onMouseOver={e => { e.currentTarget.style.borderColor = '#B8965A'; e.currentTarget.style.color = '#B8965A'; }}
-                onMouseOut={e => { e.currentTarget.style.borderColor = '#444'; e.currentTarget.style.color = '#999999'; }}>
-                {label}
-              </a>
-            ))}
+          {/* Social Icons */}
+          <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+
+            {/* Facebook */}
+            <a href="https://facebook.com/HotelWinway" target="_blank" rel="noopener noreferrer"
+              style={{ width: '36px', height: '36px', borderRadius: '50%', border: '1px solid #444', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s ease', color: '#B8965A' }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = '#B8965A'; e.currentTarget.style.background = 'rgba(184,150,90,0.1)'; }}
+              onMouseOut={e => { e.currentTarget.style.borderColor = '#444'; e.currentTarget.style.background = 'transparent'; }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8965A">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+
+            {/* Instagram */}
+            <a href="https://instagram.com/hotelwinway" target="_blank" rel="noopener noreferrer"
+              style={{ width: '36px', height: '36px', borderRadius: '50%', border: '1px solid #444', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s ease', color: '#B8965A' }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = '#B8965A'; e.currentTarget.style.background = 'rgba(184,150,90,0.1)'; }}
+              onMouseOut={e => { e.currentTarget.style.borderColor = '#444'; e.currentTarget.style.background = 'transparent'; }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8965A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="#B8965A" stroke="none"/>
+              </svg>
+            </a>
+
+            {/* Twitter / X */}
+            <a href="https://twitter.com/hotelwinway" target="_blank" rel="noopener noreferrer"
+              style={{ width: '36px', height: '36px', borderRadius: '50%', border: '1px solid #444', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s ease' }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = '#B8965A'; e.currentTarget.style.background = 'rgba(184,150,90,0.1)'; }}
+              onMouseOut={e => { e.currentTarget.style.borderColor = '#444'; e.currentTarget.style.background = 'transparent'; }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8965A">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.26 5.632 5.905-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+
+            {/* YouTube */}
+            <a href="https://youtube.com/@hotelwinway" target="_blank" rel="noopener noreferrer"
+              style={{ width: '36px', height: '36px', borderRadius: '50%', border: '1px solid #444', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s ease' }}
+              onMouseOver={e => { e.currentTarget.style.borderColor = '#B8965A'; e.currentTarget.style.background = 'rgba(184,150,90,0.1)'; }}
+              onMouseOut={e => { e.currentTarget.style.borderColor = '#444'; e.currentTarget.style.background = 'transparent'; }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#B8965A">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1C1C1C"/>
+              </svg>
+            </a>
+
           </div>
         </div>
 
