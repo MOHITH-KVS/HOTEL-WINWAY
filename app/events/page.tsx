@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import ContactCTA from '@/components/sections/ContactCTA';
 import EventsClient from './EventsClient';
 
 export const metadata: Metadata = {
@@ -9,7 +12,12 @@ export const metadata: Metadata = {
 export default function EventsPage() {
   return (
     <>
-      <EventsClient />
+      <Header />
+      <main>
+        <EventsClient />
+        <ContactCTA />
+      </main>
+      <Footer />
     </>
   );
 }

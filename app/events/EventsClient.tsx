@@ -360,19 +360,7 @@ export default function EventsClient() {
         </div>
       </section>
 
-      {/* SECTION 6 - ENQUIRY CTA */}
-      <section className="events-cta">
-        <h2 className="events-cta-title">Plan Your Event With Us</h2>
-        <p className="events-cta-subtext">Our events team is ready to help you create an unforgettable experience. Get in touch today.</p>
-        <div className="cta-buttons">
-          <Link href="/contact" className="btn-primary">
-            ENQUIRE NOW &rarr;
-          </Link>
-          <a href="tel:07316611111" className="btn-secondary">
-            CALL US: 0731-661-1111
-          </a>
-        </div>
-      </section>
+
     </main>
   );
 }
