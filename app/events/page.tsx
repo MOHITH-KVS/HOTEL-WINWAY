@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
+import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Events & Banquet | Hotel Winway Indore',
@@ -8,6 +10,7 @@ export const metadata: Metadata = {
 
 export default function EventsPage() {
   return (
+    <>
     <main className="events-page">
       <style>{`
         .events-page {
@@ -15,35 +18,6 @@ export default function EventsPage() {
         }
         
         /* Section 1: Hero */
-        .events-hero {
-          position: relative;
-          width: 100%;
-          height: 85vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          color: white;
-          overflow: hidden;
-        }
-        .events-hero-img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          z-index: -2;
-        }
-        .events-hero-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0,0,0,0.5);
-          z-index: -1;
-        }
         .events-hero-content {
           padding: 0 20px;
           z-index: 1;
@@ -69,7 +43,7 @@ export default function EventsPage() {
 
         /* Section 2: Intro */
         .events-intro {
-          background: white;
+          background: #FFFFFF;
           padding: 80px 0;
           text-align: center;
         }
@@ -103,24 +77,9 @@ export default function EventsPage() {
           padding: 0;
           margin: 0;
         }
-        .gallery-img-container {
-          position: relative;
-          height: 380px;
-          overflow: hidden;
-        }
-        .gallery-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.5s ease;
-        }
-        .gallery-img-container:hover .gallery-img {
-          transform: scale(1.04);
-        }
 
         /* Section 4: Capacity Table */
         .events-capacity {
-          background: #FAF8F5;
           padding: 80px 40px;
           text-align: center;
         }
@@ -167,7 +126,7 @@ export default function EventsPage() {
           background: #fff;
         }
         .capacity-table tr:nth-child(even) {
-          background: #FAF8F5;
+          background: transparent;
         }
         .capacity-table td:first-child {
           font-weight: 500;
@@ -181,7 +140,7 @@ export default function EventsPage() {
 
         /* Section 5: Events We Host */
         .events-host {
-          background: white;
+          background: #FFFFFF;
           padding: 0;
         }
         .events-host-title {
@@ -201,7 +160,7 @@ export default function EventsPage() {
           padding: 60px 40px;
         }
         .event-card {
-          background: white;
+          background: #FFFFFF;
           border: 1px solid #f0f0f0;
           padding: 40px 32px;
           text-align: center;
@@ -225,14 +184,14 @@ export default function EventsPage() {
 
         /* Section 6: Enquiry CTA */
         .events-cta {
-          background: #1a1a1a;
+          background: #1C1C1C;
           padding: 80px 40px;
           text-align: center;
         }
         .events-cta-title {
           color: white;
           font-family: 'Libre Baskerville', serif, var(--font-serif, serif);
-          font-size: 36px;
+          font-size: 40px;
         }
         .events-cta-subtext {
           color: #AAAAAA;
@@ -252,6 +211,7 @@ export default function EventsPage() {
           text-transform: uppercase;
           text-decoration: none;
           transition: all 0.3s ease;
+          border-radius: 0;
         }
         .btn-primary {
           background: #B8965A;
@@ -262,8 +222,8 @@ export default function EventsPage() {
         }
         .btn-secondary {
           background: transparent;
-          border: 1px solid #555;
-          color: white;
+          border: 1.5px solid #555555;
+          color: #FFFFFF;
         }
         .btn-secondary:hover {
           border-color: #B8965A;
@@ -309,9 +269,18 @@ export default function EventsPage() {
       `}</style>
 
       {/* SECTION 1 - HERO */}
-      <section className="events-hero">
-        <img src="/images/events/bh1.jpeg" alt="Events and Banquet at Hotel Winway" className="events-hero-img" />
-        <div className="events-hero-overlay"></div>
+      <section style={{
+        backgroundImage: 'url(/images/events/bh1.jpeg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        height: '85vh',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.55) 100%)' }} />
         <div className="events-hero-content">
           <div className="events-hero-label">HOTEL WINWAY</div>
           <h1 className="events-hero-title">EVENTS &amp; BANQUET</h1>
@@ -331,14 +300,18 @@ export default function EventsPage() {
       {/* SECTION 3 - IMAGE GALLERY GRID */}
       <section className="events-gallery">
         {[2, 3, 4, 5, 6, 7].map((num) => (
-          <div key={`bh${num}`} className="gallery-img-container">
-            <img src={`/images/events/bh${num}.jpeg`} alt={`Banquet Hall ${num}`} className="gallery-img" />
+          <div key={`bh${num}`} style={{ position: 'relative', height: '380px', overflow: 'hidden' }}>
+            <Image src={`/images/events/bh${num}.jpeg`} alt="Banquet Hall" fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }} />
           </div>
         ))}
       </section>
 
       {/* SECTION 4 - CAPACITY TABLE */}
-      <section className="events-capacity">
+      <section className="events-capacity" style={{
+        background: '#FAF8F5',
+        backgroundImage: 'radial-gradient(circle, #e8e0d0 1px, transparent 1px)',
+        backgroundSize: '24px 24px'
+      }}>
         <div className="events-capacity-label">VENUE SPECIFICATIONS</div>
         <h2 className="events-capacity-title">Banquet Hall Capacity</h2>
         <p className="events-capacity-subtext">Our versatile banquet hall can be configured to suit any event format</p>
@@ -424,5 +397,7 @@ export default function EventsPage() {
         </div>
       </section>
     </main>
+    <Footer />
+    </>
   );
 }
