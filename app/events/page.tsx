@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import EventsClient from './EventsClient';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Events & Banquet | Hotel Winway Indore',
@@ -11,7 +10,6 @@ export default function EventsPage() {
   return (
     <>
       <EventsClient />
-      <Footer />
     </>
   );
 }
