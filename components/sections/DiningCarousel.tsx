@@ -21,20 +21,23 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
     <>
       <style>{`
         .dining-carousel-wrapper {
-          position: relative;
-          width: 100%;
           overflow: hidden;
+          width: 100%;
+          position: relative;
           padding: 20px 0 60px 0;
         }
 
         .dining-track {
           display: flex;
-          gap: 24px;
-          padding: 0 60px;
+          gap: 28px;
+          padding: 20px 100px;
+          transition: transform 0.5s ease;
+          overflow: hidden;
         }
 
         .dining-card {
-          flex: 0 0 380px;
+          flex: 0 0 calc(40vw);
+          min-width: 0;
           background: #fff;
           border: 1px solid #f0f0f0;
           overflow: hidden;
@@ -195,8 +198,8 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
           className="dining-track" 
           ref={carouselRef}
           style={{ 
-            display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory',
-            scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch',
+            display: 'flex', overflowX: 'hidden', overflow: 'hidden', scrollSnapType: 'x mandatory',
+            scrollBehavior: 'smooth', WebkitOverflowScrolling: 'auto', userSelect: 'none',
             msOverflowStyle: 'none', scrollbarWidth: 'none'
           }}
         >
