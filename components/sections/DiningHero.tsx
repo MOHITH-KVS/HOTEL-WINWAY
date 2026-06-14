@@ -144,7 +144,28 @@ export default function DiningHero({ title, description, imageSrc, imageAlt, cui
           <span>{reservationNum}</span>
         </div>
 
-        <a href="/contact" className="dining-hero-btn">RESERVE TABLE</a>
+        <div>
+          <a href="/contact" className="dining-hero-btn">RESERVE TABLE</a>
+          <a 
+            href="#contact"
+            style={{
+              display: 'inline-block',
+              border: '1.5px solid #ffffff',
+              color: '#ffffff',
+              background: 'transparent',
+              padding: '14px 28px',
+              fontSize: '12px',
+              fontWeight: '700',
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              cursor: 'pointer',
+              marginLeft: '16px',
+            }}
+          >
+            VIEW MENU
+          </a>
+        </div>
       </div>
     </div>
   );
