@@ -49,6 +49,13 @@ const venues = [
 ];
 
 export default function DiningPreview() {
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const toggleExpand = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setExpandedId(prev => prev === id ? null : id);
+  };
+
   return (
     <>
       <style>{`
@@ -384,6 +391,7 @@ export default function DiningPreview() {
           
           <div className="dining-grid">
             {venues.map((venue) => {
+              const isExpanded = expandedId === venue.id;
               
               return (
                 <div className="dining-card" key={venue.id}>
@@ -395,26 +403,61 @@ export default function DiningPreview() {
                   <div className="dining-card-content">
                     <h3 className="dining-card-name">{venue.name}</h3>
                     
-                    <p className="dining-card-desc">{venue.shortDesc}</p>
+                    {!isExpanded && (
+                      <p className="dining-card-desc">{venue.shortDesc}</p>
+                    )}
                     
-                    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                      <a href={`/dining/${venue.id}`} style={{
-                        fontFamily: 'Lato, sans-serif',
-                        fontSize: '11px',
-                        fontWeight: '700',
-                        letterSpacing: '0.2em',
-                        textTransform: 'uppercase',
-                        color: '#FFFFFF',
-                        background: '#1a1a1a',
-                        padding: '13px 32px',
-                        textDecoration: 'none',
-                        display: 'inline-block',
-                        transition: 'all 0.3s ease',
-                      }}
-                      onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
-                      onMouseOut={e => e.currentTarget.style.background = '#1a1a1a'}>
-                        VIEW MORE
-                      </a>
+                    <div className="dining-card-buttons">
+                      <button 
+                        suppressHydrationWarning 
+                        className="btn-view-more"
+                        onClick={(e) => toggleExpand(venue.id, e)}
+                      >
+                        {isExpanded ? 'VIEW LESS' : 'VIEW MORE'}
+                      </button>
+                      <button 
+                        suppressHydrationWarning 
+                        className="btn-read-more"
+                      >
+                        READ MORE &gt;
+                      </button>
+                    </div>
+
+                    {/* EXPANDED PANEL INLINE */}
+                    <div className={`expanded-panel ${isExpanded ? 'open' : ''}`}>
+                      <div className="expanded-panel-inner">
+                        {venue.fullContent.cuisine && (
+                          <div className="expanded-info-row">
+                            <strong>Cuisine:</strong> {venue.fullContent.cuisine}
+                          </div>
+                        )}
+                        
+                        {venue.fullContent.timings && (
+                          <div className="expanded-info-row">
+                            <strong>Timings:</strong> {venue.fullContent.timings}
+                          </div>
+                        )}
+
+                        {venue.fullContent.reserve && (
+                          <div className="expanded-info-row">
+                            <strong>Reserve a table:</strong> {venue.fullContent.reserve}
+                          </div>
+                        )}
+
+                        {venue.fullContent.total && (
+                          <div className="expanded-info-row">
+                            <strong>Cost for two:</strong> {venue.fullContent.total}
+                          </div>
+                        )}
+
+                        <div className="expanded-full-desc">
+                          {venue.fullContent.description}
+                        </div>
+
+                        <a suppressHydrationWarning href="tel:9752411003" className="btn-enquire-card">
+                          ENQUIRE NOW
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>

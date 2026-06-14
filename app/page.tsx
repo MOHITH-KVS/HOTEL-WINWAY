@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
 import SecondaryNav from '@/components/sections/SecondaryNav';
 
-import WelcomeSection from '@/components/sections/WelcomeSection';
+import IntroSection from '@/components/sections/IntroSection';
+import HighlightsCarousel from '@/components/sections/HighlightsCarousel';
 
 import RoomsPreview from '@/components/sections/RoomsPreview';
 import AmenitiesSection from '@/components/sections/AmenitiesSection';
@@ -52,7 +53,8 @@ export default function HomePage() {
       <SecondaryNav />
 
 
-      <WelcomeSection />
+      <IntroSection />
+      <HighlightsCarousel />
 
       <RoomsPreview />
       <AmenitiesSection />
