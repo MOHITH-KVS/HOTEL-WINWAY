@@ -352,7 +352,7 @@ export default function NotFound() {
           <div 
             className="key-card"
             style={{
-              transform: \`rotateX(\${tilt.x}deg) rotateY(\${tilt.y}deg)\`
+              transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
             }}
           >
             <div className="card-brand">Hotel Winway</div>
@@ -360,7 +360,7 @@ export default function NotFound() {
             <div style={{ marginTop: 'auto', marginBottom: '40px' }}>
               <div className="card-number">{roomText}</div>
               <p className="card-message">
-                It seems you've been assigned to a room that doesn't exist. Let's guide you back to your stay.
+                It seems you&apos;ve been assigned to a room that doesn&apos;t exist. Let&apos;s guide you back to your stay.
               </p>
             </div>
 
