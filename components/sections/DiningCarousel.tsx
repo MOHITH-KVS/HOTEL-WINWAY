@@ -166,33 +166,101 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
         .dining-arrow-right { right: 10px; }
 
         @media (max-width: 768px) {
-          .dining-card {
-            flex: 0 0 82vw !important;
-            min-width: 0;
+          .dining-carousel-wrapper {
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
           }
           .dining-track {
-            padding: 16px 16px !important;
-            gap: 16px;
+            display: flex;
+            flex-direction: row;
+            gap: 0;
+            padding: 0;
+            width: 100%;
           }
-          .carousel-arrow-left, .carousel-arrow-right {
-            top: 120px !important; /* 50% of 240px image height */
-            transform: translateY(-50%) !important;
-            background: rgba(255, 255, 255, 0.95) !important;
-            color: #111111 !important;
+          .dining-card {
+            flex: 0 0 100vw !important;
+            width: 100vw !important;
+            max-width: 100vw !important;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 0;
           }
-          .carousel-arrow-left {
-            left: 8px !important;
+          .dining-card-image {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
           }
-          .carousel-arrow-right {
-            right: 8px !important;
-          }
-          .dining-card-name {
-            padding-left: 0;
-            margin-left: 0;
-            overflow: visible;
+          .dining-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
           }
           .dining-card-body {
-            padding: 16px;
+            padding: 20px 24px 28px 24px;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+          }
+          .dining-cuisine-tag {
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            color: #999;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+          }
+          .dining-card-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 10px;
+          }
+          .dining-card-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 14px;
+            -webkit-line-clamp: 3;
+          }
+          .dining-card-hours {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+          .dining-card-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 24px;
+            border-top: 1px solid #eee;
+            padding-top: 16px;
+            margin-top: 8px;
+          }
+          .carousel-arrow-left, .carousel-arrow-right {
+            position: absolute !important;
+            top: 130px !important;
+            transform: translateY(-50%) !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            background: rgba(255,255,255,0.9) !important;
+            border: none !important;
+            color: #333 !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+          }
+          .carousel-arrow-left {
+            left: 12px !important;
+          }
+          .carousel-arrow-right {
+            right: 12px !important;
           }
         }
       `}</style>
