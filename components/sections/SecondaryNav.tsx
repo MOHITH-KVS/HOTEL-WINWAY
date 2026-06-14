@@ -33,7 +33,7 @@ export default function SecondaryNav() {
       `}</style>
       <div className="secondary-nav-container" ref={navRef} style={{
         width: '100%',
-        overflowX: 'auto',
+        overflowX: 'scroll',
         overflowY: 'hidden',
         WebkitOverflowScrolling: 'touch',
         scrollbarWidth: 'none',

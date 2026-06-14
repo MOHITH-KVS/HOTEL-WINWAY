@@ -70,7 +70,7 @@ export default function NotFound() {
       className={'min-h-screen relative flex flex-col items-center justify-center overflow-x-hidden transition-opacity duration-1000 ' + (mounted ? 'opacity-100' : 'opacity-0')}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ wordBreak: 'break-word', overflowX: 'hidden' }}
+      style={{ wordBreak: 'break-word', overflowX: 'hidden', minHeight: '100svh' }}
     >
       <style>{`
         /* GENERAL FIXES & ANIMATIONS */
@@ -100,7 +100,8 @@ export default function NotFound() {
           filter: blur(${mounted ? '0px' : '10px'});
           transition: filter 1.5s ease;
           animation: kenburns 20s ease-out forwards;
-          height: 100vh;
+          height: 100svh;
+          min-height: -webkit-fill-available;
         }
 
         .bg-overlay {

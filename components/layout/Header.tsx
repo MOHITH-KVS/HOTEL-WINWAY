@@ -41,7 +41,8 @@ export default function Header() {
         height: '70px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        WebkitTransform: 'translateZ(0)'
       }}>
 
         {/* LOGO */}
@@ -129,7 +130,7 @@ export default function Header() {
         {/* HAMBURGER — mobile only */}
         <button className="hamburger-btn"
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: '8px', flexDirection: 'column', gap: '5px' }}>
+          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: '10px', minWidth: '44px', minHeight: '44px', flexDirection: 'column', gap: '5px', justifyContent: 'center' }}>
           <span style={{ display: 'block', width: '24px', height: '2px', background: scrolled ? '#1a1a1a' : '#FFFFFF', transition: 'all 0.3s ease', transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }} />
           <span style={{ display: 'block', width: '24px', height: '2px', background: scrolled ? '#1a1a1a' : '#FFFFFF', transition: 'all 0.3s ease', opacity: menuOpen ? 0 : 1 }} />
           <span style={{ display: 'block', width: '24px', height: '2px', background: scrolled ? '#1a1a1a' : '#FFFFFF', transition: 'all 0.3s ease', transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }} />
@@ -138,8 +139,8 @@ export default function Header() {
 
       {/* MOBILE MENU OVERLAY */}
       {menuOpen && (
-        <div style={{ position: 'fixed', inset: 0, background: '#1a1a1a', zIndex: 999, display: 'flex', flexDirection: 'column', padding: '90px 32px 40px', overflowY: 'auto' }}>
-          <button onClick={() => setMenuOpen(false)} style={{ position: 'absolute', top: '20px', right: '24px', background: 'none', border: 'none', color: '#FFFFFF', fontSize: '28px', cursor: 'pointer' }}>✕</button>
+        <div style={{ position: 'fixed', inset: 0, background: '#1a1a1a', zIndex: 999, display: 'flex', flexDirection: 'column', padding: '90px 32px 40px', overflowY: 'auto', WebkitTransform: 'translateZ(0)' }}>
+          <button onClick={() => setMenuOpen(false)} style={{ position: 'absolute', top: '20px', right: '24px', background: 'none', border: 'none', color: '#FFFFFF', fontSize: '28px', cursor: 'pointer', minWidth: '44px', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
 
           {[['HOME','/'],['ROOMS & SUITES','/rooms'],['DINING','/dining'],['EVENTS & BANQUET','/events'],['LOCAL ATTRACTIONS','/local-attractions'],['GALLERY','/gallery'],['CONTACT US','/contact']].map(([name, href]) => (
             <Link key={href} href={href} onClick={() => setMenuOpen(false)}

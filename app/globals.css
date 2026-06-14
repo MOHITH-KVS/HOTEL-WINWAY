@@ -37,6 +37,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+input, select, textarea {
+  font-size: max(16px, 1em);
+}
+
+button, a {
+  -webkit-tap-highlight-color: rgba(201, 160, 48, 0.2);
 }
 
 /* Universal section spacing — applies to EVERY section on every page */
@@ -59,6 +69,7 @@ section {
 
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -70,6 +81,9 @@ body {
   overflow-x: hidden;
   font-size: 16px;
   line-height: 1.7;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -169,6 +183,8 @@ p {
 img {
   display: block;
   max-width: 100%;
+  image-rendering: -webkit-optimize-contrast;
+  -webkit-backface-visibility: hidden;
 }
 
 @keyframes fadeInUp {
@@ -797,4 +813,50 @@ img { max-width: 100%; height: auto; }
     margin: 0 !important;
     padding: 0 16px !important;
   }
+}
+
+/* ── TOUCH DEVICE HOVER RESET ── */
+@media (hover: none) {
+  .dining-card:hover .dining-card-content,
+  .room-card:hover,
+  .btn:hover,
+  .btn-outline:hover,
+  .btn-gold:hover,
+  .btn-primary:hover,
+  .btn-accent:hover {
+    background: initial;
+    color: initial;
+    border-color: initial;
+    box-shadow: none;
+  }
+}
+
+/* ── iOS ANIMATION PREFIXES ── */
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(40px);
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes float {
+  0% { -webkit-transform: translateY(0px); transform: translateY(0px); }
+  50% { -webkit-transform: translateY(-10px); transform: translateY(-10px); }
+  100% { -webkit-transform: translateY(0px); transform: translateY(0px); }
+}
+
+@-webkit-keyframes kenburns {
+  0% { -webkit-transform: scale(1); transform: scale(1); }
+  100% { -webkit-transform: scale(1.1); transform: scale(1.1); }
+}
+
+@-webkit-keyframes kenburnsMobile {
+  0% { -webkit-transform: scale(1); transform: scale(1); }
+  100% { -webkit-transform: scale(1.04); transform: scale(1.04); }
 }

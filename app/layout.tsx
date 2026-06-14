@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -6,8 +6,22 @@ import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import ScrollObserver from "@/components/utils/ScrollObserver";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#1a1a1a",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.hotelwinway.com"),
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+  },
+  formatDetection: {
+    telephone: true,
+  },
   title: {
     default: "Hotel Winway Indore | Luxury Business Hotel on RNT Marg",
     template: "%s | Hotel Winway Indore",
@@ -160,6 +174,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="mobile-web-app-capable" content="yes" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(hotelSchema) }}

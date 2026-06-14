@@ -1,12 +1,39 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
 
 export default function ContactClient() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error || 'Failed to submit enquiry.');
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -472,26 +499,36 @@ export default function ContactClient() {
             </div>
 
             <div className="enquiry-form-panel">
-              <form onSubmit={(e) => e.preventDefault()}>
-                <div className="form-grid">
-                  <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Full Name *" required />
-                  </div>
-                  <div className="form-group">
-                    <input type="tel" className="form-control" placeholder="Phone Number *" required />
-                  </div>
-                  <div className="form-group form-full">
-                    <input type="email" className="form-control" placeholder="Email Address *" required />
-                  </div>
-                  <div className="form-group form-full">
-                    <input type="text" className="form-control" placeholder="Subject" />
-                  </div>
-                  <div className="form-group form-full">
-                    <textarea className="form-control" placeholder="Your Message *" required></textarea>
-                  </div>
+              {submitted ? (
+                <div className="text-center py-6 text-white">
+                  <h3 className="text-2xl text-[#C9A030] mb-4 luxury-serif">Thank You</h3>
+                  <p>Your enquiry has been received. We will get back to you shortly.</p>
                 </div>
-                <button type="submit" className="btn-luxury-gold">SEND ENQUIRY</button>
-              </form>
+              ) : (
+                <form onSubmit={handleSubmit}>
+                  <input type="text" name="honeypot" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+                  <div className="form-grid">
+                    <div className="form-group">
+                      <input type="text" name="name" className="form-control" placeholder="Full Name *" required autoComplete="name" />
+                    </div>
+                    <div className="form-group">
+                      <input type="tel" name="phone" className="form-control" placeholder="Phone Number *" required inputMode="numeric" autoComplete="tel" />
+                    </div>
+                    <div className="form-group form-full">
+                      <input type="email" name="email" className="form-control" placeholder="Email Address *" required autoComplete="email" />
+                    </div>
+                    <div className="form-group form-full">
+                      <input type="text" name="subject" className="form-control" placeholder="Subject" />
+                    </div>
+                    <div className="form-group form-full">
+                      <textarea name="message" className="form-control" placeholder="Your Message *" required></textarea>
+                    </div>
+                  </div>
+                  <button type="submit" className="btn-luxury-gold" disabled={loading}>
+                    {loading ? 'SENDING...' : 'SEND ENQUIRY'}
+                  </button>
+                </form>
+              )}
             </div>
 
           </div>

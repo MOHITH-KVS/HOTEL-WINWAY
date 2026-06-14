@@ -23,10 +23,10 @@ export default function Footer() {
             India — 452 001
           </p>
           <p style={{ fontSize: '13px', color: '#999999', lineHeight: '1.9', marginBottom: '6px' }}>
-            ✆ 0731-661-1111
+            ✆ <a href="tel:+9107316611111" style={{ color: 'inherit', textDecoration: 'none' }}>0731-661-1111</a>
           </p>
           <p style={{ fontSize: '13px', color: '#999999', lineHeight: '1.9', marginBottom: '24px' }}>
-            ✉ fom1@hotelwinway.com
+            ✉ <a href="mailto:fom1@hotelwinway.com" style={{ color: 'inherit', textDecoration: 'none' }}>fom1@hotelwinway.com</a>
           </p>
           {/* Social Icons */}
           <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
@@ -84,7 +84,7 @@ export default function Footer() {
           </h4>
           {[['Standard Room','/rooms/standard-room'],['Deluxe Room','/rooms/deluxe-room'],['Junior Suite','/rooms/junior-suite'],['Presidential Suite','/rooms/presidential-suite']].map(([name, href]) => (
             <div key={name} style={{ marginBottom: '14px' }}>
-              <Link href={href} style={{ fontSize: '13px', color: '#999999', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              <Link href={href} style={{ fontSize: '13px', color: '#999999', textDecoration: 'none', transition: 'color 0.3s ease', padding: '8px 0', display: 'inline-block' }}
                 onMouseOver={e => e.currentTarget.style.color = '#B8965A'}
                 onMouseOut={e => e.currentTarget.style.color = '#999999'}>
                 {name}
@@ -100,7 +100,7 @@ export default function Footer() {
           </h4>
           {[['Tiffin Restaurant','/dining/tiffin'],['The Deck','/dining/the-deck'],['Al Fresco','/dining/al-fresco'],['Cafe','/dining/cafe'],['Events & Banquet','/events']].map(([name, href]) => (
             <div key={name} style={{ marginBottom: '14px' }}>
-              <Link href={href} style={{ fontSize: '13px', color: '#999999', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              <Link href={href} style={{ fontSize: '13px', color: '#999999', textDecoration: 'none', transition: 'color 0.3s ease', padding: '8px 0', display: 'inline-block' }}
                 onMouseOver={e => e.currentTarget.style.color = '#B8965A'}
                 onMouseOut={e => e.currentTarget.style.color = '#999999'}>
                 {name}
@@ -116,7 +116,7 @@ export default function Footer() {
           </h4>
           {[['About Us','/about'],['Local Attractions','/local-attractions'],['Gallery','/gallery'],['Contact Us','/contact'],['Terms & Conditions','/terms-and-conditions'],['Privacy Policy','/privacy-policy']].map(([name, href]) => (
             <div key={name} style={{ marginBottom: '14px' }}>
-              <Link href={href} style={{ fontSize: '13px', color: '#999999', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              <Link href={href} style={{ fontSize: '13px', color: '#999999', textDecoration: 'none', transition: 'color 0.3s ease', padding: '8px 0', display: 'inline-block' }}
                 onMouseOver={e => e.currentTarget.style.color = '#B8965A'}
                 onMouseOut={e => e.currentTarget.style.color = '#999999'}>
                 {name}

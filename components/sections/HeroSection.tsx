@@ -86,7 +86,7 @@ export default function HeroSection({
   return (
     <section
       className="relative w-full overflow-hidden bg-[#1a1a1a]"
-      style={{ height: '100vh', minHeight: 600 }}
+      style={{ height: '100svh', minHeight: 'min(100svh, 600px)' }}
     >
       <div 
         ref={carouselRef}
@@ -148,7 +148,7 @@ export default function HeroSection({
         padding: '0 40px', height: 'auto',
         background: 'transparent'
       }}>
-        <a href="https://maps.google.com/?q=Hotel+Winway+Indore" target="_blank"
+        <a href="https://maps.google.com/?q=Hotel+Winway+Indore" target="_blank" rel="noopener noreferrer"
           style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#FFFFFF', background: 'rgba(0,0,0,0.55)', padding: '10px 20px', border: '1px solid rgba(255,255,255,0.4)', textDecoration: 'none', fontFamily: 'Lato, sans-serif', fontSize: '11px', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', transition: 'background 0.3s ease' }}
           onMouseOver={e => e.currentTarget.style.background = 'rgba(184,150,90,0.8)'}
           onMouseOut={e => e.currentTarget.style.background = 'rgba(0,0,0,0.55)'}>

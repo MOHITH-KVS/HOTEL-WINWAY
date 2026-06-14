@@ -10,6 +10,7 @@ interface FormData {
   phone: string;
   subject: string;
   message: string;
+  honeypot: string;
 }
 
 export default function ContactForm() {
@@ -17,17 +18,23 @@ export default function ContactForm() {
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    const subject = encodeURIComponent('Hotel Winway Enquiry');
-    const body = encodeURIComponent(
-      `Name: ${data.name}\n` +
-      `Phone: ${data.phone}\n` +
-      `Email: ${data.email}\n` +
-      `Subject: ${data.subject}\n` +
-      `Message: ${data.message || 'N/A'}`
-    );
-    window.location.href = `mailto:rdm@hotelwinway.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error || 'Failed to submit enquiry.');
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again later.');
+    }
   };
 
   if (submitted) {
@@ -47,20 +54,21 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} suppressHydrationWarning style={{ background: 'transparent' }} className="space-y-5">
+      <input type="text" {...register('honeypot')} style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label style={{ fontSize: '10px', letterSpacing: '0.15em', color: '#AAAAAA', fontWeight: '600', marginBottom: '6px', display: 'block', textTransform: 'uppercase' }}>Name *</label>
-          <input {...register('name', { required: true })} suppressHydrationWarning className="placeholder-[rgba(255,255,255,0.45)] w-full outline-none focus:border-[#C4A882]" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '0', color: '#FFFFFF', fontSize: '14px', padding: '14px 18px', fontFamily: 'Lato, sans-serif' }} placeholder="Your name" />
+          <input {...register('name', { required: true })} autoComplete="name" suppressHydrationWarning className="placeholder-[rgba(255,255,255,0.45)] w-full outline-none focus:border-[#C4A882]" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '0', color: '#FFFFFF', fontSize: '14px', padding: '14px 18px', fontFamily: 'Lato, sans-serif' }} placeholder="Your name" />
         </div>
         <div>
           <label style={{ fontSize: '10px', letterSpacing: '0.15em', color: '#AAAAAA', fontWeight: '600', marginBottom: '6px', display: 'block', textTransform: 'uppercase' }}>Phone *</label>
-          <input {...register('phone', { required: true })} suppressHydrationWarning className="placeholder-[rgba(255,255,255,0.45)] w-full outline-none focus:border-[#C4A882]" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '0', color: '#FFFFFF', fontSize: '14px', padding: '14px 18px', fontFamily: 'Lato, sans-serif' }} placeholder="+91 XXXXX XXXXX" type="tel" />
+          <input {...register('phone', { required: true })} autoComplete="tel" inputMode="numeric" suppressHydrationWarning className="placeholder-[rgba(255,255,255,0.45)] w-full outline-none focus:border-[#C4A882]" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '0', color: '#FFFFFF', fontSize: '14px', padding: '14px 18px', fontFamily: 'Lato, sans-serif' }} placeholder="+91 XXXXX XXXXX" type="tel" />
         </div>
       </div>
 
       <div>
         <label style={{ fontSize: '10px', letterSpacing: '0.15em', color: '#AAAAAA', fontWeight: '600', marginBottom: '6px', display: 'block', textTransform: 'uppercase' }}>Email *</label>
-        <input {...register('email', { required: true, pattern: /^\S+@\S+\.\S+$/ })} suppressHydrationWarning className="placeholder-[rgba(255,255,255,0.45)] w-full outline-none focus:border-[#C4A882]" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '0', color: '#FFFFFF', fontSize: '14px', padding: '14px 18px', fontFamily: 'Lato, sans-serif' }} placeholder="your@email.com" type="email" />
+        <input {...register('email', { required: true, pattern: /^\S+@\S+\.\S+$/ })} autoComplete="email" suppressHydrationWarning className="placeholder-[rgba(255,255,255,0.45)] w-full outline-none focus:border-[#C4A882]" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '0', color: '#FFFFFF', fontSize: '14px', padding: '14px 18px', fontFamily: 'Lato, sans-serif' }} placeholder="your@email.com" type="email" />
       </div>
 
       <div>
