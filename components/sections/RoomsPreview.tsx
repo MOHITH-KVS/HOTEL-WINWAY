@@ -118,142 +118,437 @@ export default function RoomsPreview() {
 
   return (
     <>
-      <section style={{ padding: '60px 0', background: '#FFFFFF' }}>
+      <style>{`
+        .rooms-section {
+          background: #fdfdfd;
+          padding: 60px 0;
+        }
 
-        {/* HEADING */}
-        <div style={{ textAlign: 'center', padding: '0 20px', marginBottom: '40px' }}>
-          <h2 style={{ fontFamily: 'Lato, sans-serif', fontSize: '26px', letterSpacing: '0.25em', color: '#1a1a1a', fontWeight: 300, textTransform: 'uppercase', marginBottom: '20px' }}>
-            ROOMS & <strong style={{ fontWeight: 800, color: '#B8965A' }}>SUITES</strong>
-          </h2>
-          <p style={{ fontFamily: 'Lato, sans-serif', fontSize: '15px', color: '#666', lineHeight: 1.8, maxWidth: '760px', margin: '0 auto' }}>
-            Designed to offer a perfect balance of comfort and sophistication, the rooms and suites at Hotel Winway provide a welcoming retreat in the heart of Indore city.
-          </p>
+        .rooms-header {
+          text-align: center;
+          max-width: 760px;
+          margin: 0 auto 60px auto;
+          padding: 0 24px;
+        }
+
+        .rooms-title {
+          font-family: 'Lato', sans-serif;
+          font-size: 26px;
+          letter-spacing: 0.25em;
+          color: #1a1a1a;
+          font-weight: 300;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+        }
+
+        .rooms-title strong {
+          font-weight: 800;
+          color: #B8965A;
+        }
+
+        .rooms-subtitle {
+          font-family: 'Lato', sans-serif;
+          font-size: 15px;
+          color: #666;
+          line-height: 1.8;
+          font-weight: 400;
+        }
+
+        .rooms-carousel-wrapper {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          padding: 0;
+        }
+
+        .rooms-track {
+          display: flex;
+          gap: 40px;
+          position: relative;
+          z-index: 1;
+          padding: 0 calc(12vw - 20px);
+        }
+
+        .room-card {
+          flex: 0 0 38vw;
+          min-width: 0;
+          background: #fff;
+          box-sizing: border-box;
+          font-family: 'Lato', sans-serif;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .room-image-wrap {
+          position: relative;
+          width: 100%;
+          height: 260px;
+          overflow: hidden;
+        }
+
+        .room-image-wrap img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          display: block;
+        }
+
+        .room-gallery-btn {
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          width: 36px;
+          height: 36px;
+          background: rgba(255,255,255,0.9);
+          border: none;
+          cursor: pointer;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .room-info {
+          padding: 24px 28px 36px 28px;
+        }
+
+        .room-name {
+          font-family: 'Libre Baskerville', serif;
+          font-size: 22px;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin-bottom: 12px;
+          text-transform: none;
+        }
+
+        .room-desc {
+          font-size: 14px;
+          color: #555555;
+          line-height: 1.65;
+          margin-bottom: 24px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+
+
+        .room-actions {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .btn-room-details {
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          color: #1a1a1a;
+          text-decoration: none;
+          text-transform: uppercase;
+          border-bottom: 1px solid transparent;
+          padding-bottom: 2px;
+          transition: border-bottom 0.2s;
+          cursor: pointer;
+        }
+        
+        .btn-room-details:hover {
+          border-bottom: 1px solid #1a1a1a;
+        }
+
+        .rooms-arrow {
+          position: absolute;
+          top: 130px; /* Centered on the 260px image height */
+          transform: translateY(-50%);
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.85);
+          border: none;
+          cursor: pointer;
+          font-size: 20px;
+          color: #333;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+          z-index: 10;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s;
+        }
+        
+        .rooms-arrow:hover {
+          background: rgba(255,255,255,1);
+        }
+
+        .rooms-arrow-left  { left: 16px; }
+        .rooms-arrow-right { right: 16px; }
+        
+        @media (max-width: 768px) {
+          .rooms-section { padding-left: 0 !important; padding-right: 0 !important; }
+          .rooms-track { padding: 0 !important; gap: 0 !important; }
+          .room-card { 
+            flex: 0 0 100% !important; 
+            width: 100% !important; 
+            min-width: 100% !important; 
+            margin: 0 !important;
+            padding: 0 16px !important;
+            box-sizing: border-box !important;
+          }
+          .room-card h3 {
+            font-size: 16px !important;
+          }
+          .room-card p {
+            font-size: 13px !important;
+          }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.5);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+        }
+
+        .modal-content {
+          background: #fff;
+          width: 100%;
+          max-width: 860px;
+          max-height: 90vh;
+          overflow-y: auto;
+          padding: 40px;
+          position: relative;
+          box-sizing: border-box;
+          font-family: 'Lato', sans-serif;
+        }
+
+        .modal-close {
+          position: absolute;
+          top: 24px;
+          right: 24px;
+          font-size: 11px;
+          font-weight: 700;
+          color: #1a1a1a;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          cursor: pointer;
+          background: none;
+          border: none;
+        }
+
+        .modal-title {
+          font-family: 'Libre Baskerville', serif;
+          font-size: 24px;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin-bottom: 24px;
+          padding-right: 40px; /* Space for close button */
+        }
+
+        .modal-desc {
+          font-size: 15px;
+          color: #555;
+          line-height: 1.8;
+          margin-bottom: 32px;
+        }
+
+        .modal-specs {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 16px;
+          margin-bottom: 32px;
+        }
+
+        .modal-spec-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          color: #444;
+        }
+
+        .modal-spec-divider {
+          color: #ccc;
+        }
+
+        .modal-highlights {
+          margin-bottom: 32px;
+          padding-left: 20px;
+        }
+
+        .modal-highlights li {
+          font-size: 14px;
+          color: #444;
+          line-height: 2;
+          list-style-type: disc;
+        }
+
+        .modal-divider {
+          border: none;
+          border-top: 1px solid #eee;
+          margin: 32px 0;
+        }
+
+        .modal-amenities-title {
+          font-size: 12px;
+          font-weight: 700;
+          color: #888;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          margin-bottom: 24px;
+        }
+
+        .modal-amenities-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-bottom: 40px;
+        }
+
+        .modal-amenities-grid span {
+          font-size: 14px;
+          color: #444;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .btn-book-now {
+          background: #2c2c2c;
+          color: #fff;
+          border: none;
+          padding: 14px 28px;
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: background 0.3s ease;
+          border-radius: 0;
+          text-decoration: none;
+          display: inline-block;
+        }
+
+        .btn-book-now:hover {
+          background: #B8965A;
+        }
+
+        @media (max-width: 640px) {
+          .modal-content {
+            padding: 24px;
+          }
+          .modal-amenities-grid {
+            grid-template-columns: 1fr;
+          }
+          .modal-specs {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .modal-spec-divider {
+            display: none;
+          }
+        }
+      `}</style>
+
+      <section className="rooms-section" id="rooms">
+        <div className="rooms-header">
+          <h2 className="rooms-title">ROOMS & <strong>SUITES</strong></h2>
+          <p className="rooms-subtitle">Designed to offer a perfect balance of comfort and sophistication, the rooms and suites at Hotel Winway provide a welcoming retreat in the heart of Indore city.</p>
         </div>
 
-        {/* CAROUSEL WRAPPER */}
-        <div style={{ position: 'relative', width: '100%' }}>
-
-          {/* PREV BUTTON */}
-          <button className="carousel-arrow" onClick={() => {
-            if (carouselRef.current) {
-              carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
-            }
-          }} style={{
-            position: 'absolute',
-            left: '12px',
-            top: '35%',
-            transform: 'translateY(-50%)',
-            zIndex: 20,
-            background: 'rgba(255,255,255,0.95)',
-            border: '1px solid #e0e0e0',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-          }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+        <div className="rooms-carousel-wrapper" style={{
+          padding: '0 16px',
+          boxSizing: 'border-box',
+          width: '100%',
+        }}>
+          {/* PREV ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Previous"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
           </button>
-
-          {/* SCROLLABLE TRACK */}
-          <div ref={carouselRef} className="rooms-carousel-track" style={{
-            display: 'flex',
-            overflowX: 'scroll',
-            scrollSnapType: 'x mandatory',
-            scrollBehavior: 'smooth',
-            WebkitOverflowScrolling: 'touch',
-            msOverflowStyle: 'none',
-            scrollbarWidth: 'none',
-            gap: '0',
-            width: '100%',
-          }}>
-
-            {roomsData.map((item) => (
-              <div key={item.id} className="room-carousel-item" style={{
-                scrollSnapAlign: 'start',
-                flexShrink: 0,
-                width: '100%',        /* ONE card per view on mobile */
-                padding: '0 16px',    /* Side padding so card doesnt touch edges */
+          
+          <div 
+            className="rooms-track" 
+            ref={carouselRef}
+            style={{ 
+              display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory',
+              scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch',
+              msOverflowStyle: 'none', scrollbarWidth: 'none'
+            }}
+          >
+            {roomsData.map((room, index) => (
+              <div className="room-card room-carousel-item" key={room.id} style={{ 
+                scrollSnapAlign: 'start', 
+                flexShrink: 0, 
+                width: '100%',
+                maxWidth: '100%',
+                margin: '0 auto',
                 boxSizing: 'border-box',
               }}>
-                {/* CARD CONTENT */}
-                <div style={{
-                  background: '#FFFFFF',
-                  borderRadius: '0',
-                  overflow: 'hidden',
-                  border: '1px solid #f0f0f0',
-                  width: '100%',
-                }}>
-                  {/* image */}
-                  <img src={item.image} alt={item.name}
-                    style={{ width: '100%', height: '280px', objectFit: 'cover', display: 'block' }} />
-                  {/* text content */}
-                  <div style={{ padding: '20px 16px 24px' }}>
-                    <h3 style={{ fontFamily: 'Lato', fontSize: '16px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#1a1a1a', marginBottom: '10px' }}>
-                      {item.name}
-                    </h3>
-                    <p style={{ fontFamily: 'Lato', fontSize: '13px', color: '#666', lineHeight: '1.7', marginBottom: '16px' }}>
-                      {item.description}
-                    </p>
-                    {/* CTAs */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-                      <a href={item.href} style={{
-                        fontFamily: 'Lato', fontSize: '11px', fontWeight: '700',
-                        letterSpacing: '0.15em', textTransform: 'uppercase',
-                        color: '#FFFFFF', background: '#B8965A',
-                        padding: '12px 20px', textDecoration: 'none', display: 'inline-block'
-                      }}>ROOM DETAILS</a>
-                      <a href="/contact" style={{
-                        fontFamily: 'Lato', fontSize: '11px', fontWeight: '600',
-                        letterSpacing: '0.12em', textTransform: 'uppercase',
-                        color: '#B8965A', textDecoration: 'underline'
-                      }}>ENQUIRE NOW</a>
-                    </div>
+                <div className="room-image-wrap">
+                  <img src={room.image} alt={room.name} />
+                  <button suppressHydrationWarning className="room-gallery-btn">&#9638;</button>
+                </div>
+                <div className="room-info">
+                  <h3 className="room-name">{room.name}</h3>
+                  <p className="room-desc">{room.description} <span style={{color: '#B8965A', cursor: 'pointer', fontWeight: 600}} onClick={() => setActiveModal(room)}>&gt;&gt;</span></p>
+                  
+                  
+                  
+                  <div className="room-actions">
+                    <a href="/contact" className="btn-book-now">ENQUIRE NOW</a>
+                    <span className="btn-room-details" onClick={() => setActiveModal(room)}>ROOM DETAILS ›</span>
                   </div>
                 </div>
               </div>
             ))}
-
           </div>
-
-          {/* NEXT BUTTON */}
-          <button className="carousel-arrow" onClick={() => {
-            if (carouselRef.current) {
-              carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
-            }
-          }} style={{
-            position: 'absolute',
-            right: '12px',
-            top: '35%',
-            transform: 'translateY(-50%)',
-            zIndex: 20,
-            background: 'rgba(255,255,255,0.95)',
-            border: '1px solid #e0e0e0',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-          }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+          
+          {/* NEXT ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Next"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
               <path d="M9 18l6-6-6-6"/>
             </svg>
           </button>
-
         </div>
-
-        {/* HIDE SCROLLBAR CSS */}
-        <style>{`
-          div::-webkit-scrollbar { display: none; }
-        `}</style>
       </section>
 
       {/* Modal */}
