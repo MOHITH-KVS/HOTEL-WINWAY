@@ -729,3 +729,49 @@ img { max-width: 100%; height: auto; }
   [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
   [style*="padding: '80px 60px'"] { padding: 30px 16px !important; }
 }
+
+/* ── DESKTOP GRID FOR CAROUSELS ── */
+@media (min-width: 1024px) {
+  .rooms-carousel-track {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+  }
+  .room-carousel-item {
+    width: 100% !important;
+    min-width: unset !important;
+  }
+  
+  .attractions-track {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    overflow-x: visible !important;
+  }
+  .attraction-item {
+    width: 100% !important;
+    min-width: unset !important;
+  }
+  
+  .carousel-arrow { display: none !important; }
+}
+
+@media (max-width: 1023px) {
+  .rooms-carousel-track {
+    display: flex !important;
+    overflow-x: scroll !important;
+  }
+  .room-carousel-item {
+    min-width: 100% !important;
+  }
+  
+  .attractions-track {
+    display: flex !important;
+    overflow-x: scroll !important;
+  }
+  .attraction-item {
+    min-width: 100% !important;
+  }
+  
+  .carousel-arrow { display: flex !important; }
+}

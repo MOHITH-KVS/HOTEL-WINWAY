@@ -134,7 +134,7 @@ export default function AttractionsCarousel() {
         <div style={{ position: 'relative', width: '100%' }}>
 
           {/* PREV BUTTON */}
-          <button onClick={() => {
+          <button className="carousel-arrow" onClick={() => {
             if (carouselRef.current) {
               carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
             }
@@ -161,7 +161,7 @@ export default function AttractionsCarousel() {
           </button>
 
           {/* SCROLLABLE TRACK */}
-          <div ref={carouselRef} style={{
+          <div ref={carouselRef} className="attractions-track" style={{
             display: 'flex',
             overflowX: 'scroll',
             scrollSnapType: 'x mandatory',
@@ -174,7 +174,7 @@ export default function AttractionsCarousel() {
           }}>
 
             {attractions.map((item) => (
-              <div key={item.id} style={{
+              <div key={item.id} className="attraction-item" style={{
                 scrollSnapAlign: 'start',
                 flexShrink: 0,
                 width: '100%',        /* ONE card per view on mobile */
@@ -225,7 +225,7 @@ export default function AttractionsCarousel() {
           </div>
 
           {/* NEXT BUTTON */}
-          <button onClick={() => {
+          <button className="carousel-arrow" onClick={() => {
             if (carouselRef.current) {
               carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
             }

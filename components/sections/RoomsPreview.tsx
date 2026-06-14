@@ -134,7 +134,7 @@ export default function RoomsPreview() {
         <div style={{ position: 'relative', width: '100%' }}>
 
           {/* PREV BUTTON */}
-          <button onClick={() => {
+          <button className="carousel-arrow" onClick={() => {
             if (carouselRef.current) {
               carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
             }
@@ -161,7 +161,7 @@ export default function RoomsPreview() {
           </button>
 
           {/* SCROLLABLE TRACK */}
-          <div ref={carouselRef} style={{
+          <div ref={carouselRef} className="rooms-carousel-track" style={{
             display: 'flex',
             overflowX: 'scroll',
             scrollSnapType: 'x mandatory',
@@ -174,7 +174,7 @@ export default function RoomsPreview() {
           }}>
 
             {roomsData.map((item) => (
-              <div key={item.id} style={{
+              <div key={item.id} className="room-carousel-item" style={{
                 scrollSnapAlign: 'start',
                 flexShrink: 0,
                 width: '100%',        /* ONE card per view on mobile */
@@ -222,7 +222,7 @@ export default function RoomsPreview() {
           </div>
 
           {/* NEXT BUTTON */}
-          <button onClick={() => {
+          <button className="carousel-arrow" onClick={() => {
             if (carouselRef.current) {
               carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
             }
