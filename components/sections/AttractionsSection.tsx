@@ -568,9 +568,9 @@ export default function AttractionsCarousel() {
             className="attractions-carousel-track"
             ref={carouselRef}
             style={{ 
-              display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory',
-              scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch',
-              msOverflowStyle: 'none', scrollbarWidth: 'none'
+              display: 'flex', overflowX: 'hidden', overflow: 'hidden', scrollSnapType: 'x mandatory',
+              scrollBehavior: 'smooth', WebkitOverflowScrolling: 'auto',
+              msOverflowStyle: 'none', scrollbarWidth: 'none', userSelect: 'none'
             }}
           >
             {attractions.map((attraction) => (
