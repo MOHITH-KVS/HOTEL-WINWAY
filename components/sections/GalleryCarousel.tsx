@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 
 interface GalleryItem {
@@ -15,20 +15,7 @@ interface GalleryCarouselProps {
 }
 
 export default function GalleryCarousel({ title, items, darkBackground = false }: GalleryCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const slideLeft = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : 0));
-  };
-
-  const slideRight = () => {
-    // Show 3 items at a time, so max index is length - 3 (if length > 3)
-    const maxIndex = items.length > 3 ? items.length - 3 : 0;
-    setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : prev));
-  };
-
-  const isAtStart = currentIndex === 0;
-  const isAtEnd = currentIndex >= (items.length > 3 ? items.length - 3 : 0);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   return (
     <section className={`gallery-section ${darkBackground ? 'bg-cream' : 'bg-white'}`}>
@@ -65,9 +52,6 @@ export default function GalleryCarousel({ title, items, darkBackground = false }
         .gallery-track {
           display: flex;
           gap: 20px;
-          transition: transform 0.4s ease;
-          will-change: transform;
-          justify-content: ${items.length <= 3 ? 'center' : 'flex-start'};
         }
         .gallery-card {
           flex: 0 0 calc(33.333% - 14px);
@@ -167,23 +151,39 @@ export default function GalleryCarousel({ title, items, darkBackground = false }
       <h2 className="gallery-section-title">{title}</h2>
 
       <div className="gallery-carousel-container">
-        {items.length > 3 && (
-          <button 
-            className="gallery-arrow gallery-arrow-left" 
-            onClick={slideLeft}
-            disabled={isAtStart}
-            aria-label="Previous image"
+          {/* PREV ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Previous"
           >
-            &#8592;
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
           </button>
-        )}
 
         <div 
           className="gallery-track"
-          style={{ transform: `translateX(calc(-${currentIndex * 100}% - ${currentIndex * 20}px))` }}
+          ref={carouselRef}
+          style={{ 
+            display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory',
+            scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch',
+            msOverflowStyle: 'none', scrollbarWidth: 'none'
+          }}
         >
           {items.map((item, idx) => (
-            <div key={idx} className="gallery-card">
+            <div key={idx} className="gallery-card" style={{ scrollSnapAlign: 'start', flexShrink: 0 }}>
               <div className="gallery-image-wrapper">
                 <Image 
                   src={item.src} 
@@ -197,16 +197,27 @@ export default function GalleryCarousel({ title, items, darkBackground = false }
           ))}
         </div>
 
-        {items.length > 3 && (
-          <button 
-            className="gallery-arrow gallery-arrow-right" 
-            onClick={slideRight}
-            disabled={isAtEnd}
-            aria-label="Next image"
+          {/* NEXT ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Next"
           >
-            &#8594;
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
           </button>
-        )}
       </div>
     </section>
   );

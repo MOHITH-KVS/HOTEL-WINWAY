@@ -1,10 +1,17 @@
 'use client';
 import Link from 'next/link';
-
 import { usePathname } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 
 export default function SecondaryNav() {
   const pathname = usePathname();
+  const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (navRef.current) {
+      navRef.current.scrollLeft = 0;
+    }
+  }, []);
 
   const tabs = [
     { label: 'OVERVIEW', href: '/#overview' },
@@ -19,76 +26,76 @@ export default function SecondaryNav() {
   ];
 
   return (
-    <div id="secondary-nav" className="secondary-nav" style={{
-      position: 'sticky',
-      top: '0px',
-      zIndex: 900,
-      background: '#FFFFFF',
-      borderBottom: '1px solid #e5e5e5',
-      width: '100%',
-      height: '56px',
-      marginTop: '60px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '0 24px',
-      overflowX: 'auto',
-      scrollbarWidth: 'none',
-      whiteSpace: 'nowrap'
-    }}>
-      <nav style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '0',
-        height: '100%',
-        whiteSpace: 'nowrap'
+    <>
+      <style>{`
+        .secondary-nav-scroll::-webkit-scrollbar { display: none; }
+        .secondary-nav-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+      <div className="secondary-nav-scroll" ref={navRef} style={{
+        width: '100%',
+        overflowX: 'auto',
+        overflowY: 'hidden',
+        WebkitOverflowScrolling: 'touch',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        borderBottom: '1px solid #e0e0e0',
+        background: '#FFFFFF',
+        position: 'sticky',
+        top: '70px',
+        zIndex: 100,
       }}>
-        {tabs.map((tab) => {
-          const isActive = (() => {
-            if (tab.href === '/' || tab.href === '/#overview') {
-              return pathname === '/';
-            }
-            if (tab.href === '/rooms') {
-              return pathname === '/rooms' || pathname.startsWith('/rooms/');
-            }
-            if (tab.href === '/dining') {
-              return pathname === '/dining' || pathname.startsWith('/dining/');
-            }
-            if (tab.href === '/terms-and-conditions') {
-              return pathname === '/terms-and-conditions';
-            }
-            // For all anchor links like /#offers, /#venues etc — NEVER active
-            if (tab.href.startsWith('/#')) return false;
-            return pathname === tab.href;
-          })();
-          
-          return (
-            <Link 
-              key={tab.label} 
-              href={tab.href}
-              className={isActive ? 'tab-active' : ''}
-              style={{
-                fontFamily: 'Lato, sans-serif',
-                fontSize: '13.5px',
-                fontWeight: isActive ? '600' : '500',
-                color: isActive ? '#1a1a1a' : '#333333',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                textDecoration: 'none',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0 20px',
-                borderBottom: isActive ? '2px solid #1a1a1a' : '2px solid transparent',
-                whiteSpace: 'nowrap'
-              }}
-            >
-              {tab.label}
-            </Link>
-          );
-        })}
-      </nav>
-    </div>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          minWidth: 'max-content',
+          width: 'max-content',
+          padding: '0',
+          margin: '0',
+        }}>
+          {tabs.map((tab) => {
+            const isActive = (() => {
+              if (tab.href === '/' || tab.href === '/#overview') {
+                return pathname === '/';
+              }
+              if (tab.href === '/rooms') {
+                return pathname === '/rooms' || pathname.startsWith('/rooms/');
+              }
+              if (tab.href === '/dining') {
+                return pathname === '/dining' || pathname.startsWith('/dining/');
+              }
+              if (tab.href === '/terms-and-conditions') {
+                return pathname === '/terms-and-conditions';
+              }
+              if (tab.href.startsWith('/#')) return false;
+              return pathname === tab.href;
+            })();
+            
+            return (
+              <Link 
+                key={tab.label} 
+                href={tab.href}
+                style={{
+                  fontFamily: 'Lato, sans-serif',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  padding: '16px 20px',
+                  whiteSpace: 'nowrap',
+                  display: 'block',
+                  borderBottom: isActive ? '2px solid #B8965A' : '2px solid transparent',
+                  color: isActive ? '#B8965A' : '#333333',
+                  transition: 'all 0.3s ease',
+                  flexShrink: 0,
+                }}
+              >
+                {tab.label}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </>
   );
 }

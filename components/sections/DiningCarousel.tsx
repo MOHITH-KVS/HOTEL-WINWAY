@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,18 +15,7 @@ interface Venue {
 }
 
 export default function DiningCarousel({ venues }: { venues: Venue[] }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const slideLeft = () => {
-    if (currentIndex > 0) setCurrentIndex((prev) => prev - 1);
-  };
-
-  const slideRight = () => {
-    // Show 3 cards at a time maximum typically, but allow scrolling to the end
-    if (currentIndex < venues.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -40,12 +29,8 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
 
         .dining-track {
           display: flex;
-          flex-direction: row;
           gap: 24px;
           padding: 0 60px;
-          transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-          will-change: transform;
-          box-sizing: border-box;
         }
 
         .dining-card {
@@ -176,17 +161,47 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
 
         .dining-arrow-left  { left: 10px; }
         .dining-arrow-right { right: 10px; }
+
+        @media (max-width: 768px) {
+          .dining-card { flex: 0 0 calc(100vw - 40px); }
+          .dining-track { padding: 0 20px; }
+        }
       `}</style>
 
       <div className="dining-carousel-wrapper">
-        <button className="dining-arrow dining-arrow-left" onClick={slideLeft}>&#8592;</button>
+          {/* PREV ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Previous"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
         
         <div 
           className="dining-track" 
-          style={{ transform: `translateX(-${currentIndex * (380 + 24)}px)` }}
+          ref={carouselRef}
+          style={{ 
+            display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory',
+            scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch',
+            msOverflowStyle: 'none', scrollbarWidth: 'none'
+          }}
         >
           {venues.map((venue) => (
-            <div key={venue.id} className="dining-card">
+            <div key={venue.id} className="dining-card" style={{ scrollSnapAlign: 'start', flexShrink: 0 }}>
               <div className="dining-card-image">
                 <Image src={venue.image} alt={venue.name} fill />
               </div>
@@ -206,7 +221,27 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
           ))}
         </div>
 
-        <button className="dining-arrow dining-arrow-right" onClick={slideRight}>&#8594;</button>
+          {/* NEXT ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Next"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
       </div>
     </>
   );

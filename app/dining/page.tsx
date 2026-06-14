@@ -3,8 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Clock } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
-import ContactCTA from '@/components/sections/ContactCTA';
 import SecondaryNav from '@/components/sections/SecondaryNav';
+import ContactCTA from '@/components/sections/ContactCTA';
+
 import DiningCarousel from '@/components/sections/DiningCarousel';
 import AmenitiesSection from '@/components/sections/AmenitiesSection';
 
@@ -78,6 +79,8 @@ export default function DiningPage() {
       />
 
       <SecondaryNav />
+
+
 
       <style>{`
         .dining-header {

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
 import SecondaryNav from '@/components/sections/SecondaryNav';
+
 import ContactCTA from '@/components/sections/ContactCTA';
 import GalleryCarousel from '@/components/sections/GalleryCarousel';
 
@@ -145,6 +146,8 @@ export default function GalleryPage() {
       />
 
       <SecondaryNav />
+
+
 
       {/* Intro Heading Section */}
       <section className="gallery-intro">

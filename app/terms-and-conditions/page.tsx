@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import SecondaryNav from '@/components/sections/SecondaryNav';
+
 import HeroSection from '@/components/sections/HeroSection';
+import SecondaryNav from '@/components/sections/SecondaryNav';
 import TermsContent from '@/components/sections/TermsContent';
 import ContactCTA from '@/components/sections/ContactCTA';
 
@@ -21,6 +22,8 @@ export default function TermsAndConditionsPage() {
       />
 
       <SecondaryNav />
+
+
 
       <TermsContent />
 

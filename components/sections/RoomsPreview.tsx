@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const roomsData = [
   {
@@ -103,8 +103,7 @@ const roomsData = [
 ];
 
 export default function RoomsPreview() {
-  const [roomsCurrent, setRoomsCurrent] = useState(0);
-  const [roomsAnimating, setRoomsAnimating] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [activeModal, setActiveModal] = useState<typeof roomsData[0] | null>(null);
 
   // Prevent background scrolling when modal is open
@@ -119,19 +118,7 @@ export default function RoomsPreview() {
     };
   }, [activeModal]);
 
-  const roomsSlideRight = () => {
-    if (roomsAnimating || roomsCurrent >= roomsData.length - 2) return;
-    setRoomsAnimating(true);
-    setRoomsCurrent(prev => prev + 1);
-    setTimeout(() => setRoomsAnimating(false), 500);
-  };
 
-  const roomsSlideLeft = () => {
-    if (roomsAnimating || roomsCurrent <= 0) return;
-    setRoomsAnimating(true);
-    setRoomsCurrent(prev => prev - 1);
-    setTimeout(() => setRoomsAnimating(false), 500);
-  };
 
   return (
     <>
@@ -180,10 +167,7 @@ export default function RoomsPreview() {
 
         .rooms-track {
           display: flex;
-          flex-direction: row;
           gap: 40px;
-          transition: transform 0.5s ease;
-          will-change: transform;
           position: relative;
           z-index: 1;
           padding: 0 calc(12vw - 20px);
@@ -333,8 +317,16 @@ export default function RoomsPreview() {
           .rooms-track {
             padding: 0 5vw;
           }
-          .room-card {
-            flex: 0 0 90vw;
+          .room-carousel-item {
+            flex: 0 0 calc(100vw - 40px) !important;
+            width: calc(100vw - 40px) !important;
+            min-width: 0 !important;
+          }
+          .room-carousel-item h3 {
+            font-size: 16px !important;
+          }
+          .room-carousel-item p {
+            font-size: 13px !important;
           }
         }
 
@@ -498,22 +490,39 @@ export default function RoomsPreview() {
         </div>
 
         <div className="rooms-carousel-wrapper">
-          <button 
-            suppressHydrationWarning
-            className="rooms-arrow rooms-arrow-left" 
-            onClick={roomsSlideLeft}
-            style={{ display: roomsCurrent === 0 ? 'none' : 'flex' }}
-          >&#8249;</button>
+          {/* PREV ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Previous"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
           
           <div 
             className="rooms-track" 
-            id="roomsTrack"
+            ref={carouselRef}
             style={{ 
-              transform: `translateX(calc(-${roomsCurrent} * (38vw + 40px)))` 
+              display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory',
+              scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch',
+              msOverflowStyle: 'none', scrollbarWidth: 'none'
             }}
           >
             {roomsData.map((room, index) => (
-              <div className="room-card" key={room.id}>
+              <div className="room-card room-carousel-item" key={room.id} style={{ scrollSnapAlign: 'start', flexShrink: 0, width: '38vw' }}>
                 <div className="room-image-wrap">
                   <img src={room.image} alt={room.name} />
                   <button suppressHydrationWarning className="room-gallery-btn">&#9638;</button>
@@ -537,12 +546,27 @@ export default function RoomsPreview() {
             ))}
           </div>
           
-          <button 
-            suppressHydrationWarning
-            className="rooms-arrow rooms-arrow-right" 
-            onClick={roomsSlideRight}
-            style={{ display: roomsCurrent >= roomsData.length - 2 ? 'none' : 'flex' }}
-          >&#8250;</button>
+          {/* NEXT ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Next"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
         </div>
       </section>
 

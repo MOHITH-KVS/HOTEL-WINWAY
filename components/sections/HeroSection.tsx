@@ -47,33 +47,39 @@ export default function HeroSection({
     : (images ?? DEFAULT_IMAGES);
 
   const isSlider = slides.length > 1;
-  const [current, setCurrent] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const { openModal } = useEnquiryModal();
 
-  const indicatorBottom = '0px';
-
-  const goToSlide = useCallback((idx: number) => {
-    setCurrent(idx);
-    setProgress(0);
-  }, []);
+  const prevSlide = useCallback(() => {
+    if (carouselRef.current) {
+      const el = carouselRef.current;
+      const index = Math.round(el.scrollLeft / el.offsetWidth);
+      const prevIndex = (index - 1 + slides.length) % slides.length;
+      if (index === 0) {
+        el.scrollTo({ left: el.offsetWidth * (slides.length - 1), behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: -el.offsetWidth, behavior: 'smooth' });
+      }
+    }
+  }, [slides.length]);
 
   const nextSlide = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % slides.length);
-    setProgress(0);
+    if (carouselRef.current) {
+      const el = carouselRef.current;
+      const index = Math.round(el.scrollLeft / el.offsetWidth);
+      if (index === slides.length - 1) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: el.offsetWidth, behavior: 'smooth' });
+      }
+    }
   }, [slides.length]);
 
   useEffect(() => {
     if (!isSlider) return;
-    progressRef.current = setInterval(() => {
-      setProgress((p) => (p >= 100 ? 0 : p + 100 / (SLIDE_DURATION / 50)));
-    }, 50);
     timerRef.current = setInterval(nextSlide, SLIDE_DURATION);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
-      if (progressRef.current) clearInterval(progressRef.current);
     };
   }, [isSlider, nextSlide]);
 
@@ -82,17 +88,33 @@ export default function HeroSection({
       className="relative w-full overflow-hidden bg-[#1a1a1a]"
       style={{ height: '100vh', minHeight: 600 }}
     >
-      {slides.map((slide, idx) => (
-        <div
-          key={slide.src}
-          className="absolute inset-0 transition-opacity duration-[1000ms] ease-in-out parallax-bg"
-          style={{ 
-            opacity: idx === current ? 1 : 0, 
-            zIndex: idx === current ? 1 : 0,
-            backgroundImage: `url('${slide.src}')`
-          }}
-        />
-      ))}
+      <div 
+        ref={carouselRef}
+        className="absolute inset-0 z-0"
+        style={{
+          display: 'flex',
+          overflowX: 'scroll',
+          scrollSnapType: 'x mandatory',
+          scrollBehavior: 'smooth',
+          WebkitOverflowScrolling: 'touch',
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none',
+        }}
+      >
+        {slides.map((slide) => (
+          <div
+            key={slide.src}
+            style={{
+              scrollSnapAlign: 'start',
+              flexShrink: 0,
+              width: '100%',
+              backgroundImage: `url('${slide.src}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+        ))}
+      </div>
 
       <div className="absolute inset-0 z-10" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.7) 100%)' }} />
 
@@ -146,26 +168,51 @@ export default function HeroSection({
 
       {/* Slider progress indicators */}
       {isSlider && (
-        <div
-          className="absolute left-0 right-0 z-30 flex"
-          style={{ height: 3, bottom: indicatorBottom }}
-        >
-          {slides.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => goToSlide(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-              className="flex-1 bg-white/30 relative overflow-hidden cursor-pointer border-none p-0"
-              style={{ height: 3 }}
-              suppressHydrationWarning
-            >
-              {idx === current && (
-                <span className="absolute inset-y-0 left-0 bg-white" style={{ width: `${progress}%` }} />
-              )}
-              {idx < current && <span className="absolute inset-0 bg-white/80" />}
-            </button>
-          ))}
-        </div>
+        <>
+          {/* PREV ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 30, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Previous"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+
+          {/* NEXT ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 30, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Next"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </>
       )}
 
       {showScrollHint && (

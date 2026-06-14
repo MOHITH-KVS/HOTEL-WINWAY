@@ -97,11 +97,8 @@ const attractions = [
 ];
 
 export default function AttractionsCarousel() {
-  const sectionRef = useRef(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [activeModal, setActiveModal] = useState<typeof attractions[0] | null>(null);
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -119,19 +116,7 @@ export default function AttractionsCarousel() {
     };
   }, [activeModal]);
 
-  const slideRight = () => {
-    if (isAnimating || currentSlide >= attractions.length - 2) return;
-    setIsAnimating(true);
-    setCurrentSlide(prev => prev + 1);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
 
-  const slideLeft = () => {
-    if (isAnimating || currentSlide <= 0) return;
-    setIsAnimating(true);
-    setCurrentSlide(prev => prev - 1);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
 
   return (
     <>
@@ -185,11 +170,8 @@ export default function AttractionsCarousel() {
 
         .attractions-carousel-track {
           display: flex;
-          flex-direction: row;
           gap: 28px;
-          transition: transform 0.5s ease;
           padding: 20px 100px;
-          will-change: transform;
         }
 
         /* EXACT CARD STRUCTURE */
@@ -535,7 +517,7 @@ export default function AttractionsCarousel() {
         }
         
         @media (max-width: 768px) {
-          .attraction-card { flex: 0 0 calc(85vw); }
+          .attraction-card { flex: 0 0 calc(100vw - 40px); }
           .attractions-carousel-track { padding: 20px; }
           .carousel-arrow { display: none; }
           .attr-modal-body { padding: 32px 24px; }
@@ -544,7 +526,7 @@ export default function AttractionsCarousel() {
         }
       `}</style>
 
-      <section id="attractions" ref={sectionRef} className="local-attractions-section">
+      <section id="attractions" className="local-attractions-section">
         
         <div className="attr-header">
           <span className="attr-label">Explore Indore</span>
@@ -552,21 +534,39 @@ export default function AttractionsCarousel() {
         </div>
 
         <div className="attractions-carousel-wrapper">
-          <button 
-            className="carousel-arrow carousel-arrow-left" 
-            onClick={slideLeft}
-            disabled={currentSlide === 0}
-            suppressHydrationWarning
+          {/* PREV ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Previous"
           >
-            &#8592;
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
           </button>
 
           <div 
             className="attractions-carousel-track"
-            style={{ transform: `translateX(calc(-${currentSlide} * (40vw + 28px)))` }}
+            ref={carouselRef}
+            style={{ 
+              display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory',
+              scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch',
+              msOverflowStyle: 'none', scrollbarWidth: 'none'
+            }}
           >
             {attractions.map((attraction) => (
-              <div className="attraction-card" key={attraction.id}>
+              <div className="attraction-card" key={attraction.id} style={{ scrollSnapAlign: 'start', flexShrink: 0 }}>
                 <div className="card-image-wrapper">
                   <img src={attraction.image} alt={attraction.name} />
                   {attraction.badge && <span className="category-tag">{attraction.badge}</span>}
@@ -595,13 +595,26 @@ export default function AttractionsCarousel() {
             ))}
           </div>
 
-          <button 
-            className="carousel-arrow carousel-arrow-right" 
-            onClick={slideRight}
-            disabled={currentSlide >= attractions.length - 2}
-            suppressHydrationWarning
+          {/* NEXT ARROW */}
+          <button
+            onClick={() => {
+              if (carouselRef.current) {
+                carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+              zIndex: 10, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%',
+              width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => e.currentTarget.style.background = '#B8965A'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
+            aria-label="Next"
           >
-            &#8594;
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
           </button>
         </div>
       </section>

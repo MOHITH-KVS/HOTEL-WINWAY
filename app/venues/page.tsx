@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import ContactCTA from '@/components/sections/ContactCTA';
-import SecondaryNav from '@/components/sections/SecondaryNav';
+
 import HeroSection from '@/components/sections/HeroSection';
+import SecondaryNav from '@/components/sections/SecondaryNav';
 
 export const metadata: Metadata = {
   title: 'Event Venues | Hotel Winway Indore',
@@ -210,6 +211,8 @@ export default function VenuesPage() {
       />
 
       <SecondaryNav />
+
+
 
       {/* SECTION 1 - Hero */}
       <section className="venues-hero">

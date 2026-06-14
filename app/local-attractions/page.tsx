@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
 import SecondaryNav from '@/components/sections/SecondaryNav';
+
 import AttractionsCarousel from '@/components/sections/AttractionsSection';
 import ItinerariesSection from '@/components/sections/ItinerariesSection';
 import ContactCTA from '@/components/sections/ContactCTA';
@@ -67,8 +68,10 @@ export default function LocalAttractionsPage() {
         imageSrc="/images/attractions/local/rajwada-palace.avif" 
         subtitle="Discover the vibrant heritage and culture of Indore"
       />
-      
+
       <SecondaryNav />
+      
+
 
       {/* Intro Section */}
       <section className="attractions-intro">

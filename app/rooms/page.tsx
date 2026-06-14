@@ -3,8 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Wifi, Users, Maximize2, BedDouble, ArrowRight } from 'lucide-react';
 import HeroSection from '@/components/sections/HeroSection';
-import ContactCTA from '@/components/sections/ContactCTA';
 import SecondaryNav from '@/components/sections/SecondaryNav';
+import ContactCTA from '@/components/sections/ContactCTA';
+
 import RoomsGrid from '@/components/sections/RoomsGrid';
 import DiningPreview from '@/components/sections/DiningPreview';
 import AttractionsSection from '@/components/sections/AttractionsSection';
@@ -261,6 +262,8 @@ export default function RoomsPage() {
       />
 
       <SecondaryNav />
+
+
 
       <section className="rooms-page-section">
         <div className="intro-heading-wrapper">

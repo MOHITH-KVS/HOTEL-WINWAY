@@ -21,8 +21,8 @@ export default function IntroSection() {
         textTransform: 'uppercase',
         lineHeight: '1.4'
       }}>
-        <span style={{ fontWeight: 300 }}>WHERE THE LEGACY OF INDORE </span>
-        <span style={{ fontWeight: 800 }}>MEETS THE PULSE OF INNOVATION</span>
+        <span style={{ fontWeight: 300 }}>WHERE THE WARMTH OF MALWA </span>
+        <span style={{ fontWeight: 800 }}>MEETS MODERN LUXURY</span>
       </h2>
       
       <p style={{
@@ -35,7 +35,7 @@ export default function IntroSection() {
         maxWidth: '640px',
         lineHeight: '1.8'
       }}>
-        Nestled in the heart of Indore, where history and modernity collide, Wow Crest offers an unforgettable stay. This 5-star hotel in Indore exudes the dy...››
+        At Hotel Winway, hospitality is more than a service — it is a tradition rooted in the warmth and culture of Malwa.
       </p>
     </section>
   );
