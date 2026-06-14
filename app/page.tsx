@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
+import SecondaryNav from '@/components/sections/SecondaryNav';
 import IntroSection from '@/components/sections/IntroSection';
 
 import RoomsPreview from '@/components/sections/RoomsPreview';
@@ -46,6 +47,8 @@ export default function HomePage() {
         locationLabel="INDORE, MADHYA PRADESH"
         showCornerBadges={true}
       />
+
+      <SecondaryNav />
 
       <IntroSection />
 

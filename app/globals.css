@@ -772,6 +772,29 @@ img { max-width: 100%; height: auto; }
   .attraction-item {
     min-width: 100% !important;
   }
-  
+
   .carousel-arrow { display: flex !important; }
+}
+
+/* ── SECONDARY NAV STYLES ── */
+.secondary-nav-container::-webkit-scrollbar { display: none; }
+
+@media (min-width: 1024px) {
+  .secondary-nav-inner {
+    margin: 0 auto !important;
+    width: auto !important;
+    min-width: unset !important;
+    justify-content: center !important;
+    display: flex !important;
+    padding: 0 40px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .secondary-nav-inner {
+    min-width: max-content !important;
+    width: max-content !important;
+    margin: 0 !important;
+    padding: 0 16px !important;
+  }
 }

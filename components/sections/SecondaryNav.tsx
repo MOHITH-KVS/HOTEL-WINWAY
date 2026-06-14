@@ -31,26 +31,27 @@ export default function SecondaryNav() {
         .secondary-nav-scroll::-webkit-scrollbar { display: none; }
         .secondary-nav-scroll { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
-      <div className="secondary-nav-scroll" ref={navRef} style={{
+      <div className="secondary-nav-container" ref={navRef} style={{
         width: '100%',
         overflowX: 'auto',
         overflowY: 'hidden',
         WebkitOverflowScrolling: 'touch',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
-        borderBottom: '1px solid #e0e0e0',
+        borderBottom: '1px solid #e8e8e8',
         background: '#FFFFFF',
         position: 'sticky',
         top: '70px',
         zIndex: 100,
       }}>
-        <div style={{
+        <div className="secondary-nav-inner" style={{
           display: 'flex',
           flexDirection: 'row',
+          alignItems: 'center',
           minWidth: 'max-content',
           width: 'max-content',
-          padding: '0',
-          margin: '0',
+          margin: '0 auto',
+          padding: '0 40px',
         }}>
           {tabs.map((tab) => {
             const isActive = (() => {
