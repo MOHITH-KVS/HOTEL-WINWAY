@@ -132,7 +132,7 @@ export default function DiningPreview() {
           margin: 0 auto;
           position: relative;
           z-index: 1;
-          align-items: flex-start;
+          align-items: stretch;
           padding: 0;
         }
 
@@ -145,12 +145,13 @@ export default function DiningPreview() {
           display: flex;
           flex-direction: column;
           position: relative;
+          height: 100%;
         }
 
         .dining-card-img-wrap {
           position: relative;
           width: 100%;
-          height: 300px;
+          height: 280px;
           overflow: hidden;
           flex-shrink: 0;
         }
@@ -214,8 +215,7 @@ export default function DiningPreview() {
 
         .dining-card-buttons {
           display: flex;
-          align-items: center;
-          gap: 18px;
+          justify-content: center;
           margin-top: auto;
         }
 
@@ -414,12 +414,6 @@ export default function DiningPreview() {
                         onClick={(e) => toggleExpand(venue.id, e)}
                       >
                         {isExpanded ? 'VIEW LESS' : 'VIEW MORE'}
-                      </button>
-                      <button 
-                        suppressHydrationWarning 
-                        className="btn-read-more"
-                      >
-                        READ MORE &gt;
                       </button>
                     </div>
 
