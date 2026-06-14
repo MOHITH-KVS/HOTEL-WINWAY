@@ -166,14 +166,39 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
         .dining-arrow-right { right: 10px; }
 
         @media (max-width: 768px) {
-          .dining-card { flex: 0 0 calc(100vw - 40px); }
-          .dining-track { padding: 0 20px; }
+          .dining-card {
+            flex: 0 0 85vw;
+            min-width: 0;
+          }
+          .dining-track {
+            padding: 20px 24px;
+            gap: 16px;
+          }
+          .carousel-arrow-left {
+            left: 8px !important;
+            top: 200px !important;
+            transform: translateY(0) !important;
+          }
+          .carousel-arrow-right {
+            right: 8px !important;
+            top: 200px !important;
+            transform: translateY(0) !important;
+          }
+          .dining-card-name {
+            padding-left: 0;
+            margin-left: 0;
+            overflow: visible;
+          }
+          .dining-card-body {
+            padding: 16px;
+          }
         }
       `}</style>
 
       <div className="dining-carousel-wrapper">
           {/* PREV ARROW */}
           <button
+            className="carousel-arrow-left"
             onClick={() => {
               if (carouselRef.current) {
                 carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
@@ -226,6 +251,7 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
 
           {/* NEXT ARROW */}
           <button
+            className="carousel-arrow-right"
             onClick={() => {
               if (carouselRef.current) {
                 carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
