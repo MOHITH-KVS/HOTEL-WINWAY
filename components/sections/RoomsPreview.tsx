@@ -5,7 +5,6 @@ const roomsData = [
   {
     id: 'standard-room',
     name: 'Standard Room',
-    price: '₹ 4,000',
     description: 'Experience effortless comfort in our thoughtfully appointed Room. Designed with contemporary elegance and practical convenience in mind, the room features inviting interiors, comfortable bedding and modern amenities to ensure a pleasant and relaxing stay.',
     image: '/images/rooms/standard-room/standard-1.jpeg',
     href: '/rooms/standard-room',
@@ -30,7 +29,6 @@ const roomsData = [
   {
     id: 'deluxe-room',
     name: 'Deluxe Room',
-    price: '₹ 4,200',
     description: 'Enjoy an elevated stay experience in our Deluxe Room, thoughtfully designed to offer enhanced comfort and contemporary style. Featuring spacious interiors, elegant furnishings and modern amenities, the room provides the perfect setting to relax and recharge.',
     image: '/images/rooms/deluxe-room/deluxe-1.jpeg',
     href: '/rooms/deluxe-room',
@@ -55,7 +53,6 @@ const roomsData = [
   {
     id: 'junior-suite',
     name: 'Junior Suite',
-    price: '₹ 5,500',
     description: 'Indulge in elevated comfort and added luxury in our Junior Suite. Thoughtfully designed with spacious interiors and elegant furnishings, the suite offers a refined retreat for discerning travellers. Unwind in the relaxing bathtub and enjoy refreshments from the minibar.',
     image: '/images/rooms/junior-suite/junior-1.jpeg',
     href: '/rooms/junior-suite',
@@ -79,7 +76,6 @@ const roomsData = [
   {
     id: 'presidential-suite',
     name: 'Presidential Suite',
-    price: '₹ 7,000',
     description: 'Experience the pinnacle of luxury in our Presidential Suite, designed for guests who appreciate exceptional comfort and sophistication. Featuring expansive living spaces, elegant interiors and premium amenities, the suite offers an elevated stay experience.',
     image: '/images/rooms/presidential-suite/ps-1.jpeg',
     href: '/rooms/presidential-suite',
@@ -237,31 +233,7 @@ export default function RoomsPreview() {
           overflow: hidden;
         }
 
-        .room-price-block {
-          margin-bottom: 24px;
-        }
 
-        .price-label {
-          display: block;
-          font-size: 12px;
-          color: #777;
-          margin-bottom: 4px;
-        }
-
-        .price-amount {
-          display: block;
-          font-size: 32px;
-          font-weight: 700;
-          color: #1a1a1a;
-          margin-bottom: 2px;
-          font-family: 'Libre Baskerville', serif;
-        }
-
-        .price-note {
-          display: block;
-          font-size: 11px;
-          color: #777;
-        }
 
         .room-actions {
           display: flex;
@@ -314,6 +286,9 @@ export default function RoomsPreview() {
         .rooms-arrow-right { right: 16px; }
         
         @media (max-width: 768px) {
+          .rooms-section { padding: 40px 16px !important; }
+          .room-card { width: 100% !important; min-width: 100% !important; margin: 0 auto !important; }
+          .rooms-grid { grid-template-columns: 1fr !important; padding: 0 16px !important; }
           .rooms-track {
             padding: 0 5vw;
           }
@@ -489,7 +464,11 @@ export default function RoomsPreview() {
           <p className="rooms-subtitle">Designed to offer a perfect balance of comfort and sophistication, the rooms and suites at Hotel Winway provide a welcoming retreat in the heart of Indore city.</p>
         </div>
 
-        <div className="rooms-carousel-wrapper">
+        <div className="rooms-carousel-wrapper" style={{
+          padding: '0 16px',
+          boxSizing: 'border-box',
+          width: '100%',
+        }}>
           {/* PREV ARROW */}
           <button
             onClick={() => {
@@ -522,7 +501,14 @@ export default function RoomsPreview() {
             }}
           >
             {roomsData.map((room, index) => (
-              <div className="room-card room-carousel-item" key={room.id} style={{ scrollSnapAlign: 'start', flexShrink: 0, width: '38vw' }}>
+              <div className="room-card room-carousel-item" key={room.id} style={{ 
+                scrollSnapAlign: 'start', 
+                flexShrink: 0, 
+                width: '100%',
+                maxWidth: '100%',
+                margin: '0 auto',
+                boxSizing: 'border-box',
+              }}>
                 <div className="room-image-wrap">
                   <img src={room.image} alt={room.name} />
                   <button suppressHydrationWarning className="room-gallery-btn">&#9638;</button>
@@ -531,11 +517,7 @@ export default function RoomsPreview() {
                   <h3 className="room-name">{room.name}</h3>
                   <p className="room-desc">{room.description} <span style={{color: '#B8965A', cursor: 'pointer', fontWeight: 600}} onClick={() => setActiveModal(room)}>&gt;&gt;</span></p>
                   
-                  <div className="room-price-block">
-                    <span className="price-label">Member rate starting from</span>
-                    <span className="price-amount">{room.price}</span>
-                    <span className="price-note">per Night (Excluding Taxes)</span>
-                  </div>
+                  
                   
                   <div className="room-actions">
                     <a href="/contact" className="btn-book-now">ENQUIRE NOW</a>

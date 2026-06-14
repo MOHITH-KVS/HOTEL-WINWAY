@@ -330,7 +330,6 @@ export default async function RoomDetailPage({ params }: { params: Promise<{ slu
                 <h4 className="font-serif text-lg text-[#1A1A1A] mb-3">Policies</h4>
                 <ul className="space-y-2 text-xs text-[#57585B]">
                   <li>• Cancellation: 48 hrs prior to check-in</li>
-                  <li>• Extra bed: ₹1,200 + taxes</li>
                   <li>• Children under 6: Free (same room)</li>
                   <li>• Government ID required at check-in</li>
                 </ul>

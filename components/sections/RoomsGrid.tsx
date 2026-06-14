@@ -14,7 +14,6 @@ const roomsData = [
     guests: 'Up to 2 guests',
     wifi: 'Inclusive of WiFi',
     bed: 'Double bed',
-    price: '₹ 4,000',
     image: '/images/rooms/standard-room/standard-1.jpeg',
     href: '/rooms/standard-room'
   },
@@ -26,7 +25,6 @@ const roomsData = [
     guests: 'Up to 2 guests',
     wifi: 'Inclusive of WiFi',
     bed: 'Double bed',
-    price: '₹ 4,200',
     image: '/images/rooms/deluxe-room/deluxe-1.jpeg',
     href: '/rooms/deluxe-room'
   },
@@ -38,7 +36,6 @@ const roomsData = [
     guests: 'Up to 2 guests',
     wifi: 'Inclusive of WiFi',
     bed: 'King bed',
-    price: '₹ 5,500',
     image: '/images/rooms/junior-suite/junior-1.jpeg',
     href: '/rooms/junior-suite'
   },
@@ -50,7 +47,6 @@ const roomsData = [
     guests: 'Up to 2 guests',
     wifi: 'Inclusive of WiFi',
     bed: 'King bed',
-    price: '₹ 7,000',
     image: '/images/rooms/presidential-suite/ps-1.jpeg',
     href: '/rooms/presidential-suite'
   }
@@ -98,13 +94,7 @@ export default function RoomsGrid() {
                 </div>
               </div>
 
-              <div className="price-section">
-                <span className="member-rate-label">Member rate starting from</span>
-                <div className="flex items-baseline">
-                  <span className="price-amount">{room.price}</span>
-                  <span className="per-night">per Night (Excluding Taxes)</span>
-                </div>
-              </div>
+
 
               <div className="room-card-buttons">
                 <a href="/contact" className="btn-enquire">ENQUIRE NOW</a>
