@@ -74,15 +74,15 @@ export default function ExploreDiningCarousel({ currentOutletId }: ExploreDining
         }
 
         .explore-track {
-          display: flex;
-          gap: 30px;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
           padding-bottom: 20px;
-          justify-content: ${outletsToShow.length <= 3 ? 'center' : 'flex-start'};
+          overflow: visible;
         }
 
         .explore-card {
-          flex: 0 0 calc(33.333% - 20px);
-          min-width: 300px;
+          min-width: 0;
           max-width: 450px;
           scroll-snap-align: start;
           display: block;
@@ -159,19 +159,28 @@ export default function ExploreDiningCarousel({ currentOutletId }: ExploreDining
           color: #fff;
           border-color: #C9A030;
         }
+        .carousel-arrow {
+          display: none !important;
+        }
         .left-arrow { left: 15px; }
         .right-arrow { right: 15px; }
 
         @media (max-width: 1024px) {
-          .explore-card { flex: 0 0 calc(50% - 15px); }
-        }
-        @media (max-width: 900px) {
-          .explore-track { justify-content: flex-start; }
+          .explore-track {
+            grid-template-columns: repeat(3, 1fr);
+          }
         }
         @media (max-width: 768px) {
-          .explore-card { flex: 0 0 calc(100vw - 40px); }
+          .explore-track {
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            gap: 16px;
+          }
+          .explore-card { flex: 0 0 85vw; }
           .left-arrow { left: 5px; }
           .right-arrow { right: 5px; }
+          .carousel-arrow { display: flex !important; }
         }
       `}</style>
       
@@ -183,6 +192,7 @@ export default function ExploreDiningCarousel({ currentOutletId }: ExploreDining
       <div className="explore-carousel-wrapper">
           {/* PREV ARROW */}
           <button
+            className="carousel-arrow"
             onClick={() => {
               if (scrollRef.current) {
                 scrollRef.current.scrollBy({ left: -scrollRef.current.offsetWidth, behavior: 'smooth' });
@@ -219,6 +229,7 @@ export default function ExploreDiningCarousel({ currentOutletId }: ExploreDining
         </div>
           {/* NEXT ARROW */}
           <button
+            className="carousel-arrow"
             onClick={() => {
               if (scrollRef.current) {
                 scrollRef.current.scrollBy({ left: scrollRef.current.offsetWidth, behavior: 'smooth' });

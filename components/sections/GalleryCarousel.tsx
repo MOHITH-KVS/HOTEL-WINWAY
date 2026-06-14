@@ -50,14 +50,13 @@ export default function GalleryCarousel({ title, items, darkBackground = false }
           padding: 0 40px;
         }
         .gallery-track {
-          display: flex;
-          gap: 20px;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          gap: 24px;
         }
         .gallery-card {
-          flex: 0 0 calc(33.333% - 14px);
           display: flex;
           flex-direction: column;
-          max-width: 450px; /* Prevent overstretching */
         }
         .gallery-image-wrapper {
           position: relative;
@@ -109,6 +108,9 @@ export default function GalleryCarousel({ title, items, darkBackground = false }
           opacity: 0.5;
           cursor: not-allowed;
         }
+        .carousel-arrow {
+          display: none !important;
+        }
         .gallery-arrow-left {
           left: 20px;
         }
@@ -118,26 +120,28 @@ export default function GalleryCarousel({ title, items, darkBackground = false }
 
         /* Mobile specific styles */
         @media (max-width: 900px) {
-          .gallery-track {
-            justify-content: ${items.length <= 2 ? 'center' : 'flex-start'};
-          }
-          .gallery-card {
-            flex: 0 0 calc(50% - 10px);
-          }
           .gallery-image-wrapper {
             height: 360px;
           }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
           .gallery-carousel-container {
             padding: 0 16px;
+          }
+          .gallery-track {
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
           }
           .gallery-card {
             flex: 0 0 100%;
           }
           .gallery-image-wrapper {
             height: 300px;
+          }
+          .carousel-arrow {
+            display: flex !important;
           }
           .gallery-arrow-left {
             left: 10px;
@@ -153,6 +157,7 @@ export default function GalleryCarousel({ title, items, darkBackground = false }
       <div className="gallery-carousel-container">
           {/* PREV ARROW */}
           <button
+            className="carousel-arrow gallery-arrow-left"
             onClick={() => {
               if (carouselRef.current) {
                 carouselRef.current.scrollBy({ left: -carouselRef.current.offsetWidth, behavior: 'smooth' });
@@ -177,9 +182,9 @@ export default function GalleryCarousel({ title, items, darkBackground = false }
           className="gallery-track"
           ref={carouselRef}
           style={{ 
-            display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory',
-            scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch',
-            msOverflowStyle: 'none', scrollbarWidth: 'none'
+            overflowX: 'hidden', scrollSnapType: 'x mandatory',
+            scrollBehavior: 'smooth', WebkitOverflowScrolling: 'auto',
+            msOverflowStyle: 'none', scrollbarWidth: 'none', userSelect: 'none'
           }}
         >
           {items.map((item, idx) => (
@@ -199,6 +204,7 @@ export default function GalleryCarousel({ title, items, darkBackground = false }
 
           {/* NEXT ARROW */}
           <button
+            className="carousel-arrow gallery-arrow-right"
             onClick={() => {
               if (carouselRef.current) {
                 carouselRef.current.scrollBy({ left: carouselRef.current.offsetWidth, behavior: 'smooth' });
