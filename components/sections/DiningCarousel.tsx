@@ -167,22 +167,24 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
 
         @media (max-width: 768px) {
           .dining-card {
-            flex: 0 0 85vw;
+            flex: 0 0 82vw !important;
             min-width: 0;
           }
           .dining-track {
-            padding: 20px 24px;
+            padding: 16px 16px !important;
             gap: 16px;
+          }
+          .carousel-arrow-left, .carousel-arrow-right {
+            top: 120px !important; /* 50% of 240px image height */
+            transform: translateY(-50%) !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #111111 !important;
           }
           .carousel-arrow-left {
             left: 8px !important;
-            top: 200px !important;
-            transform: translateY(0) !important;
           }
           .carousel-arrow-right {
             right: 8px !important;
-            top: 200px !important;
-            transform: translateY(0) !important;
           }
           .dining-card-name {
             padding-left: 0;
@@ -214,7 +216,7 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
             onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
             aria-label="Previous"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
           </button>
@@ -267,7 +269,7 @@ export default function DiningCarousel({ venues }: { venues: Venue[] }) {
             onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.9)'}
             aria-label="Next"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="2.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M9 18l6-6-6-6"/>
             </svg>
           </button>
