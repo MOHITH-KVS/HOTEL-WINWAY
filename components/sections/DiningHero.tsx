@@ -118,6 +118,29 @@ export default function DiningHero({ title, description, imageSrc, imageAlt, cui
           color: #fff;
         }
 
+        .dining-view-menu-btn {
+          font-family: var(--font-sans);
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          padding: 16px 32px;
+          background-color: transparent;
+          color: #ffffff;
+          border: 1px solid #ffffff;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          display: inline-block;
+          margin-left: 16px;
+          cursor: pointer;
+        }
+
+        .dining-view-menu-btn:hover {
+          background-color: #C9A030;
+          border-color: #C9A030;
+          color: #ffffff;
+        }
+
         @media (max-width: 600px) {
           .dining-quick-strip {
             gap: 10px;
@@ -146,23 +169,7 @@ export default function DiningHero({ title, description, imageSrc, imageAlt, cui
 
         <div>
           <a href="/contact" className="dining-hero-btn">RESERVE TABLE</a>
-          <a 
-            href="#contact"
-            style={{
-              display: 'inline-block',
-              border: '1.5px solid #ffffff',
-              color: '#ffffff',
-              background: 'transparent',
-              padding: '14px 28px',
-              fontSize: '12px',
-              fontWeight: '700',
-              letterSpacing: '2px',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              cursor: 'pointer',
-              marginLeft: '16px',
-            }}
-          >
+          <a href="#contact" className="dining-view-menu-btn">
             VIEW MENU
           </a>
         </div>
